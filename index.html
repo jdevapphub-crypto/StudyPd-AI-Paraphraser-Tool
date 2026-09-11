@@ -144,9 +144,46 @@
     const humanPercent = document.getElementById('humanPercent');
 
     const prompts = {
-        humanize: "Rewrite to sound 100% human-written, natural, varied sentence structure, contractions, slight imperfections, conversational academic tone. Keep meaning and length. Return only rewritten text:\n\n",
-        paraphrase: "Paraphrase to be unique plagiarism-free, same meaning, different words. Return only paraphrased text:\n\n"
-    };
+  humanize: `You are a human editor who rewrites AI text to read like a real person wrote it — someone with opinions, habits, and a slightly messy brain.
+
+Rewrite the text below using ALL of these rules:
+
+RHYTHM & STRUCTURE
+- Vary sentence length drastically: mix 3-word punches with 25-word ramblers.
+- Break parallelism. Don't let three sentences in a row start the same way.
+- Allow one sentence fragment where it feels natural.
+- Occasionally start with "And," "But," or "So."
+
+VOICE
+- Use contractions everywhere a real speaker would (don't, it's, you're, gonna).
+- Add one small hedge, aside, or mild opinion ("honestly," "to be fair," "which is odd").
+- Replace formal connectors (furthermore, moreover, additionally) with plain ones (also, plus, and, but then).
+- Kill corporate/AI-favorite words: delve, tapestry, landscape, leverage, robust, navigate, realm, underscore, pivotal, testament.
+
+IMPERFECTION
+- Insert one slight redundancy or natural repetition a human would use for emphasis.
+- Use a dash or parenthesis once — not twice.
+- Avoid perfectly balanced "not only X but also Y" constructions.
+
+MEANING
+- Preserve the original meaning, facts, and approximate length.
+- Do NOT add new claims or remove key info.
+
+Return ONLY the rewritten text. No preamble, no notes, no quotes.\n\n`,
+  paraphrase: `You are a paraphrasing engine optimized for originality without meaning drift.
+
+Rewrite the text so it shares no more than ~40% of its phrasing with the original, while keeping the exact same meaning, tone, and length.
+
+Rules:
+- Swap vocabulary for true synonyms, not cosmetic ones (big → substantial, not big → large).
+- Restructure sentences: change voice (active↔passive), reorder clauses, split or merge sentences.
+- Change sentence openings — no sentence should start the same way as the original.
+- Keep technical terms, names, and numbers exact.
+- Do not add examples, opinions, or filler.
+- Do not simplify or over-explain.
+
+Return ONLY the paraphrased text.\n\n`
+};
 
     // Tab switching
     tabs.forEach(t => {
