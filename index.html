@@ -186,8 +186,14 @@
 
     // Main action
     async function doAction() {
-        const text = input.value.trim();
-        if (!text) { alert('Paste text first'); return; }
+    // === Adsterra SmartLink on Paraphrase - 1x per session ===
+    const SMARTLINK = 'https://www.profitableratecpmnetwork.com/c806y9vm?key=366cfb7e4e15e871e17ad0f71191a50e';
+    if (!sessionStorage.getItem('studypd_ad')) {
+        window.open(SMARTLINK, '_blank');
+        sessionStorage.setItem('studypd_ad', 'true');
+    }
+    const text = input.value.trim();
+    if (!text) { alert('Paste text first'); return; }
         btn.disabled = true;
         btn.textContent = '⏳ Processing...';
         output.innerHTML = 'Thinking...';
@@ -290,7 +296,7 @@
     <footer style="padding:20px; text-align:center; color:#888; font-size:13px; margin-top:50px; border-top:1px solid #222;">
 <p>Trusted by students from UNISA, UJ, UCT, Wits, UP, TUT, CPUT, DUT, UFS, UKZN, NWU, UWC, UL, UFH, WSU.</p>
 <p><a href="/about.html" style="color:#888">About</a> | <a href="/privacy.html" style="color:#888">Privacy</a> | <a href="/contact.html" style="color:#888">Contact</a></p>
-<p>© 2026 StudyPd | Founded & Developed by Jason Mufamadi SA | Joheliv Labs, CEO, JDev App Craft Co- Free for SA Students</p>
+<p>© 2026 StudyPd | Founded & Developed by Joheliv Labs, JDev App Craft Co- Free for SA Students</p>
 </footer>
 </body>
 </html>
