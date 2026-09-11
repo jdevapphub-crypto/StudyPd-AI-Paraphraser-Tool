@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://study-pd-ai-paraphraser-tool.vercel.app/sitemap.xml
