@@ -22,98 +22,238 @@
   }
 }
 </script>
+<!-- PDF.js and Tesseract for the merged tools -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
 <style>
-        *{margin:0;padding:0;box-sizing:border-box;font-family:Inter,system-ui,sans-serif}
-        body{background:#0a0a0f;color:#fff;min-height:100vh}
-        .topbar{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;background:#11111a;border-bottom:1px solid #222}
-        .logo{font-weight:800;font-size:18px}.logo span{color:#7c5cfc}
-        .nav a{color:#aaa;text-decoration:none;margin-left:18px;font-size:14px}.nav a.active{color:#fff}
-        .container{max-width:1100px;margin:0 auto;padding:30px 20px}
-        h1{font-size:32px;margin-bottom:8px}h1 span{color:#7c5cfc}
-        .credit{opacity:0.4;font-size:13px;color:#888;margin-bottom:20px}
-        .tabs{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap}
-        .tab{padding:10px 18px;border-radius:10px;border:1px solid #2a2a35;background:#1a1a26;color:#aaa;cursor:pointer;font-weight:600;transition:all 0.15s}
-        .tab.active{background:#7c5cfc;color:#fff;border-color:#7c5cfc}
-        .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-        @media(max-width:800px){.grid{grid-template-columns:1fr}}
-        .box{background:#15151f;border:1px solid #232336;border-radius:14px;padding:14px}
-        .box-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;color:#aaa;font-size:13px}
-        textarea{width:100%;height:280px;background:#0f0f17;border:1px solid #2a2a3a;border-radius:10px;color:#fff;padding:14px;resize:none;font-size:15px;outline:none}
-        textarea:focus{border-color:#7c5cfc}
-        .output{width:100%;height:280px;background:#0f0f17;border:1px solid #2a2a3a;border-radius:10px;color:#ddd;padding:14px;font-size:15px;overflow:auto;white-space:pre-wrap;line-height:1.6}
-        .output mark{background:#7c5cfc40;color:#c7b3ff;padding:2px 0;border-radius:3px}
-        .btn-primary{width:100%;margin-top:14px;padding:14px;background:linear-gradient(90deg,#7c5cfc,#5b8def);border:none;border-radius:12px;color:#fff;font-weight:700;font-size:16px;cursor:pointer;transition:opacity 0.2s}
-        .btn-primary:disabled{opacity:0.6}
-        .badge{padding:4px 10px;border-radius:20px;background:#1e1e2d;color:#aaa;font-size:11px}
-        .human-bar{display:flex;align-items:center;gap:12px;margin-top:14px;padding:12px 16px;background:#1a1a2a;border-radius:12px;border:1px solid #2e2e44}
-        .human-bar .label{font-size:13px;color:#aaa;font-weight:600}
-        .progress-bg{flex:1;height:10px;background:#0f0f17;border-radius:8px;overflow:hidden;border:1px solid #2a2a3a}
-        .progress-fill{height:100%;width:0%;background:linear-gradient(90deg,#5b8def,#7c5cfc);border-radius:8px;transition:width 0.4s ease}
-        .human-percent{font-weight:800;font-size:18px;color:#7c5cfc;min-width:60px;text-align:right}
-        .section-title{margin-top:40px;margin-bottom:16px;font-size:22px;font-weight:700;display:flex;align-items:center;gap:10px}
-        .section-title span{color:#7c5cfc}
-        .card{background:#15151f;border:1px solid #232336;border-radius:14px;padding:18px}
-        .card h3{font-size:16px;margin-bottom:10px;color:#ddd}
-        .card select{width:100%;padding:12px;background:#0f0f17;border:1px solid #2a2a3a;border-radius:10px;color:#fff;font-size:14px;outline:none;margin-bottom:10px}
-        .card select:focus{border-color:#7c5cfc}
-        .apa-example{background:#0f0f17;border-left:3px solid #7c5cfc;padding:14px 18px;border-radius:0 10px 10px 0;margin-top:10px;font-size:13px;color:#bbb;line-height:1.8}
-        .apa-example em{color:#7c5cfc;font-style:normal;font-weight:600}
-        .text-muted{color:#888;font-size:12px;margin-top:8px}
-        .style-badge{display:inline-block;padding:3px 10px;border-radius:20px;background:#7c5cfc22;color:#7c5cfc;font-size:11px;font-weight:700;margin-left:8px;vertical-align:middle}
-    </style>
+    *{margin:0;padding:0;box-sizing:border-box;font-family:Inter,system-ui,sans-serif}
+    body{background:#0a0a0f;color:#fff;min-height:100vh;padding-top:150px}
+    /* Fixed header wrapper */
+    .fixed-header{position:fixed;top:0;left:0;right:0;z-index:100;background:#0a0a0f;border-bottom:1px solid #222}
+    .topbar{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;background:#11111a;border-bottom:1px solid #222}
+    .logo{font-weight:800;font-size:18px}.logo span{color:#7c5cfc}
+    .nav a{color:#aaa;text-decoration:none;margin-left:18px;font-size:14px}.nav a.active{color:#fff}
+    .header-titles{max-width:1100px;margin:0 auto;padding:16px 20px 14px}
+    h1{font-size:28px;margin-bottom:4px}h1 span{color:#7c5cfc}
+    .credit{opacity:0.4;font-size:13px;color:#888}
+    .container{max-width:1100px;margin:0 auto;padding:30px 20px 20px}
+    .tabs{display:flex;gap:10px;margin-bottom:24px;flex-wrap:wrap}
+    .tab{padding:10px 18px;border-radius:10px;border:1px solid #2a2a35;background:#1a1a26;color:#aaa;cursor:pointer;font-weight:600;transition:all 0.15s}
+    .tab.active{background:#7c5cfc;color:#fff;border-color:#7c5cfc}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    @media(max-width:800px){.grid{grid-template-columns:1fr}}
+    .box{background:#15151f;border:1px solid #232336;border-radius:14px;padding:14px}
+    .box-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;color:#aaa;font-size:13px}
+    textarea{width:100%;height:280px;background:#0f0f17;border:1px solid #2a2a3a;border-radius:10px;color:#fff;padding:14px;resize:none;font-size:15px;outline:none}
+    textarea:focus{border-color:#7c5cfc}
+    .output{width:100%;height:280px;background:#0f0f17;border:1px solid #2a2a3a;border-radius:10px;color:#ddd;padding:14px;font-size:15px;overflow:auto;white-space:pre-wrap;line-height:1.6}
+    .output mark{background:#7c5cfc40;color:#c7b3ff;padding:2px 0;border-radius:3px}
+    .btn-primary{width:100%;margin-top:14px;padding:14px;background:linear-gradient(90deg,#7c5cfc,#5b8def);border:none;border-radius:12px;color:#fff;font-weight:700;font-size:16px;cursor:pointer;transition:opacity 0.2s}
+    .btn-primary:disabled{opacity:0.6}
+    .badge{padding:4px 10px;border-radius:20px;background:#1e1e2d;color:#aaa;font-size:11px}
+    .human-bar{display:flex;align-items:center;gap:12px;margin-top:14px;padding:12px 16px;background:#1a1a2a;border-radius:12px;border:1px solid #2e2e44}
+    .human-bar .label{font-size:13px;color:#aaa;font-weight:600}
+    .progress-bg{flex:1;height:10px;background:#0f0f17;border-radius:8px;overflow:hidden;border:1px solid #2a2a3a}
+    .progress-fill{height:100%;width:0%;background:linear-gradient(90deg,#5b8def,#7c5cfc);border-radius:8px;transition:width 0.4s ease}
+    .human-percent{font-weight:800;font-size:18px;color:#7c5cfc;min-width:60px;text-align:right}
+    .section-title{margin-top:40px;margin-bottom:16px;font-size:22px;font-weight:700;display:flex;align-items:center;gap:10px}
+    .section-title span{color:#7c5cfc}
+    .card{background:#15151f;border:1px solid #232336;border-radius:14px;padding:18px}
+    .card h3{font-size:16px;margin-bottom:10px;color:#ddd}
+    .card select{width:100%;padding:12px;background:#0f0f17;border:1px solid #2a2a3a;border-radius:10px;color:#fff;font-size:14px;outline:none;margin-bottom:10px}
+    .card select:focus{border-color:#7c5cfc}
+    .apa-example{background:#0f0f17;border-left:3px solid #7c5cfc;padding:14px 18px;border-radius:0 10px 10px 0;margin-top:10px;font-size:13px;color:#bbb;line-height:1.8}
+    .apa-example em{color:#7c5cfc;font-style:normal;font-weight:600}
+    .text-muted{color:#888;font-size:12px;margin-top:8px}
+    .style-badge{display:inline-block;padding:3px 10px;border-radius:20px;background:#7c5cfc22;color:#7c5cfc;font-size:11px;font-weight:700;margin-left:8px;vertical-align:middle}
+    /* Merged tool styles (dark theme) */
+    .tool-section{display:none;margin-top:20px}
+    .tool-section.active{display:block}
+    .tool-card{background:#15151f;border:1px solid #232336;border-radius:14px;padding:20px}
+    .tool-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:10px}
+    .tool-header h3{font-size:18px;font-weight:700;color:#fff}
+    .tool-header h3 span{color:#7c5cfc}
+    .score-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}
+    .score{padding:6px 14px;border-radius:20px;font-size:12px;font-weight:700;background:#1e1e2d;color:#aaa}
+    .score.ai-high{background:#3b1e1e;color:#f87171}
+    .score.ai-low{background:#1e3b2e;color:#4ade80}
+    .score.ai-mid{background:#3b3a1e;color:#facc15}
+    .score.ai-zero{background:#1e1e2d;color:#aaa}
+    .clarity-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    @media(max-width:800px){.clarity-grid{grid-template-columns:1fr}}
+    .clarity-issues{border:1px solid #232336;border-radius:12px;padding:14px;height:260px;overflow-y:auto;font-size:13px;background:#0f0f17;color:#ccc}
+    .issue-block{margin-bottom:12px;padding:10px 12px;border-radius:10px;background:#1a1a26;border-left:4px solid #555}
+    .issue-block.warn{border-left-color:#f59e0b;background:#2a1f0e}
+    .issue-block.bad{border-left-color:#ef4444;background:#2a0e0e}
+    .issue-block.good{border-left-color:#22c55e;background:#0e2a1a}
+    .issue-title{font-weight:800;font-size:12px;margin-bottom:6px;color:#ddd}
+    .issue-item{font-size:12.5px;color:#aaa;margin-bottom:4px;line-height:1.5}
+    .hint{font-size:12px;color:#777;margin-top:8px}
+    .btn{padding:12px 18px;border-radius:12px;border:none;font-weight:700;cursor:pointer;font-size:14px;background:#1e1e2d;color:#ddd;transition:all 0.15s}
+    .btn:hover{background:#2a2a3a}
+    .btn-main{background:#7c5cfc;color:#fff}
+    .btn-main:hover{background:#6b4ae0}
+    .btns{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
+    .drop{border:2px dashed #2a2a3a;border-radius:12px;padding:24px;text-align:center;background:#0f0f17;cursor:pointer;color:#aaa}
+    .drop:hover{border-color:#7c5cfc}
+    .chatBox{height:300px;overflow-y:auto;border:1px solid #232336;border-radius:12px;padding:12px;background:#0f0f17}
+    .msg{padding:8px 12px;border-radius:12px;margin:6px 0;max-width:85%;font-size:13px;line-height:1.5;white-space:pre-wrap}
+    .msg.user{background:#7c5cfc;color:#fff;margin-left:auto}
+    .msg.ai{background:#1e1e2d;color:#ddd}
+    .chat-input-row{display:flex;gap:8px;margin-top:10px}
+    .chat-input-row input{flex:1;padding:10px 14px;border-radius:10px;border:1px solid #2a2a3a;background:#0f0f17;color:#fff;outline:none}
+    .chat-input-row input:focus{border-color:#7c5cfc}
+    .scan-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    @media(max-width:800px){.scan-grid{grid-template-columns:1fr}}
+    video,canvas{width:100%;border-radius:12px;background:#000}
+    .status-text{font-size:12px;margin-top:6px;color:#aaa}
+    .rewrite-area{margin-top:12px}
+    .rewrite-area textarea{height:200px}
+    .rewrite-label{font-size:12px;font-weight:700;margin-bottom:6px;color:#7c5cfc}
+</style>
 </head>
 <body>
-<div class="topbar">
-    <div class="logo">📚 StudyPad <span>AI</span></div>
-    <div class="nav"><a href="#" class="active">Paraphraser</a></div>
+
+<!-- Fixed header -->
+<div class="fixed-header">
+    <div class="topbar">
+        <div class="logo">📚 StudyPad <span>AI</span></div>
+        <div class="nav"><a href="#" class="active">Tools</a></div>
+    </div>
+    <div class="header-titles">
+        <h1>Study<span>Pad</span> AI Tools</h1>
+        <p class="credit">Joheliv: Jason's Labs</p>
+    </div>
 </div>
+
 <div class="container">
-    <h1>AI <span>Humanizer</span> & Paraphraser</h1>
-    <p class="credit">Joheliv: Jason's Labs</p>
-
-    <!-- Tabs -->
-    <div class="tabs">
-        <button class="tab active" data-mode="humanize">✨ Humanize (Make Undetectable)</button>
-        <button class="tab" data-mode="paraphrase">📝 Paraphrase</button>
+    <!-- Main Tool Tabs -->
+    <div class="tabs" id="mainTabs">
+        <button class="tab active" data-tool="humanizer">✨ Humanizer & Paraphraser</button>
+        <button class="tab" data-tool="clarity">✍️ Writing Clarity</button>
+        <button class="tab" data-tool="summarizer">📝 Summarizer</button>
+        <button class="tab" data-tool="pdf">📄 PDF Chat</button>
+        <button class="tab" data-tool="scan">📸 Scan & Solve</button>
     </div>
 
-    <!-- Main grid: input / output -->
-    <div class="grid">
-        <div class="box">
-            <div class="box-header"><span>Input Text</span><span class="badge" id="wordCount">0 words</span></div>
-            <textarea id="inputText" placeholder="Paste your AI essay here..."></textarea>
+    <!-- ==================== HUMANIZER & PARAPHRASER ==================== -->
+    <div id="tool-humanizer" class="tool-section active">
+        <div class="tabs" style="margin-bottom:16px">
+            <button class="tab active" data-mode="humanize">✨ Humanize (Make Undetectable)</button>
+            <button class="tab" data-mode="paraphrase">📝 Paraphrase</button>
         </div>
-        <div class="box">
-            <div class="box-header"><span>Output</span><span style="cursor:pointer" onclick="copyOutput()">📋 Copy</span></div>
-            <div id="output" class="output">Your humanized text will appear here...</div>
+        <div class="grid">
+            <div class="box">
+                <div class="box-header"><span>Input Text</span><span class="badge" id="wordCount">0 words</span></div>
+                <textarea id="inputText" placeholder="Paste your AI essay here..."></textarea>
+            </div>
+            <div class="box">
+                <div class="box-header"><span>Output</span><span style="cursor:pointer" onclick="copyOutput()">📋 Copy</span></div>
+                <div id="output" class="output">Your humanized text will appear here...</div>
+            </div>
+        </div>
+        <button class="btn-primary" id="actionBtn">✨ Humanize Text</button>
+        <div class="human-bar" id="humanBar">
+            <span class="label">🧑 Humanized</span>
+            <div class="progress-bg"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+            <span class="human-percent" id="humanPercent">0%</span>
+        </div>
+        <p class="text-muted" style="margin-top:6px;">Highlighted sentences are humanized. Percentage shows humanized paragraphs.</p>
+    </div>
+
+    <!-- ==================== WRITING CLARITY ==================== -->
+    <div id="tool-clarity" class="tool-section">
+        <div class="tool-card">
+            <div class="tool-header"><h3>✍️ Writing <span>Clarity</span> Checker</h3></div>
+            <div class="score-row">
+                <span class="score ai-zero" id="clarityScore">Readability: —</span>
+                <span class="score ai-zero" id="passiveScore">Passive voice: —</span>
+                <span class="score ai-zero" id="wordyScore">Wordy phrases: —</span>
+                <span class="score ai-zero" id="sentScore">Avg sentence: —</span>
+            </div>
+            <div class="clarity-grid">
+                <textarea id="clarityInput" placeholder="Paste your own writing here — an essay, assignment, email — to check it for clarity."></textarea>
+                <div id="clarityIssues" class="clarity-issues">
+                    <div class="hint">Click "Analyze Writing" to see readability, passive voice, wordy phrases and long sentences flagged here.</div>
+                </div>
+            </div>
+            <div class="btns">
+                <button class="btn" onclick="clearClarity()">Clear</button>
+                <button class="btn btn-main" onclick="analyzeClarity()">Analyze Writing</button>
+                <button class="btn" onclick="aiRewrite()">✨ AI Clarity Rewrite</button>
+            </div>
+            <div id="clarityRewriteWrap" class="rewrite-area" style="display:none">
+                <div class="rewrite-label">Suggested rewrite — a starting point for your own edit, not a final draft to submit as-is</div>
+                <textarea id="clarityRewrite" readonly></textarea>
+            </div>
         </div>
     </div>
-    <button class="btn-primary" id="actionBtn">✨ Humanize Text</button>
 
-    <!-- Humanization percentage bar -->
-    <div class="human-bar" id="humanBar">
-        <span class="label">🧑 Humanized</span>
-        <div class="progress-bg"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
-        <span class="human-percent" id="humanPercent">0%</span>
+    <!-- ==================== SUMMARIZER ==================== -->
+    <div id="tool-summarizer" class="tool-section">
+        <div class="tool-card">
+            <div class="tool-header"><h3>📝 Smart <span>Summarizer</span></h3></div>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px">
+                <select id="sumLen" style="flex:1;padding:10px;border-radius:10px;border:1px solid #2a2a3a;background:#0f0f17;color:#fff;outline:none">
+                    <option value="3">Short - 3 points</option>
+                    <option value="5" selected>Medium - 5 points</option>
+                    <option value="8">Long - 8 points</option>
+                </select>
+                <button class="btn btn-main" onclick="doSummarize()">Extractive Summary</button>
+                <button class="btn" onclick="doAiSummarize()">✨ AI Summary (Smart)</button>
+            </div>
+            <textarea id="sumInput" placeholder="Paste long text, lecture notes, article..."></textarea>
+            <textarea id="sumOutput" readonly placeholder="Summary will appear here in bullet points..." style="margin-top:10px;height:200px"></textarea>
+            <div class="hint">"Extractive Summary" pulls the most important existing sentences from your text (fast, works offline). "AI Summary" rewrites the ideas in fresh words using AI (needs a connection).</div>
+        </div>
     </div>
-  <!-- StudyPd Recommended for Students - Native Ad -->
-<div style="max-width:100%; margin:20px auto; padding:15px; background:#f9f9f9; border-radius:12px; border:1px solid #eee;">
-  <p style="font-size:12px; color:#888; margin:0 0 8px 0; text-align:left;">📌 Recommended for SA Students</p>
-  <script async="async" data-cfasync="false" src="https://pl31289423.profitableratecpmnetwork.com/e4fb4a34f5e4d604af81a06c1997e0ab/invoke.js"></script>
-  <div id="container-e4fb4a34f5e4d604af81a06c1997e0ab"></div>
-</div>
-    <p class="text-muted" style="margin-top:6px;">Highlighted sentences are humanized. Percentage shows humanized paragraphs.</p>
 
-<div style="margin:20px auto; text-align:center;">
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-5326242742377705"
-     data-ad-slot="auto"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-</div>
-    <!-- Citation Guide Section -->
+    <!-- ==================== PDF CHAT ==================== -->
+    <div id="tool-pdf" class="tool-section">
+        <div class="tool-card">
+            <div class="tool-header"><h3>📄 PDF <span>Chat</span></h3></div>
+            <div class="drop" onclick="document.getElementById('pdfFile').click()">
+                <div id="pdfLabel">Click to upload PDF (past paper, notes)</div>
+                <input type="file" id="pdfFile" accept=".pdf" hidden>
+            </div>
+            <div id="pdfInfo" class="status-text"></div>
+            <div class="chatBox" id="pdfChat"></div>
+            <div class="chat-input-row">
+                <input id="pdfQ" placeholder="Ask: Explain page 2, Summarize chapter...">
+                <button class="btn btn-main" onclick="askPdf()">Ask</button>
+            </div>
+            <div class="hint">Reads up to the first 40 pages. Answers are grounded in the PDF text and will cite the page number they came from.</div>
+        </div>
+    </div>
+
+    <!-- ==================== SCAN & SOLVE ==================== -->
+    <div id="tool-scan" class="tool-section">
+        <div class="tool-card">
+            <div class="tool-header"><h3>📸 Scan & <span>Solve</span></h3></div>
+            <div class="scan-grid">
+                <div>
+                    <video id="video" autoplay playsinline></video>
+                    <canvas id="canvas" style="display:none"></canvas>
+                    <div class="btns">
+                        <button class="btn" onclick="startCam()">Start Camera</button>
+                        <button class="btn" onclick="stopCam()">Stop Camera</button>
+                        <button class="btn btn-main" onclick="snap()">📸 Snap & OCR</button>
+                        <input type="file" id="imgFile" accept="image/*" hidden>
+                        <button class="btn" onclick="document.getElementById('imgFile').click()">Upload Image</button>
+                    </div>
+                    <div id="ocrStatus" class="status-text">Ready</div>
+                </div>
+                <div>
+                    <textarea id="ocrText" placeholder="Scanned text will appear here... then click Solve"></textarea>
+                    <button class="btn btn-main" style="width:100%;margin-top:8px" onclick="solveScanned()">🧠 Explain & Solve</button>
+                    <textarea id="solveOutput" readonly placeholder="Step-by-step explanation..." style="margin-top:8px;height:180px"></textarea>
+                </div>
+            </div>
+            <div class="hint">This walks through the reasoning step by step so you can learn the method, not just copy a final answer.</div>
+        </div>
+    </div>
+
+    <!-- ==================== CITATION GUIDE ==================== -->
     <div class="section-title">📖 <span>Citation Guide</span></div>
     <div class="card" style="margin-bottom:18px;">
         <h3>How to cite in your paragraphs</h3>
@@ -132,67 +272,103 @@
         <p class="text-muted" style="margin-top:10px;">Always include a full reference list entry at the end of your paper.</p>
     </div>
 
-</div>
-<script>
-    const WORKER_URL = "https://super-fire-c62cstudypad-proxy.jdevapphub.workers.dev/";
-    let mode = "humanize";
-    const input = document.getElementById('inputText');
-    const output = document.getElementById('output');
-    const btn = document.getElementById('actionBtn');
-    const tabs = document.querySelectorAll('.tab');
-    const progressFill = document.getElementById('progressFill');
-    const humanPercent = document.getElementById('humanPercent');
+    <!-- Adsterra SmartLink (hidden) -->
+    <div style="margin:20px auto; text-align:center;">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-5326242742377705"
+             data-ad-slot="auto"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
 
-    const prompts = {
-  humanize: `Rewrite the text below as a real human would write it. Vary sentence length. Use contractions. Start some sentences with And, But, or So,. Avoid words like delve, tapestry, leverage, robust, navigate. Keep meaning and rough length. Output ONLY the rewritten text.\n\n`,
-  paraphrase: `Rewrite the text below with different words and sentence structure. Keep exact meaning, tone, and length. Keep names and numbers exact. Output ONLY the rewritten text.\n\n`
+    <!-- StudyPd Recommended for Students - Native Ad -->
+    <div style="max-width:100%; margin:20px auto; padding:15px; background:#15151f; border-radius:12px; border:1px solid #232336;">
+        <p style="font-size:12px; color:#888; margin:0 0 8px 0; text-align:left;">📌 Recommended for SA Students</p>
+        <script async="async" data-cfasync="false" src="https://pl31289423.profitableratecpmnetwork.com/e4fb4a34f5e4d604af81a06c1997e0ab/invoke.js"></script>
+        <div id="container-e4fb4a34f5e4d604af81a06c1997e0ab"></div>
+    </div>
+</div>
+
+<footer style="padding:20px; text-align:center; color:#888; font-size:13px; margin-top:50px; border-top:1px solid #222;">
+    <p>Trusted by students from UNISA, UJ, UCT, Wits, UP, TUT, CPUT, DUT, UFS, UKZN, NWU, UWC, UL, UFH, WSU.</p>
+    <p><a href="/about.html" style="color:#888">About</a> | <a href="/privacy.html" style="color:#888">Privacy</a> | <a href="/contact.html" style="color:#888">Contact</a></p>
+    <p>© 2026 StudyPd | Founded & Developed by Joheliv Labs, JDev App Craft Co- Free for SA Students</p>
+</footer>
+
+<!-- Adsterra Social Bar - StudyPd -->
+<script src="https://pl31289422.profitableratecpmnetwork.com/ef/10/2d/ef102d0e6dfb6ec1c26ef3e4445ccde6.js"></script>
+
+<script>
+// ==================== SHARED CONFIG ====================
+const WORKER_URL = "https://super-fire-c62cstudypad-proxy.jdevapphub.workers.dev/";
+const WORKER_URL_V2 = 'https://young-recipe-a9fastudypadsmart.jdevapphub.workers.dev';
+
+// ==================== MAIN TOOL SWITCHING ====================
+document.querySelectorAll('#mainTabs .tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+        document.querySelectorAll('#mainTabs .tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        const tool = tab.dataset.tool;
+        document.querySelectorAll('.tool-section').forEach(s => s.classList.remove('active'));
+        document.getElementById('tool-' + tool).classList.add('active');
+    });
+});
+
+// ==================== HUMANIZER & PARAPHRASER ====================
+let mode = "humanize";
+const input = document.getElementById('inputText');
+const output = document.getElementById('output');
+const btn = document.getElementById('actionBtn');
+const humanizerTabs = document.querySelectorAll('#tool-humanizer .tab[data-mode]');
+const progressFill = document.getElementById('progressFill');
+const humanPercent = document.getElementById('humanPercent');
+
+const prompts = {
+    humanize: `Rewrite the text below as a real human would write it. Vary sentence length. Use contractions. Start some sentences with And, But, or So,. Avoid words like delve, tapestry, leverage, robust, navigate. Keep meaning and rough length. Output ONLY the rewritten text.\n\n`,
+    paraphrase: `Rewrite the text below with different words and sentence structure. Keep exact meaning, tone, and length. Keep names and numbers exact. Output ONLY the rewritten text.\n\n`
 };
 
-    // Tab switching
-    tabs.forEach(t => {
-        t.addEventListener('click', () => {
-            tabs.forEach(x => x.classList.remove('active'));
-            t.classList.add('active');
-            mode = t.dataset.mode;
-            btn.textContent = mode === 'humanize' ? '✨ Humanize Text - Make Undetectable' : '📝 Paraphrase Now';
-        });
+humanizerTabs.forEach(t => {
+    t.addEventListener('click', () => {
+        humanizerTabs.forEach(x => x.classList.remove('active'));
+        t.classList.add('active');
+        mode = t.dataset.mode;
+        btn.textContent = mode === 'humanize' ? '✨ Humanize Text - Make Undetectable' : '📝 Paraphrase Now';
     });
+});
 
-    // Word count
-    input.addEventListener('input', () => {
-        const words = input.value.trim() ? input.value.trim().split(/\s+/).length : 0;
-        document.getElementById('wordCount').textContent = words + ' words';
-    });
+input.addEventListener('input', () => {
+    const words = input.value.trim() ? input.value.trim().split(/\s+/).length : 0;
+    document.getElementById('wordCount').textContent = words + ' words';
+});
 
-    // Update humanization percentage
-    function updateHumanPercentage() {
-        const textContent = output.textContent || '';
-        const sentences = textContent.match(/[^.!?]+[.!?]*/g) || [];
-        const totalSentences = sentences.filter(s => s.trim().length > 0).length;
-        if (totalSentences === 0) {
-            progressFill.style.width = '0%';
-            humanPercent.textContent = '0%';
-            return;
-        }
-        const markCount = (output.innerHTML.match(/<mark>/g) || []).length;
-        const percentage = Math.min(100, Math.round((markCount / totalSentences) * 100));
-        progressFill.style.width = percentage + '%';
-        humanPercent.textContent = percentage + '%';
+function updateHumanPercentage() {
+    const textContent = output.textContent || '';
+    const sentences = textContent.match(/[^.!?]+[.!?]*/g) || [];
+    const totalSentences = sentences.filter(s => s.trim().length > 0).length;
+    if (totalSentences === 0) {
+        progressFill.style.width = '0%';
+        humanPercent.textContent = '0%';
+        return;
     }
+    const markCount = (output.innerHTML.match(/<mark>/g) || []).length;
+    const percentage = Math.min(100, Math.round((markCount / totalSentences) * 100));
+    progressFill.style.width = percentage + '%';
+    humanPercent.textContent = percentage + '%';
+}
 
-    // Highlight humanized sentences
-    function highlightHumanizedSentences(text) {
-        const sentences = text.match(/[^.!?]+[.!?]*/g) || [text];
-        return sentences.map(s => {
-            const trimmed = s.trim();
-            if (trimmed.length === 0) return s;
-            return `<mark>${s}</mark>`;
-        }).join('');
-    }
+function highlightHumanizedSentences(text) {
+    const sentences = text.match(/[^.!?]+[.!?]*/g) || [text];
+    return sentences.map(s => {
+        const trimmed = s.trim();
+        if (trimmed.length === 0) return s;
+        return `<mark>${s}</mark>`;
+    }).join('');
+}
 
-    // Main action
-    async function doAction() {
-    // === Adsterra SmartLink on Paraphrase - 1x per session ===
+async function doAction() {
     const SMARTLINK = 'https://www.profitableratecpmnetwork.com/c806y9vm?key=366cfb7e4e15e871e17ad0f71191a50e';
     if (!sessionStorage.getItem('studypd_ad')) {
         window.open(SMARTLINK, '_blank');
@@ -200,111 +376,408 @@
     }
     const text = input.value.trim();
     if (!text) { alert('Paste text first'); return; }
-        btn.disabled = true;
-        btn.textContent = '⏳ Processing...';
-        output.innerHTML = 'Thinking...';
-        progressFill.style.width = '0%';
-        humanPercent.textContent = '0%';
+    btn.disabled = true;
+    btn.textContent = '⏳ Processing...';
+    output.innerHTML = 'Thinking...';
+    progressFill.style.width = '0%';
+    humanPercent.textContent = '0%';
 
-        try {
-            const res = await fetch(WORKER_URL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    model: 'openai/gpt-oss-20b',
-                    messages: [{ role: 'user', content: prompts[mode] + text }],
-                    temperature: 0.8,
-                    max_tokens: 2000
-                })
-            });
-            const data = await res.json();
-            let rawOutput = data.choices?.[0]?.message?.content || JSON.stringify(data);
+    try {
+        const res = await fetch(WORKER_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                model: 'openai/gpt-oss-20b',
+                messages: [{ role: 'user', content: prompts[mode] + text }],
+                temperature: 0.8,
+                max_tokens: 2000
+            })
+        });
+        const data = await res.json();
+        let rawOutput = data.choices?.[0]?.message?.content || JSON.stringify(data);
 
-            if (mode === 'humanize') {
-                const escaped = rawOutput.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-                const highlighted = highlightHumanizedSentences(escaped);
-                output.innerHTML = highlighted;
-                updateHumanPercentage();
-            } else {
-                output.textContent = rawOutput;
-                progressFill.style.width = '0%';
-                humanPercent.textContent = '0%';
-            }
-            btn.textContent = '✅ Done';
-        } catch (e) {
-            output.textContent = 'Error: ' + e.message;
-            btn.textContent = '❌ Error';
+        if (mode === 'humanize') {
+            const escaped = rawOutput.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            const highlighted = highlightHumanizedSentences(escaped);
+            output.innerHTML = highlighted;
+            updateHumanPercentage();
+        } else {
+            output.textContent = rawOutput;
             progressFill.style.width = '0%';
             humanPercent.textContent = '0%';
         }
-        btn.disabled = false;
-    }
-
-    function copyOutput() {
-        navigator.clipboard.writeText(output.textContent);
-        alert('Copied!');
-    }
-
-    btn.addEventListener('click', doAction);
-
-    // ---------- Citation Guide (Multiple Styles) ----------
-    const citationStyle = document.getElementById('citationStyle');
-    const citationExample = document.getElementById('citationExample');
-
-    const citationData = {
-        apa: {
-            name: 'APA (7th ed.)',
-            parenthetical: '(Smith, 2020)',
-            narrative: 'Smith (2020) found that...',
-            paragraph: 'Recent studies have shown a strong correlation between sleep and memory (Smith, 2020). This finding suggests that adequate rest is crucial for academic performance.'
-        },
-        mla: {
-            name: 'MLA (9th ed.)',
-            parenthetical: '(Smith 45)',
-            narrative: 'Smith argues that... (45)',
-            paragraph: 'Recent studies have shown a strong correlation between sleep and memory (Smith 45). This finding suggests that adequate rest is crucial for academic performance. As Smith notes, "students who slept eight hours performed significantly better" (47).'
-        },
-        chicago: {
-            name: 'Chicago (17th ed.)',
-            parenthetical: '(Smith 2020, 45)',
-            narrative: 'Smith (2020, 45) found that...',
-            paragraph: 'Recent studies have shown a strong correlation between sleep and memory (Smith 2020, 45). This finding suggests that adequate rest is crucial for academic performance. Smith further argues that sleep hygiene should be taught in schools.'
-        },
-        harvard: {
-            name: 'Harvard',
-            parenthetical: '(Smith, 2020, p. 45)',
-            narrative: 'Smith (2020, p. 45) found that...',
-            paragraph: 'Recent studies have shown a strong correlation between sleep and memory (Smith, 2020, p. 45). This finding suggests that adequate rest is crucial for academic performance.'
-        }
-    };
-
-    function updateCitationExample() {
-        const style = citationStyle.value;
-        const data = citationData[style];
-        if (data) {
-            citationExample.innerHTML = `
-                <em>In-text (parenthetical):</em> ${data.parenthetical}<br>
-                <em>In-text (narrative):</em> ${data.narrative}<br>
-                <em>Paragraph example:</em> ${data.paragraph}
-            `;
-        }
-    }
-
-    citationStyle.addEventListener('change', updateCitationExample);
-    updateCitationExample();
-
-    // Initialize on load
-    window.addEventListener('load', () => {
+        btn.textContent = '✅ Done';
+    } catch (e) {
+        output.textContent = 'Error: ' + e.message;
+        btn.textContent = '❌ Error';
         progressFill.style.width = '0%';
         humanPercent.textContent = '0%';
+    }
+    btn.disabled = false;
+}
+
+function copyOutput() {
+    navigator.clipboard.writeText(output.textContent);
+    alert('Copied!');
+}
+
+btn.addEventListener('click', doAction);
+
+// ==================== CITATION GUIDE ====================
+const citationStyle = document.getElementById('citationStyle');
+const citationExample = document.getElementById('citationExample');
+
+const citationData = {
+    apa: {
+        name: 'APA (7th ed.)',
+        parenthetical: '(Smith, 2020)',
+        narrative: 'Smith (2020) found that...',
+        paragraph: 'Recent studies have shown a strong correlation between sleep and memory (Smith, 2020). This finding suggests that adequate rest is crucial for academic performance.'
+    },
+    mla: {
+        name: 'MLA (9th ed.)',
+        parenthetical: '(Smith 45)',
+        narrative: 'Smith argues that... (45)',
+        paragraph: 'Recent studies have shown a strong correlation between sleep and memory (Smith 45). This finding suggests that adequate rest is crucial for academic performance. As Smith notes, "students who slept eight hours performed significantly better" (47).'
+    },
+    chicago: {
+        name: 'Chicago (17th ed.)',
+        parenthetical: '(Smith 2020, 45)',
+        narrative: 'Smith (2020, 45) found that...',
+        paragraph: 'Recent studies have shown a strong correlation between sleep and memory (Smith 2020, 45). This finding suggests that adequate rest is crucial for academic performance. Smith further argues that sleep hygiene should be taught in schools.'
+    },
+    harvard: {
+        name: 'Harvard',
+        parenthetical: '(Smith, 2020, p. 45)',
+        narrative: 'Smith (2020, p. 45) found that...',
+        paragraph: 'Recent studies have shown a strong correlation between sleep and memory (Smith, 2020, p. 45). This finding suggests that adequate rest is crucial for academic performance.'
+    }
+};
+
+function updateCitationExample() {
+    const style = citationStyle.value;
+    const data = citationData[style];
+    if (data) {
+        citationExample.innerHTML = `
+            <em>In-text (parenthetical):</em> ${data.parenthetical}<br>
+            <em>In-text (narrative):</em> ${data.narrative}<br>
+            <em>Paragraph example:</em> ${data.paragraph}
+        `;
+    }
+}
+
+citationStyle.addEventListener('change', updateCitationExample);
+updateCitationExample();
+
+// ==================== V2 SHARED AI HELPER ====================
+async function callAI(systemPrompt, userPrompt, maxTokens) {
+    const res = await fetch(WORKER_URL_V2, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            model: 'llama-3.3-70b-versatile',
+            messages: [
+                { role: 'system', content: systemPrompt },
+                { role: 'user', content: userPrompt }
+            ],
+            temperature: 0.4,
+            max_tokens: maxTokens || 900
+        })
     });
+    const data = await res.json();
+    const text = data.choices?.[0]?.message?.content || '';
+    if (!text) throw new Error('Empty AI response');
+    return text;
+}
+
+// ==================== WRITING CLARITY ====================
+const WORDY_PHRASES = {
+    "due to the fact that": "because", "in order to": "to", "at this point in time": "now",
+    "utilize": "use", "utilizes": "use", "utilizing": "using", "a large number of": "many",
+    "in the event that": "if", "for the purpose of": "to", "with regard to": "regarding",
+    "it is important to note that": "(often can be cut entirely)", "in spite of the fact that": "although",
+    "on a daily basis": "daily", "the majority of": "most", "has the ability to": "can",
+    "in the near future": "soon", "take into consideration": "consider", "each and every": "every",
+    "despite the fact that": "although", "in the process of": "(often can be cut)", "a majority of": "most",
+    "with the exception of": "except for", "in a timely manner": "promptly", "basic fundamentals": "fundamentals"
+};
+
+function escapeRegex(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+
+function estimateSyllables(word) {
+    word = word.toLowerCase().replace(/[^a-z]/g, ''); if (!word) return 0;
+    let matches = word.match(/[aeiouy]+/g); let count = matches ? matches.length : 0;
+    if (word.endsWith('e') && count > 1) count--;
+    return Math.max(count, 1);
+}
+
+function fleschLabel(score) {
+    if (score >= 90) return { label: 'Very Easy', cls: 'ai-low' };
+    if (score >= 70) return { label: 'Easy', cls: 'ai-low' };
+    if (score >= 60) return { label: 'Fairly Easy', cls: 'ai-mid' };
+    if (score >= 50) return { label: 'Standard', cls: 'ai-mid' };
+    if (score >= 30) return { label: 'Fairly Hard', cls: 'ai-high' };
+    return { label: 'Hard to read', cls: 'ai-high' };
+}
+
+function analyzeClarity() {
+    const text = document.getElementById('clarityInput').value.trim();
+    const issuesEl = document.getElementById('clarityIssues');
+    if (!text) { issuesEl.innerHTML = '<div class="hint">Paste some text first.</div>'; return; }
+    const sentences = text.split(/(?<=[.!?])\s+/).filter(s => s.trim().length > 0);
+    const words = text.split(/\s+/).filter(Boolean);
+    const wordCount = words.length, sentenceCount = sentences.length || 1;
+    const avgSentLen = wordCount / sentenceCount;
+    const syllableTotal = words.reduce((sum, w) => sum + estimateSyllables(w), 0);
+    const flesch = 206.835 - 1.015 * (wordCount / sentenceCount) - 84.6 * (syllableTotal / Math.max(wordCount, 1));
+    const fLabel = fleschLabel(flesch);
+
+    const passiveRe = /\b(am|is|are|was|were|be|been|being)\s+\w+(ed|en)\b/gi;
+    const passiveSentences = sentences.filter(s => passiveRe.test(s));
+    passiveRe.lastIndex = 0;
+    const passivePct = Math.round((passiveSentences.length / sentenceCount) * 100);
+
+    const wordyHits = [];
+    Object.keys(WORDY_PHRASES).forEach(phrase => {
+        const re = new RegExp('\\b' + escapeRegex(phrase) + '\\b', 'gi');
+        const m = text.match(re);
+        if (m) wordyHits.push({ phrase, suggestion: WORDY_PHRASES[phrase], count: m.length });
+    });
+    const wordyTotal = wordyHits.reduce((a, b) => a + b.count, 0);
+
+    const longSentences = sentences.filter(s => s.split(/\s+/).filter(Boolean).length > 30);
+
+    const adverbs = words.filter(w => /\w{4,}ly$/i.test(w.replace(/[.,!?]/g, '')));
+    const adverbPct = (adverbs.length / wordCount) * 100;
+
+    document.getElementById('clarityScore').textContent = `Readability: ${Math.round(flesch)} (${fLabel.label})`;
+    document.getElementById('clarityScore').className = 'score ' + fLabel.cls;
+    document.getElementById('passiveScore').textContent = `Passive voice: ${passivePct}% of sentences`;
+    document.getElementById('passiveScore').className = 'score ' + (passivePct > 25 ? 'ai-high' : passivePct > 10 ? 'ai-mid' : 'ai-low');
+    document.getElementById('wordyScore').textContent = `Wordy phrases: ${wordyTotal}`;
+    document.getElementById('wordyScore').className = 'score ' + (wordyTotal > 5 ? 'ai-high' : wordyTotal > 0 ? 'ai-mid' : 'ai-low');
+    document.getElementById('sentScore').textContent = `Avg sentence: ${avgSentLen.toFixed(1)} words`;
+    document.getElementById('sentScore').className = 'score ' + (avgSentLen > 25 ? 'ai-high' : avgSentLen > 20 ? 'ai-mid' : 'ai-low');
+
+    let html = '';
+    html += `<div class="issue-block ${passiveSentences.length ? 'warn' : 'good'}"><div class="issue-title">🗣️ Passive voice (${passiveSentences.length} sentence${passiveSentences.length === 1 ? '' : 's'})</div>`;
+    if (passiveSentences.length) {
+        html += passiveSentences.slice(0, 5).map(s => `<div class="issue-item">"${escapeHtml(s.trim().slice(0, 140))}${s.length > 140 ? '…' : ''}"</div>`).join('');
+        html += `<div class="hint">Try rewriting with the doer as the subject — "the committee approved the plan" instead of "the plan was approved."</div>`;
+    } else { html += `<div class="issue-item">No obvious passive constructions found — nice.</div>`; }
+    html += `</div>`;
+
+    html += `<div class="issue-block ${wordyTotal ? 'warn' : 'good'}"><div class="issue-title">✂️ Wordy phrases (${wordyTotal})</div>`;
+    if (wordyHits.length) {
+        html += wordyHits.map(h => `<div class="issue-item"><b>"${escapeHtml(h.phrase)}"</b> ×${h.count} → try "${escapeHtml(h.suggestion)}"</div>`).join('');
+    } else { html += `<div class="issue-item">No common wordy phrases detected.</div>`; }
+    html += `</div>`;
+
+    html += `<div class="issue-block ${longSentences.length ? 'warn' : 'good'}"><div class="issue-title">📏 Long sentences (${longSentences.length})</div>`;
+    if (longSentences.length) {
+        html += longSentences.slice(0, 4).map(s => `<div class="issue-item">"${escapeHtml(s.trim().slice(0, 140))}…" (${s.split(/\s+/).length} words) — consider splitting.</div>`).join('');
+    } else { html += `<div class="issue-item">Sentence lengths look reasonable.</div>`; }
+    html += `</div>`;
+
+    html += `<div class="issue-block ${adverbPct > 4 ? 'warn' : 'good'}"><div class="issue-title">🔎 Adverb usage</div><div class="issue-item">${adverbs.length} "-ly" adverbs (${adverbPct.toFixed(1)}% of words). ${adverbPct > 4 ? 'Consider replacing some with a stronger verb.' : 'Looks fine.'}</div></div>`;
+
+    issuesEl.innerHTML = html;
+}
+
+function clearClarity() {
+    document.getElementById('clarityInput').value = '';
+    document.getElementById('clarityIssues').innerHTML = '<div class="hint">Click "Analyze Writing" to see readability, passive voice, wordy phrases and long sentences flagged here.</div>';
+    ['clarityScore', 'passiveScore', 'wordyScore', 'sentScore'].forEach(id => { document.getElementById(id).className = 'score ai-zero'; });
+    document.getElementById('clarityScore').textContent = 'Readability: —';
+    document.getElementById('passiveScore').textContent = 'Passive voice: —';
+    document.getElementById('wordyScore').textContent = 'Wordy phrases: —';
+    document.getElementById('sentScore').textContent = 'Avg sentence: —';
+    document.getElementById('clarityRewriteWrap').style.display = 'none';
+}
+
+async function aiRewrite() {
+    const text = document.getElementById('clarityInput').value.trim();
+    if (!text) return alert('Paste some text first');
+    const wrap = document.getElementById('clarityRewriteWrap'), out = document.getElementById('clarityRewrite');
+    wrap.style.display = 'block'; out.value = 'Rewriting for clarity...';
+    try {
+        const sys = "You are a writing coach. Improve clarity: reduce passive voice and wordiness, split overly long sentences, fix awkward phrasing. Preserve the author's meaning, key facts, and overall voice. Do not add new claims or change the argument. Return only the rewritten text, no preamble or notes.";
+        const result = await callAI(sys, text, 1200);
+        out.value = result.trim();
+    } catch (err) {
+        out.value = "Couldn't reach the AI rewrite service right now. Try again in a moment, or use the issues list above to edit manually.";
+    }
+}
+
+function escapeHtml(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+
+// ==================== SUMMARIZER ====================
+const STOPWORDS = new Set(("a an the and or but if of to in on for with as at by is are was were be been being this that these those it its from into over under not no so than then there here which who whom whose what when where why how you your i we our they their he she his her them").split(' '));
+
+function doSummarize() {
+    let text = document.getElementById('sumInput').value; if (!text.trim()) return alert("Paste text");
+    let len = parseInt(document.getElementById('sumLen').value);
+    let sentences = text.split(/(?<=[.!?])\s+/).filter(s => s.trim().length > 15);
+    let freq = {};
+    text.toLowerCase().split(/\W+/).forEach(w => { if (w.length > 3 && !STOPWORDS.has(w)) freq[w] = (freq[w] || 0) + 1; });
+    let scored = sentences.map((s, idx) => {
+        let ws = s.toLowerCase().split(/\W+/).filter(Boolean);
+        let raw = 0; ws.forEach(w => { if (!STOPWORDS.has(w)) raw += freq[w] || 0; });
+        let score = raw / Math.sqrt(ws.length || 1);
+        if (idx < 2 || idx > sentences.length - 3) score *= 1.25;
+        return { s, score, idx };
+    });
+    scored.sort((a, b) => b.score - a.score);
+    const seen = new Set(); const picked = [];
+    for (const item of scored) {
+        const key = item.s.toLowerCase().slice(0, 40);
+        if (seen.has(key)) continue;
+        seen.add(key); picked.push(item);
+        if (picked.length >= len) break;
+    }
+    picked.sort((a, b) => a.idx - b.idx);
+    document.getElementById('sumOutput').value = picked.map((x, i) => `${i + 1}. ${x.s.trim()}`).join("\n\n");
+}
+
+async function doAiSummarize() {
+    const text = document.getElementById('sumInput').value.trim(); if (!text) return alert("Paste text");
+    const len = parseInt(document.getElementById('sumLen').value);
+    const out = document.getElementById('sumOutput'); out.value = 'Generating AI summary...';
+    try {
+        const sys = `You are a study assistant. Summarize the given text in exactly ${len} clear bullet points, in your own words, covering the most important ideas. Number each point. Keep it factual — don't add information not implied by the text.`;
+        const result = await callAI(sys, text.slice(0, 8000), 900);
+        out.value = result.trim();
+    } catch (err) {
+        out.value = "Couldn't reach the AI summary service — falling back to extractive summary.\n\n";
+        doSummarize();
+    }
+}
+
+// ==================== PDF CHAT ====================
+let pdfPages = [];
+let pdfChunks = [];
+
+document.getElementById('pdfFile').addEventListener('change', async (e) => {
+    let file = e.target.files[0]; if (!file) return;
+    document.getElementById('pdfLabel').innerText = "Reading PDF...";
+    try {
+        let buf = await file.arrayBuffer();
+        let pdf = await pdfjsLib.getDocument({ data: buf }).promise;
+        pdfPages = []; pdfChunks = [];
+        const limit = Math.min(pdf.numPages, 40);
+        for (let i = 1; i <= limit; i++) {
+            let page = await pdf.getPage(i); let c = await page.getTextContent();
+            let pageText = c.items.map(it => it.str).join(" ");
+            pdfPages.push({ page: i, text: pageText });
+            for (let j = 0; j < pageText.length; j += 1200) {
+                pdfChunks.push({ page: i, text: pageText.slice(j, j + 1200) });
+            }
+        }
+        const totalWords = pdfPages.reduce((sum, p) => sum + p.text.split(/\s+/).filter(Boolean).length, 0);
+        document.getElementById('pdfInfo').innerText = `Loaded ${limit} of ${pdf.numPages} page(s), ~${totalWords} words`;
+        document.getElementById('pdfLabel').innerText = file.name + " loaded";
+        document.getElementById('pdfChat').innerHTML = '';
+        addMsg("ai", `PDF loaded: ${file.name} (${limit} pages read). Ask me anything about it — I'll point to the page it came from.`);
+    } catch (err) {
+        document.getElementById('pdfLabel').innerText = "Could not read that PDF";
+    }
+});
+
+function addMsg(who, txt) {
+    let box = document.getElementById('pdfChat');
+    let d = document.createElement('div');
+    d.className = "msg " + who;
+    d.innerText = txt;
+    box.appendChild(d);
+    box.scrollTop = box.scrollHeight;
+}
+
+function scoreChunks(qWords) {
+    return pdfChunks.map(c => {
+        const lc = c.text.toLowerCase();
+        let sc = 0; qWords.forEach(w => { if (lc.includes(w)) sc++; });
+        return { ...c, sc };
+    }).filter(x => x.sc > 0).sort((a, b) => b.sc - a.sc).slice(0, 5);
+}
+
+async function askPdf() {
+    let q = document.getElementById('pdfQ').value.trim(); if (!q || !pdfChunks.length) return alert("Upload PDF and type a question");
+    addMsg("user", q);
+    document.getElementById('pdfQ').value = "";
+    let qWords = q.toLowerCase().split(/\W+/).filter(w => w.length > 3);
+    let top = scoreChunks(qWords);
+    if (!top.length) {
+        addMsg("ai", "I couldn't find anything in the PDF matching that — try rephrasing, or ask about a specific page or topic.");
+        return;
+    }
+    try {
+        const excerpts = top.map(c => `[Page ${c.page}]\n${c.text}`).join('\n\n---\n\n');
+        const sys = "You are a study assistant answering questions about a PDF using only the excerpts provided. Cite the page number(s) your answer comes from like (p.3). If the excerpts don't contain the answer, say so honestly instead of guessing.";
+        const userPrompt = `QUESTION: ${q}\n\nEXCERPTS:\n${excerpts}`;
+        const answer = await callAI(sys, userPrompt, 700);
+        addMsg("ai", answer.trim());
+    } catch (err) {
+        const fallback = top.slice(0, 3).map(c => `(p.${c.page}) "${c.text.trim().slice(0, 160)}..."`).join('\n');
+        addMsg("ai", "Couldn't reach the AI right now — here's the closest matching text I found:\n\n" + fallback);
+    }
+}
+
+// ==================== SCAN & SOLVE ====================
+let stream = null;
+
+async function startCam() {
+    try {
+        if (stream) stopCam();
+        stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } });
+        document.getElementById('video').srcObject = stream;
+    } catch (e) { alert("Camera not available or permission denied — use Upload Image instead."); }
+}
+
+function stopCam() {
+    if (stream) { stream.getTracks().forEach(t => t.stop()); stream = null; }
+    const v = document.getElementById('video'); if (v) v.srcObject = null;
+}
+
+function snap() {
+    if (!stream) return alert("Start the camera first, or use Upload Image.");
+    let v = document.getElementById('video'); let c = document.getElementById('canvas');
+    c.width = v.videoWidth; c.height = v.videoHeight; c.getContext('2d').drawImage(v, 0, 0);
+    doOCR(c.toDataURL());
+}
+
+document.getElementById('imgFile').addEventListener('change', e => {
+    let f = e.target.files[0]; if (!f) return;
+    let r = new FileReader(); r.onload = () => doOCR(r.result); r.readAsDataURL(f);
+});
+
+async function doOCR(dataUrl) {
+    document.getElementById('ocrStatus').innerText = "⏳ Reading text... (OCR)";
+    try {
+        let res = await Tesseract.recognize(dataUrl, 'eng');
+        document.getElementById('ocrText').value = res.data.text.trim();
+        document.getElementById('ocrStatus').innerText = "✅ Text extracted - " + res.data.text.split(/\s+/).filter(Boolean).length + " words";
+    } catch (err) {
+        document.getElementById('ocrStatus').innerText = "❌ Couldn't read that image — try a clearer photo or better lighting.";
+    }
+}
+
+async function solveScanned() {
+    let q = document.getElementById('ocrText').value.trim(); if (!q) return alert("Scan or upload a question first");
+    const out = document.getElementById('solveOutput'); out.value = "Working through it...";
+    try {
+        const sys = "You are a patient tutor helping a student understand a question, not just get an answer. Explain your reasoning step by step in plain language, naming the key concept being tested, then state the final answer clearly at the end labeled 'Final answer:'. Keep it focused and exam-relevant.";
+        const result = await callAI(sys, q, 900);
+        out.value = result.trim();
+    } catch (err) {
+        out.value = `QUESTION: ${q}\n\nCouldn't reach the AI tutor right now. In the meantime, try this approach:\n1. Identify what the question is actually asking and which topic/module it relates to.\n2. Write down what you already know that's relevant.\n3. Break the question into smaller parts and answer each one.\n4. Combine your answers into a final response, and check it against your notes.`;
+    }
+}
+
+// ==================== INIT ====================
+window.addEventListener('load', () => {
+    progressFill.style.width = '0%';
+    humanPercent.textContent = '0%';
+});
 </script>
-    <footer style="padding:20px; text-align:center; color:#888; font-size:13px; margin-top:50px; border-top:1px solid #222;">
-<p>Trusted by students from UNISA, UJ, UCT, Wits, UP, TUT, CPUT, DUT, UFS, UKZN, NWU, UWC, UL, UFH, WSU.</p>
-<p><a href="/about.html" style="color:#888">About</a> | <a href="/privacy.html" style="color:#888">Privacy</a> | <a href="/contact.html" style="color:#888">Contact</a></p>
-<p>© 2026 StudyPd | Founded & Developed by Joheliv Labs, JDev App Craft Co- Free for SA Students</p>
-</footer>
-  <!-- Adsterra Social Bar - StudyPd -->
-<script src="https://pl31289422.profitableratecpmnetwork.com/ef/10/2d/ef102d0e6dfb6ec1c26ef3e4445ccde6.js"></script>
 </body>
 </html>
