@@ -1,1194 +1,532 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-<!-- ============ ADSENSE HEAD SCRIPT ============ -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5326242742377705"
-     crossorigin="anonymous"></script>
-
-<!-- ============ SEO ============ -->
-<title>StudyPad AI — AI Humanizer & Paraphraser for South African Students</title>
-<meta name="description" content="Free AI humanizer and paraphraser for South African university students. Improve readability, natural tone, and clarity. Educational purpose only. Built in Alice, Eastern Cape." />
-<meta name="keywords" content="AI humanizer South Africa, Free AI humanizer, AI paraphraser free, paraphraser for students, improve academic writing, UNISA writing tool, UJ paraphrasing tool, TUT academic writing, study aid South Africa" />
-<meta name="author" content="StudyPad AI" />
-<meta name="robots" content="index, follow" />
-<meta name="google-site-verification" content="U0a-aDEaPdCgxHxRu_ZMHfYw-yg8YmKSpC6NfRagFc" />
-<link rel="canonical" href="https://study-pd-ai-paraphraser-tool.vercel.app/" />
-
-<!-- ============ OPEN GRAPH ============ -->
-<meta property="og:title" content="StudyPad AI — AI Humanizer & Paraphraser" />
-<meta property="og:description" content="Improve readability and clarity of your academic writing. Free for South African students." />
-<meta property="og:url" content="https://study-pd-ai-paraphraser-tool.vercel.app/" />
-<meta property="og:site_name" content="StudyPad AI" />
-<meta property="og:locale" content="en_ZA" />
-<meta property="og:type" content="website" />
-
-<!-- ============ FAVICON ============ -->
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>" />
-
-<!-- ============ STRUCTURED DATA ============ -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5326242742377705" crossorigin="anonymous"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="google-site-verification" content="U0a-aDEaPdCgxHxRu_ZMHfYw-yg8YmKSpC6NfRagFc">
+<meta name="author" content="Jason Mufamadi">
+<title>StudyPd - Free AI Paraphraser & Humanizer for South African Students</title>
+  <link rel="icon" type="image/png" href="icon.png">
+<link rel="apple-touch-icon" href="icon.png">
+<link rel="manifest" href="manifest.json">
+<meta name="description" content="Free AI paraphraser & humanizer for South African university students - UNISA, UJ, UCT. Built by Jason Mufamadi.">
+<meta name="keywords" content="free paraphraser south africa, ai humanizer sa, unisa assignment tool, Jason Mufamadi">
+<meta name="robots" content="index, follow">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "Organization",
-  "name": "StudyPad AI",
-  "url": "https://study-pd-ai-paraphraser-tool.vercel.app",
-  "email": "helpstudypad@gmail.com",
-  "telephone": "+27738592196",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Alice",
-    "addressRegion": "Eastern Cape",
-    "addressCountry": "ZA"
+  "name": "StudyPd",
+  "founder": {
+    "@type": "Person",
+    "name": "Jason Mufamadi",
+    "jobTitle": "Founder & Developer"
   }
 }
 </script>
-
 <style>
-  *{margin:0;padding:0;box-sizing:border-box;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
-  html,body{background:#0a0e1a;color:#e5e7eb;scroll-behavior:smooth}
-  a{color:#60a5fa;text-decoration:none}
-  a:hover{color:#93c5fd}
-
-  .container{max-width:1100px;margin:0 auto;padding:0 20px}
-
-  /* HEADER */
-  header.site-header{position:sticky;top:0;z-index:50;background:rgba(10,14,26,0.95);backdrop-filter:blur(8px);border-bottom:1px solid #232a44}
-  .header-inner{display:flex;align-items:center;justify-content:space-between;padding:12px 0}
-  .logo{font-weight:800;font-size:18px;color:#fff;text-decoration:none}
-  .logo span{color:#3b82f6}
-  nav.main-nav{display:flex;gap:22px;font-size:14px}
-  nav.main-nav a{color:#cbd5e1}
-  nav.main-nav a:hover{color:#fff}
-  .mobile-menu{display:none;font-size:22px;color:#fff;cursor:pointer;background:none;border:none}
-
-  @media(max-width:768px){
-    nav.main-nav{display:none;position:absolute;top:56px;right:20px;background:#151a2d;border:1px solid #232a44;border-radius:12px;padding:12px;flex-direction:column;gap:12px;min-width:180px}
-    nav.main-nav.open{display:flex}
-    .mobile-menu{display:block}
-  }
-
-  /* HERO */
-  .hero{padding:48px 0 24px}
-  .hero h1{font-size:32px;font-weight:800;color:#fff;line-height:1.2}
-  .hero h1 span{color:#3b82f6}
-  .hero p{color:#94a3b8;margin-top:8px;font-size:14px}
-
-  /* AD WRAPPER */
-  .ad-wrap{margin:32px 0;display:flex;justify-content:center;min-height:120px;background:#f1f5f9;border-radius:16px;padding:10px;width:100%;overflow:hidden}
-  .ad-wrap ins{display:block;width:100%}
-
-  /* TABS + TONES */
-  .tabs{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:20px}
-  .tab{padding:10px 20px;border-radius:12px;border:1px solid #232a44;background:#151a2d;color:#cbd5e1;font-weight:600;font-size:14px;cursor:pointer;transition:all .15s}
-  .tab:hover{color:#fff}
-  .tab.active{background:#3b82f6;border-color:#3b82f6;color:#fff}
-
-  .tone-row{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:20px}
-  .tone-label{font-size:12px;color:#94a3b8;font-weight:600;margin-right:4px}
-  .tone{padding:6px 16px;border-radius:999px;border:1px solid #232a44;background:#151a2d;color:#cbd5e1;font-weight:600;font-size:12px;cursor:pointer;transition:all .15s}
-  .tone:hover{color:#fff}
-  .tone.active{background:#3b82f6;border-color:#3b82f6;color:#fff}
-
-  /* GRID */
-  .grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-  @media(max-width:800px){.grid{grid-template-columns:1fr}}
-
-  .card{background:#151a2d;border:1px solid #232a44;border-radius:16px;padding:16px}
-  .card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font-size:12px;color:#94a3b8}
-  .badge{padding:2px 10px;border-radius:999px;background:#1e2438;color:#cbd5e1;font-size:11px}
-  .badge.success{background:rgba(34,197,94,0.2);color:#4ade80}
-
-  textarea{width:100%;height:320px;background:#0d1220;border:1px solid #232a44;border-radius:12px;color:#fff;padding:14px;font-size:14px;outline:none;resize:none;line-height:1.7}
-  textarea:focus{border-color:#3b82f6}
-
-  /* OUTPUT as clean paragraph */
-  .output-box{width:100%;height:320px;overflow:auto;background:#0d1220;border:1px solid #232a44;border-radius:12px;padding:16px;font-size:15px;line-height:1.9;color:#e2e8f0;white-space:pre-wrap;word-wrap:break-word}
-  .output-empty{color:#64748b;font-size:14px;font-style:italic}
-
-  /* Action bar with copy on the right */
-  .action-bar{display:flex;gap:12px;margin-top:20px;align-items:stretch}
-  .btn-primary{flex:1;padding:16px;border:none;border-radius:14px;background:linear-gradient(90deg,#3b82f6,#6366f1);color:#fff;font-weight:700;font-size:16px;cursor:pointer;transition:opacity .2s}
-  .btn-primary:hover{opacity:.95}
-  .btn-primary:disabled{opacity:.6;cursor:not-allowed}
-  .btn-copy{min-width:110px;padding:16px 20px;border:1px solid #232a44;border-radius:14px;background:#151a2d;color:#e5e7eb;font-weight:700;font-size:14px;cursor:pointer;transition:all .15s}
-  .btn-copy:hover{background:#1e2438;color:#fff}
-  .btn-copy.copied{background:#16a34a;border-color:#16a34a;color:#fff}
-
-  .mini-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
-  .mini-btn{font-size:12px;padding:6px 12px;border-radius:8px;border:1px solid #232a44;background:#151a2d;color:#cbd5e1;cursor:pointer}
-  .mini-btn:hover{color:#fff}
-
-  .error-msg{color:#f87171;font-size:14px;margin-top:12px}
-
-  /* HUMAN SCORE BAR */
-  .human-bar{display:flex;align-items:center;gap:12px;background:#121729;border:1px solid #232a44;border-radius:16px;padding:12px 16px;margin-top:20px}
-  .human-bar .label{font-size:12px;color:#94a3b8;font-weight:600;white-space:nowrap}
-  .progress-bg{flex:1;height:12px;background:#0a0e1a;border-radius:8px;overflow:hidden;border:1px solid #232a44}
-  .progress-fill{height:100%;width:0%;background:linear-gradient(90deg,#facc15,#3b82f6);border-radius:8px;transition:width .5s ease}
-  .human-percent{font-weight:800;font-size:18px;color:#3b82f6;min-width:56px;text-align:right}
-
-  .score-note{font-size:12px;color:#64748b;margin-top:8px}
-
-  /* CONTENT SECTIONS */
-  section.content{padding:40px 0}
-  section.content h2{font-size:22px;color:#f1f5f9;font-weight:700;margin:28px 0 12px}
-  section.content h3{font-size:16px;color:#f1f5f9;font-weight:600;margin:20px 0 8px}
-  section.content p{color:#cbd5e1;line-height:1.8;margin-bottom:14px;font-size:15px}
-  section.content ul,section.content ol{color:#cbd5e1;line-height:1.8;padding-left:22px;margin-bottom:14px;font-size:15px}
-  section.content li{margin-bottom:6px}
-  section.content strong{color:#f1f5f9}
-  section.content em{color:#94a3b8}
-
-  /* PAGE CONTENT */
-  .page-content{max-width:820px;margin:0 auto;padding:40px 20px}
-  .page-content h1{font-size:28px;font-weight:800;color:#fff;margin-bottom:20px}
-  .page-content h2{font-size:20px;color:#f1f5f9;font-weight:700;margin:24px 0 10px}
-  .page-content p{color:#cbd5e1;line-height:1.8;margin-bottom:14px;font-size:15px}
-  .page-content ul{color:#cbd5e1;line-height:1.8;padding-left:22px;margin-bottom:14px}
-  .page-content li{margin-bottom:6px}
-
-  /* NAV PAGE SYSTEM */
-  .page{display:none}
-  .page.active{display:block}
-
-  /* CONTACT FORM */
-  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:24px}
-  @media(max-width:800px){.form-grid{grid-template-columns:1fr}}
-  .form-card{background:#151a2d;border:1px solid #232a44;border-radius:16px;padding:20px}
-  .form-card label{display:block;font-size:12px;color:#94a3b8;margin-bottom:6px}
-  .form-card input,.form-card textarea{width:100%;background:#0d1220;border:1px solid #232a44;border-radius:10px;padding:10px 12px;color:#fff;font-size:14px;outline:none;margin-bottom:14px;font-family:inherit}
-  .form-card input:focus,.form-card textarea:focus{border-color:#3b82f6}
-  .form-card textarea{resize:vertical;min-height:120px}
-  .form-card button{width:100%;padding:12px;border:none;border-radius:10px;background:#3b82f6;color:#fff;font-weight:600;font-size:14px;cursor:pointer}
-  .form-card button:hover{background:#2563eb}
-  .contact-info{background:#151a2d;border:1px solid #232a44;border-radius:16px;padding:20px}
-  .contact-info h3{color:#f1f5f9;font-size:14px;font-weight:600;margin-bottom:8px;margin-top:16px}
-  .contact-info h3:first-child{margin-top:0}
-  .contact-info p,.contact-info a{color:#cbd5e1;font-size:14px}
-
-  /* BLOG LIST */
-  .blog-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:24px}
-  @media(max-width:800px){.blog-grid{grid-template-columns:1fr}}
-  .blog-card{background:#151a2d;border:1px solid #232a44;border-radius:16px;padding:20px;cursor:pointer;transition:border-color .15s}
-  .blog-card:hover{border-color:#3b82f6}
-  .blog-card h2{font-size:18px;color:#fff;font-weight:600;margin-bottom:8px;line-height:1.4}
-  .blog-card p{color:#94a3b8;font-size:14px;line-height:1.6}
-  .blog-card .read-more{color:#60a5fa;font-size:12px;margin-top:12px;display:inline-block}
-
-  /* CITATION */
-  .citation-card{background:#151a2d;border:1px solid #232a44;border-radius:16px;padding:20px;margin-top:20px}
-  .citation-card select{width:100%;padding:12px;background:#0d1220;border:1px solid #232a44;border-radius:10px;color:#fff;font-size:14px;outline:none;margin-bottom:14px}
-  .citation-card select:focus{border-color:#3b82f6}
-  .citation-example{background:#0d1220;border-left:3px solid #3b82f6;padding:14px 18px;border-radius:0 10px 10px 0;font-size:14px;color:#cbd5e1;line-height:1.8}
-  .citation-example em{color:#60a5fa;font-style:normal;font-weight:600}
-
-  /* FOOTER */
-  footer.site-footer{border-top:1px solid #232a44;background:#080b14;margin-top:60px;padding:40px 0 20px}
-  .footer-grid{display:grid;grid-template-columns:1.2fr 1fr 1fr 1.2fr;gap:32px;font-size:14px}
-  @media(max-width:800px){.footer-grid{grid-template-columns:1fr 1fr}}
-  @media(max-width:520px){.footer-grid{grid-template-columns:1fr}}
-  .footer-grid h4{color:#e2e8f0;font-size:14px;font-weight:600;margin-bottom:10px}
-  .footer-grid ul{list-style:none;display:flex;flex-direction:column;gap:6px}
-  .footer-grid li,.footer-grid p{color:#94a3b8;line-height:1.6}
-  .footer-brand{font-weight:800;font-size:16px;color:#fff;margin-bottom:8px}
-  .footer-brand span{color:#3b82f6}
-  .footer-bottom{border-top:1px solid #232a44;margin-top:32px;padding-top:16px;font-size:12px;color:#64748b;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
-
-  .section-title{font-size:22px;color:#f1f5f9;font-weight:700;margin:40px 0 16px}
-
-  @media(max-width:640px){
-    .hero h1{font-size:24px}
-    .hero{padding:32px 0 16px}
-    .tab{font-size:13px;padding:8px 14px}
-    .tone{font-size:11px;padding:5px 12px}
-    textarea,.output-box{height:240px}
-    .action-bar{flex-direction:column}
-    .btn-copy{min-width:auto;width:100%}
-  }
+    *{margin:0;padding:0;box-sizing:border-box;font-family:Inter,system-ui,sans-serif}
+    body{background:#0a0a0f;color:#fff;min-height:100vh;padding-top:150px}
+    .fixed-header{position:fixed;top:0;left:0;right:0;z-index:100;background:#0a0a0f;border-bottom:1px solid #222}
+    .topbar{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;background:#11111a;border-bottom:1px solid #222}
+    .logo{font-weight:800;font-size:18px}.logo span{color:#7c5cfc}
+    .nav a{color:#aaa;text-decoration:none;margin-left:18px;font-size:14px}.nav a.active{color:#fff}
+    .header-titles{max-width:1100px;margin:0 auto;padding:16px 20px 14px}
+    h1{font-size:28px;margin-bottom:4px}h1 span{color:#7c5cfc}
+    .credit{opacity:0.4;font-size:13px;color:#888}
+    .container{max-width:1100px;margin:0 auto;padding:30px 20px 20px}
+    .tabs{display:flex;gap:10px;margin-bottom:24px;flex-wrap:wrap}
+    .tab{padding:10px 18px;border-radius:10px;border:1px solid #2a2a35;background:#1a1a26;color:#aaa;cursor:pointer;font-weight:600;transition:all 0.15s}
+    .tab.active{background:#7c5cfc;color:#fff;border-color:#7c5cfc}
+    .tone-row{display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+    .tone-row .tone-label{font-size:13px;color:#aaa;font-weight:600;margin-right:4px}
+    .tone{padding:8px 16px;border-radius:20px;border:1px solid #2a2a35;background:#15151f;color:#aaa;cursor:pointer;font-weight:600;font-size:13px;transition:all 0.15s}
+    .tone:hover{border-color:#3a3a4a;color:#ddd}
+    .tone.active{background:#7c5cfc;color:#fff;border-color:#7c5cfc}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+    @media(max-width:800px){.grid{grid-template-columns:1fr}}
+    .box{background:#15151f;border:1px solid #232336;border-radius:14px;padding:14px}
+    .box-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;color:#aaa;font-size:13px}
+    textarea{width:100%;height:340px;background:#0f0f17;border:1px solid #2a2a3a;border-radius:10px;color:#fff;padding:14px;resize:none;font-size:15px;outline:none;line-height:1.6}
+    textarea:focus{border-color:#7c5cfc}
+    .output{width:100%;height:340px;background:#0f0f17;border:1px solid #2a2a3a;border-radius:10px;color:#ddd;padding:14px;font-size:15px;overflow:auto;white-space:pre-wrap;line-height:1.6}
+    .output mark{background:#7c5cfc40;color:#c7b3ff;padding:2px 0;border-radius:3px}
+    .btn-primary{width:100%;margin-top:14px;padding:14px;background:linear-gradient(90deg,#7c5cfc,#5b8def);border:none;border-radius:12px;color:#fff;font-weight:700;font-size:16px;cursor:pointer;transition:opacity 0.2s}
+    .btn-primary:disabled{opacity:0.6}
+    .badge{padding:4px 10px;border-radius:20px;background:#1e1e2d;color:#aaa;font-size:11px}
+    .human-bar{display:flex;align-items:center;gap:12px;margin-top:14px;padding:14px 18px;background:#1a1a2a;border-radius:12px;border:1px solid #2e2e44}
+    .human-bar .label{font-size:13px;color:#aaa;font-weight:600;white-space:nowrap}
+    .progress-bg{flex:1;height:12px;background:#0f0f17;border-radius:8px;overflow:hidden;border:1px solid #2a2a3a}
+    .progress-fill{height:100%;width:0%;background:linear-gradient(90deg,#5b8def,#7c5cfc);border-radius:8px;transition:width 0.6s ease}
+    .human-percent{font-weight:800;font-size:20px;color:#7c5cfc;min-width:70px;text-align:right}
+    .section-title{margin-top:40px;margin-bottom:16px;font-size:22px;font-weight:700;display:flex;align-items:center;gap:10px}
+    .section-title span{color:#7c5cfc}
+    .card{background:#15151f;border:1px solid #232336;border-radius:14px;padding:18px}
+    .card h3{font-size:16px;margin-bottom:10px;color:#ddd}
+    .card select{width:100%;padding:12px;background:#0f0f17;border:1px solid #2a2a3a;border-radius:10px;color:#fff;font-size:14px;outline:none;margin-bottom:10px}
+    .card select:focus{border-color:#7c5cfc}
+    .apa-example{background:#0f0f17;border-left:3px solid #7c5cfc;padding:14px 18px;border-radius:0 10px 10px 0;margin-top:10px;font-size:13px;color:#bbb;line-height:1.8}
+    .apa-example em{color:#7c5cfc;font-style:normal;font-weight:600}
+    .text-muted{color:#888;font-size:12px;margin-top:8px}
+    .score-breakdown{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-top:12px}
+    .score-chip{background:#1a1a26;border:1px solid #2a2a3a;border-radius:10px;padding:10px 12px;font-size:12px;display:flex;justify-content:space-between;align-items:center;gap:8px}
+    .score-chip .name{color:#aaa;font-weight:600}
+    .score-chip .val{font-weight:800;color:#7c5cfc}
+    .score-chip .val.good{color:#4ade80}
+    .score-chip .val.ok{color:#facc15}
+    .score-chip .val.bad{color:#f87171}
 </style>
 </head>
 <body>
 
-<!-- ============ HEADER ============ -->
-<header class="site-header">
-  <div class="container header-inner">
-    <a href="#" class="logo" onclick="showPage('home');return false;">📚 StudyPad <span>AI</span></a>
-    <nav class="main-nav" id="mainNav">
-      <a href="#" onclick="showPage('home');return false;">Home</a>
-      <a href="#" onclick="showPage('how');return false;">How it Works</a>
-      <a href="#" onclick="showPage('blog');return false;">Blog</a>
-      <a href="#" onclick="showPage('about');return false;">About</a>
-      <a href="#" onclick="showPage('contact');return false;">Contact</a>
-    </nav>
-    <button class="mobile-menu" onclick="document.getElementById('mainNav').classList.toggle('open')">☰</button>
-  </div>
-</header>
-
-<!-- ============ HOME PAGE ============ -->
-<div id="page-home" class="page active">
-
-  <div class="container">
-    <section class="hero">
-      <h1>AI <span>Humanizer</span> & Paraphraser</h1>
-      <p>Improve readability and clarity of your academic writing. Free for South African students. Educational purpose only.</p>
-    </section>
-  </div>
-
-  <!-- AD UNIT #1 -->
-  <div class="container">
-    <div class="ad-wrap">
-      <ins class="adsbygoogle"
-           style="display:block"
-           data-ad-client="ca-pub-5326242742377705"
-           data-ad-slot="4394796685"
-           data-ad-format="auto"
-           data-full-width-responsive="true"></ins>
-      <script>
-           (adsbygoogle = window.adsbygoogle || []).push({});
-      </script>
+<div class="fixed-header">
+    <div class="topbar">
+        <div class="logo">📚 StudyPad <span>AI</span></div>
+        <div class="nav"><a href="#" class="active">Humanizer</a></div>
     </div>
-  </div>
+    <div class="header-titles">
+        <h1>AI <span>Humanizer</span> & Paraphraser</h1>
+        <p class="credit">Joheliv: Jason's Labs</p>
+    </div>
+</div>
 
-  <!-- ============ TOOL ============ -->
-  <div class="container">
+<div class="container">
 
-    <!-- Tabs -->
     <div class="tabs">
-      <button class="tab active" data-mode="humanize" onclick="setMode('humanize',this)">✨ Humanize (Improve Readability)</button>
-      <button class="tab" data-mode="paraphrase" onclick="setMode('paraphrase',this)">📝 Paraphrase</button>
+        <button class="tab active" data-mode="humanize">✨ Humanize (Make Undetectable)</button>
+        <button class="tab" data-mode="paraphrase">📝 Paraphrase</button>
     </div>
 
-    <!-- Tones -->
     <div class="tone-row">
-      <span class="tone-label">🎨 Tone:</span>
-      <button class="tone" data-tone="balanced" onclick="setTone('balanced',this)">Balanced</button>
-      <button class="tone" data-tone="academic" onclick="setTone('academic',this)">🎓 Academic</button>
-      <button class="tone active" data-tone="casual" onclick="setTone('casual',this)">💬 Casual</button>
-      <button class="tone" data-tone="simple" onclick="setTone('simple',this)">🌱 Simple</button>
+        <span class="tone-label">🎨 Tone:</span>
+        <button class="tone active" data-tone="balanced">Balanced</button>
+        <button class="tone" data-tone="academic">🎓 Academic</button>
+        <button class="tone" data-tone="casual">💬 Casual</button>
+        <button class="tone" data-tone="simple">🌱 Simple</button>
     </div>
 
-    <!-- Input / Output -->
     <div class="grid">
-      <div class="card">
-        <div class="card-header">
-          <span>Input Text</span>
-          <span class="badge" id="wordCount">0 words</span>
+        <div class="box">
+            <div class="box-header"><span>Input Text</span><span class="badge" id="wordCount">0 words</span></div>
+            <textarea id="inputText" placeholder="Paste your AI essay here..."></textarea>
         </div>
-        <textarea id="inputText" placeholder="Paste your AI-generated essay here to improve readability…"></textarea>
-        <div class="mini-actions">
-          <button class="mini-btn" onclick="clearAll()">Clear</button>
-          <button class="mini-btn" onclick="downloadTxt()">⬇ .txt</button>
-          <button class="mini-btn" onclick="downloadDoc()">⬇ .doc</button>
+        <div class="box">
+            <div class="box-header"><span>Output</span><span style="cursor:pointer" onclick="copyOutput()">📋 Copy</span></div>
+            <div id="outputText" class="output">Your humanized text will appear here...</div>
         </div>
-      </div>
-
-      <div class="card">
-        <div class="card-header">
-          <span>Output</span>
-          <span class="badge" id="statusBadge">Ready</span>
-        </div>
-        <div class="output-box" id="outputBox">
-          <p class="output-empty">Your improved text will appear here as a clean paragraph.</p>
-        </div>
-      </div>
     </div>
 
-    <!-- Action bar — COPY on the RIGHT -->
-    <div class="action-bar">
-      <button class="btn-primary" id="actionBtn" onclick="runTool()">✨ Humanize Text (Casual)</button>
-      <button class="btn-copy" id="copyBtn" onclick="copyOutput()">📋 Copy</button>
-    </div>
+    <button class="btn-primary" id="actionBtn">✨ Humanize Text</button>
 
-    <p class="error-msg" id="errorMsg" style="display:none;"></p>
-
-    <!-- Human score -->
     <div class="human-bar">
-      <span class="label">🧑 Human Score</span>
-      <div class="progress-bg"><div class="progress-fill" id="progressFill"></div></div>
-      <span class="human-percent" id="humanPercent">0%</span>
+        <span class="label">🧑 Human Score</span>
+        <div class="progress-bg"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+        <span class="human-percent" id="humanPercent">0%</span>
     </div>
-    <p class="score-note">Score reflects sentence variety, natural contractions, and reduced AI-style clichés. 80%+ reads as genuinely human-like.</p>
-  </div>
 
-  <!-- AD UNIT #2 -->
-  <div class="container">
-    <div class="ad-wrap">
-      <ins class="adsbygoogle"
-           style="display:block"
-           data-ad-client="ca-pub-5326242742377705"
-           data-ad-slot="4394796685"
-           data-ad-format="auto"
-           data-full-width-responsive="true"></ins>
-      <script>
-           (adsbygoogle = window.adsbygoogle || []).push({});
-      </script>
+    <div class="score-breakdown" id="scoreBreakdown" style="display:none">
+        <div class="score-chip"><span class="name">Sentence variety</span><span class="val" id="sc-sent">—</span></div>
+        <div class="score-chip"><span class="name">Contractions</span><span class="val" id="sc-cont">—</span></div>
+        <div class="score-chip"><span class="name">AI clichés avoided</span><span class="val" id="sc-clich">—</span></div>
+        <div class="score-chip"><span class="name">Burstiness (rhythm)</span><span class="val" id="sc-burst">—</span></div>
+        <div class="score-chip"><span class="name">Personal voice</span><span class="val" id="sc-voice">—</span></div>
     </div>
-  </div>
 
-  <!-- ============ CITATION GUIDE ============ -->
-  <div class="container">
-    <h2 class="section-title">📖 Citation Guide</h2>
-    <div class="citation-card">
-      <h3 style="color:#f1f5f9;font-size:15px;margin-bottom:8px;">How to cite in your paragraphs</h3>
-      <p style="color:#94a3b8;font-size:14px;margin-bottom:14px;">Choose a referencing style, then see how to write in-text citations and a full paragraph.</p>
-      <select id="citationStyle" onchange="updateCitation()">
-        <option value="apa">APA (7th ed.)</option>
-        <option value="mla">MLA (9th ed.)</option>
-        <option value="chicago">Chicago (17th ed.)</option>
-        <option value="harvard">Harvard</option>
-      </select>
-      <div class="citation-example" id="citationExample"></div>
+    <p class="text-muted" style="margin-top:10px;">The Human Score is based on real human-writing signals: sentence-length variety, natural contractions, absence of AI clichés, and rhythm. 80%+ reads as genuinely human.</p>
+
+    <div class="section-title">📖 <span>Citation Guide</span></div>
+    <div class="card" style="margin-bottom:18px;">
+        <h3>How to cite in your paragraphs</h3>
+        <p style="font-size:14px;color:#aaa;margin-bottom:14px;">Choose a referencing style, then see how to write in-text citations and a full paragraph.</p>
+        <select id="citationStyle">
+            <option value="apa">APA (7th ed.)</option>
+            <option value="mla">MLA (9th ed.)</option>
+            <option value="chicago">Chicago (17th ed.)</option>
+            <option value="harvard">Harvard</option>
+        </select>
+        <div class="apa-example" id="citationExample">
+            <em>In-text (parenthetical):</em> (Smith, 2020)<br>
+            <em>In-text (narrative):</em> Smith (2020) found that...<br>
+            <em>Paragraph example:</em> Recent studies have shown a strong correlation between sleep and memory (Smith, 2020). This finding suggests that adequate rest is crucial for academic performance.
+        </div>
+        <p class="text-muted" style="margin-top:10px;">Always include a full reference list entry at the end of your paper.</p>
     </div>
-  </div>
 
-  <!-- ============ EDUCATIONAL CONTENT ============ -->
-  <div class="container">
-    <section class="content">
-      <h2>What does StudyPad AI do?</h2>
-      <p>StudyPad AI is a free writing aid for South African university students. It rewrites your draft into a more natural, human-like tone using basic South African English. The goal is to improve readability and clarity for academic writing, essays, and assignments.</p>
-      <p>It is designed for students at UNISA, UJ, UCT, Wits, UP, TUT, CPUT, DUT, UFS, UKZN, NWU, UWC, UL, UFH, and WSU — but anyone can use it.</p>
-
-      <h2>How it works</h2>
-      <ol>
-        <li>Paste your draft into the input box.</li>
-        <li>Pick a tone — Balanced, Academic, Casual, or Simple.</li>
-        <li>Click <strong>Humanize</strong> or <strong>Paraphrase</strong>.</li>
-        <li>Copy the improved paragraph into your draft.</li>
-      </ol>
-
-      <h2>Academic integrity</h2>
-      <p>This tool is for learning assistance only. Always cite your sources, follow your institution's rules, and use StudyPad AI as a writing aid — not a replacement for your own work.</p>
-
-      <h2>Explore more</h2>
-      <ul>
-        <li><a href="#" onclick="showPage('how');return false;">How it Works</a></li>
-        <li><a href="#" onclick="showPage('blog');return false;">Writing guides for SA students</a></li>
-        <li><a href="#" onclick="showPage('about');return false;">About StudyPad AI</a></li>
-        <li><a href="#" onclick="showPage('contact');return false;">Contact us</a></li>
-      </ul>
-    </section>
-  </div>
-
-  <!-- AD UNIT #3 -->
-  <div class="container">
-    <div class="ad-wrap">
-      <ins class="adsbygoogle"
-           style="display:block"
-           data-ad-client="ca-pub-5326242742377705"
-           data-ad-slot="4394796685"
-           data-ad-format="auto"
-           data-full-width-responsive="true"></ins>
-      <script>
-           (adsbygoogle = window.adsbygoogle || []).push({});
-      </script>
+    <div style="margin:20px auto; text-align:center;">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-5326242742377705"
+             data-ad-slot="auto"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
-  </div>
 
-</div><!-- /page-home -->
-
-
-<!-- ============ ABOUT PAGE ============ -->
-<div id="page-about" class="page">
-  <div class="page-content">
-    <h1>About StudyPad AI</h1>
-    <p>StudyPad AI is a free writing aid built in Alice, Eastern Cape, South Africa. It was created for university students who want to improve the readability, tone, and clarity of their academic work without paying for expensive software. The tool is designed to help you turn stiff or robotic-sounding drafts into text that sounds more natural and human-like, while keeping your original meaning intact.</p>
-
-    <h2>Our mission</h2>
-    <p>South African students face unique challenges — large classes, limited writing support, and tight deadlines. StudyPad AI exists to give every student access to a simple, fast writing aid that helps them express their ideas clearly. We believe access to good writing support should not depend on your budget or your postcode.</p>
-
-    <h2>Who it is for</h2>
-    <p>The tool is used by students at UNISA, UJ, UCT, Wits, UP, TUT, CPUT, DUT, UFS, UKZN, NWU, UWC, UL, UFH, and WSU — as well as high-school learners preparing for tertiary study. It is written in basic South African English so the language feels familiar and accessible.</p>
-
-    <h2>What we value</h2>
-    <ul>
-      <li><strong>Clarity first.</strong> Good writing is clear writing.</li>
-      <li><strong>Academic integrity.</strong> This is a learning aid, not a shortcut. Always cite your sources.</li>
-      <li><strong>Privacy.</strong> We do not store your text permanently. See our <a href="#" onclick="showPage('privacy');return false;">Privacy Policy</a>.</li>
-      <li><strong>Accessibility.</strong> Free, mobile-friendly, and built for low-bandwidth users.</li>
-    </ul>
-
-    <h2>How we are funded</h2>
-    <p>StudyPad AI is supported by Google AdSense advertising. Ads keep the tool free for every student. We do not sell your data, and we do not store what you type.</p>
-
-    <h2>Get in touch</h2>
-    <p>Email <a href="mailto:helpstudypad@gmail.com">helpstudypad@gmail.com</a> or reach us on WhatsApp at <a href="https://wa.me/27738592196">073 859 2196</a>. We are based in Alice, Eastern Cape.</p>
-  </div>
+    <div style="max-width:100%; margin:20px auto; padding:15px; background:#15151f; border-radius:12px; border:1px solid #232336;">
+        <p style="font-size:12px; color:#888; margin:0 0 8px 0; text-align:left;">📌 Recommended for SA Students</p>
+        <script async="async" data-cfasync="false" src="https://pl31289423.profitableratecpmnetwork.com/e4fb4a34f5e4d604af81a06c1997e0ab/invoke.js"></script>
+        <div id="container-e4fb4a34f5e4d604af81a06c1997e0ab"></div>
+    </div>
 </div>
 
-
-<!-- ============ CONTACT PAGE ============ -->
-<div id="page-contact" class="page">
-  <div class="page-content">
-    <h1>Contact StudyPad AI</h1>
-    <p>We would love to hear from you. Whether you have feedback, found a bug, or want to suggest a new feature, send us a message and we will get back to you as soon as possible.</p>
-
-    <div class="form-grid">
-      <form class="form-card" onsubmit="submitContact(event)">
-        <label>Your name</label>
-        <input type="text" id="cName" required />
-        <label>Email</label>
-        <input type="email" id="cEmail" required />
-        <label>Message</label>
-        <textarea id="cMessage" required></textarea>
-        <button type="submit">Send message</button>
-      </form>
-
-      <div class="contact-info">
-        <h3>Email</h3>
-        <p><a href="mailto:helpstudypad@gmail.com">helpstudypad@gmail.com</a></p>
-        <h3>WhatsApp</h3>
-        <p><a href="https://wa.me/27738592196">073 859 2196</a></p>
-        <h3>Location</h3>
-        <p>Alice, Eastern Cape, South Africa</p>
-        <h3>Response time</h3>
-        <p>Usually within 1–2 business days.</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<!-- ============ HOW IT WORKS PAGE ============ -->
-<div id="page-how" class="page">
-  <div class="page-content">
-    <h1>How the AI Humanizer Works</h1>
-    <p>StudyPad AI takes your draft and rewrites it into a more natural, human-like tone using basic South African English. Here is exactly what happens when you press the button.</p>
-
-    <h2>Step 1 — You paste your text</h2>
-    <p>Paste any academic paragraph, essay introduction, or assignment text into the input box. The tool accepts English text up to a few thousand words.</p>
-
-    <h2>Step 2 — You pick a tone</h2>
-    <ul>
-      <li><strong>Balanced</strong> — neutral everyday academic tone.</li>
-      <li><strong>Academic</strong> — more formal, suited to essays and reports.</li>
-      <li><strong>Casual</strong> — relaxed, friendly, natural-sounding.</li>
-      <li><strong>Simple</strong> — short sentences, plain vocabulary.</li>
-    </ul>
-
-    <h2>Step 3 — The AI rewrites it</h2>
-    <p>Your text is sent to our secure API. The model rewrites it into a natural, flowing paragraph that keeps your original meaning while sounding more human.</p>
-
-    <h2>Step 4 — You get a clean paragraph</h2>
-    <p>The output appears as one clean, well-written paragraph — never as a bullet list or numbered points. Use the Copy button on the right to grab it instantly.</p>
-
-    <h2>Step 5 — Human Score</h2>
-    <p>StudyPad AI analyses your result for sentence variety, natural contractions, and absence of AI-style clichés. The score bar shows how human-like the result reads. 80%+ means the text reads naturally.</p>
-
-    <h2>Step 6 — Use it as a study aid</h2>
-    <p>Use the output as a reference. Rewrite in your own words, cite your sources, and follow your university's rules on AI assistance.</p>
-
-    <h2>Tips for best results</h2>
-    <ul>
-      <li>Give the tool complete sentences, not fragments.</li>
-      <li>Choose <strong>Academic</strong> tone for formal assignments.</li>
-      <li>Run the result through the tool again for further refinement.</li>
-      <li>Always proofread the final version yourself.</li>
-    </ul>
-  </div>
-</div>
-
-
-<!-- ============ BLOG LIST PAGE ============ -->
-<div id="page-blog" class="page">
-  <div class="page-content">
-    <h1>Writing Guides</h1>
-    <p style="color:#94a3b8;">Free, practical guides for South African university students.</p>
-
-    <div class="blog-grid">
-      <div class="blog-card" onclick="showPage('blog1')">
-        <h2>How to Paraphrase University Assignments (UNISA, UJ, TUT Guide)</h2>
-        <p>A step-by-step guide to paraphrasing effectively without losing your meaning or plagiarising.</p>
-        <span class="read-more">Read more →</span>
-      </div>
-      <div class="blog-card" onclick="showPage('blog2')">
-        <h2>Improve Your Academic Writing in South Africa</h2>
-        <p>Practical tips to make your essays clearer, shorter, and more confident.</p>
-        <span class="read-more">Read more →</span>
-      </div>
-      <div class="blog-card" onclick="showPage('blog3')">
-        <h2>Avoid Plagiarism: A Complete Guide for SA Students</h2>
-        <p>What plagiarism is, the different types, and how to avoid it in every assignment.</p>
-        <span class="read-more">Read more →</span>
-      </div>
-      <div class="blog-card" onclick="showPage('blog4')">
-        <h2>NSFAS Motivation Letter Tips That Actually Work</h2>
-        <p>How to write a NSFAS motivation letter that stands out and shows genuine need.</p>
-        <span class="read-more">Read more →</span>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<!-- ============ BLOG POST 1 ============ -->
-<div id="page-blog1" class="page">
-  <div class="page-content">
-    <h1>How to Paraphrase University Assignments</h1>
-    <p style="color:#64748b;font-size:13px;">A practical guide for UNISA, UJ, TUT, and other SA students.</p>
-
-    <p>Paraphrasing is one of the most important skills you will learn at university. It is also one of the most commonly misunderstood. Many students think paraphrasing just means "changing a few words", but real paraphrasing is about expressing the same idea in a completely new way while still giving credit to the original author.</p>
-    <p>This guide walks you through paraphrasing step by step, with examples that work for assignments at UNISA, UJ, TUT, UCT, Wits, and every other South African university.</p>
-
-    <div class="ad-wrap">
-      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5326242742377705" data-ad-slot="4394796685" data-ad-format="auto" data-full-width-responsive="true"></ins>
-      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-    </div>
-
-    <h2>What paraphrasing actually means</h2>
-    <p>Paraphrasing means restating someone else's idea in your own words while keeping the original meaning. It is different from summarising (which shortens) and different from quoting (which repeats exactly). When you paraphrase, you still cite the source — that is non-negotiable.</p>
-
-    <h2>Why it matters</h2>
-    <p>Your lecturers want to see that you understand the material, not that you can copy and paste. Paraphrasing shows understanding. It also helps you avoid plagiarism, which is one of the most serious academic offences at any South African university.</p>
-
-    <h2>Step 1 — Read until you understand</h2>
-    <p>Before you paraphrase, read the original passage twice. Close the source. Then say the idea out loud in your own words. If you cannot say it out loud, you do not understand it well enough to paraphrase it yet.</p>
-
-    <h2>Step 2 — Change the structure, not just the words</h2>
-    <p>Good paraphrasing changes the sentence structure. If the original sentence starts with the subject, your paraphrase might start with the object. If the original uses the passive voice, yours might use the active voice.</p>
-
-    <h2>Step 3 — Use your own vocabulary</h2>
-    <p>Swap out words where you can, but do not force it. Some technical terms cannot be changed — "photosynthesis" is still "photosynthesis". What matters is that the phrasing around it is yours.</p>
-
-    <h2>Step 4 — Cite the source</h2>
-    <p>Every paraphrase must be cited. In APA style, add (Author, Year) at the end of the sentence. In Harvard style, add (Author, Year, p. X). This is how you give credit while still using your own words.</p>
-
-    <div class="ad-wrap">
-      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5326242742377705" data-ad-slot="4394796685" data-ad-format="auto" data-full-width-responsive="true"></ins>
-      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-    </div>
-
-    <h2>Step 5 — Compare with the original</h2>
-    <p>Put your paraphrase next to the original. If a reader could match them sentence by sentence, you have not paraphrased enough. The structure should be noticeably different.</p>
-
-    <h2>A quick example</h2>
-    <p><strong>Original:</strong> "Students who sleep fewer than six hours per night consistently perform worse on memory-based assessments than those who sleep eight hours."</p>
-    <p><strong>Weak paraphrase:</strong> "Students who sleep less than six hours every night always do worse on memory tests than students who sleep eight hours." (Too close.)</p>
-    <p><strong>Strong paraphrase:</strong> "Research shows a clear link between sleep duration and academic performance: learners getting adequate rest tend to recall information better than those who are chronically sleep-deprived (Smith, 2020)."</p>
-
-    <h2>Common mistakes</h2>
-    <ul>
-      <li>Only changing one or two words.</li>
-      <li>Keeping the exact same sentence order.</li>
-      <li>Forgetting to cite the source.</li>
-      <li>Using synonyms that change the meaning.</li>
-      <li>Copying technical terms without quotation marks.</li>
-    </ul>
-
-    <h2>Where StudyPad AI helps</h2>
-    <p>StudyPad AI's paraphraser can show you one possible rewrite of your own writing. Use it to see how sentences can be restructured, then apply those techniques to your source material yourself.</p>
-
-    <h2>Final thoughts</h2>
-    <p>Paraphrasing is a skill. The more you practice, the faster and better you get. Read widely, write often, and always cite your sources.</p>
-
-    <p style="margin-top:24px;"><a href="#" onclick="showPage('blog');return false;">← Back to all guides</a></p>
-  </div>
-</div>
-
-
-<!-- ============ BLOG POST 2 ============ -->
-<div id="page-blog2" class="page">
-  <div class="page-content">
-    <h1>Improve Your Academic Writing in South Africa</h1>
-    <p style="color:#64748b;font-size:13px;">Practical tips for essays, reports, and assignments.</p>
-
-    <p>Academic writing is a skill, not a talent. Every student can improve with deliberate practice. This guide gives you practical, no-nonsense techniques that work for South African students writing in English as a first or second language.</p>
-    <p>Whether you are writing a UNISA portfolio, a UJ tutorial, a Wits research paper, or a TUT practical report, these principles apply.</p>
-
-    <div class="ad-wrap">
-      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5326242742377705" data-ad-slot="4394796685" data-ad-format="auto" data-full-width-responsive="true"></ins>
-      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-    </div>
-
-    <h2>1. Know your reader</h2>
-    <p>Your lecturer is your reader. They are busy, they have read hundreds of essays this week, and they want to see that you understand the material. Write for a smart, tired, time-poor reader. That means: clear structure, plain language, no padding.</p>
-
-    <h2>2. Plan before you write</h2>
-    <p>A ten-minute plan saves an hour of rewriting. Write one sentence for each paragraph you want to include. If you cannot summarise a paragraph in one sentence, you do not yet know what that paragraph is about.</p>
-
-    <h2>3. One idea per paragraph</h2>
-    <p>Every paragraph should make one point. Start with a topic sentence that states that point. Follow with evidence. End with a short closing sentence that connects back to your main argument.</p>
-
-    <h2>4. Cut the padding</h2>
-    <p>Phrases like "in today's fast-paced world", "it is important to note", and "in this essay I will discuss" add nothing. Delete them. Say what you mean in the fewest words possible.</p>
-
-    <h2>5. Use active voice</h2>
-    <p>Passive voice hides who did what. Active voice is clearer and more direct. Compare: "The study was conducted by the researchers" (passive) with "The researchers conducted the study" (active). Prefer active unless the passive is genuinely better.</p>
-
-    <div class="ad-wrap">
-      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5326242742377705" data-ad-slot="4394796685" data-ad-format="auto" data-full-width-responsive="true"></ins>
-      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-    </div>
-
-    <h2>6. Vary your sentence length</h2>
-    <p>Short sentences make a point. Longer sentences explain and connect. Mix them. Writing that uses only long sentences feels heavy; writing that uses only short sentences feels choppy. The best academic writing moves between both.</p>
-
-    <h2>7. Cite properly</h2>
-    <p>Every claim that is not common knowledge needs a citation. Use APA, Harvard, MLA, or Chicago — whichever your department requires. Keep a reference list as you go, not at the end when you have forgotten the details.</p>
-
-    <h2>8. Proofread out loud</h2>
-    <p>Reading aloud catches errors that silent reading misses. You will hear when a sentence is too long, when a word is wrong, and when a paragraph does not flow. Do this before every submission.</p>
-
-    <h2>9. Read good writing</h2>
-    <p>The best writers are readers. Read academic papers in your field, good journalism, and anything else that is well-written. Over time, good writing patterns will become natural to you.</p>
-
-    <h2>10. Use tools wisely</h2>
-    <p>Tools like StudyPad AI can help you see alternate phrasings, check the readability of your work, and improve tone. Use them as a support, not as a replacement for your own writing. The goal is to become a better writer, not to hide that you are writing.</p>
-
-    <h2>Final thoughts</h2>
-    <p>Good academic writing is clear writing. Remove everything that gets in the way of your meaning, and your marks will follow.</p>
-
-    <p style="margin-top:24px;"><a href="#" onclick="showPage('blog');return false;">← Back to all guides</a></p>
-  </div>
-</div>
-
-
-<!-- ============ BLOG POST 3 ============ -->
-<div id="page-blog3" class="page">
-  <div class="page-content">
-    <h1>Avoid Plagiarism: A Complete Guide for SA Students</h1>
-    <p style="color:#64748b;font-size:13px;">Understand it, recognise it, avoid it.</p>
-
-    <p>Plagiarism is one of the most serious academic offences at any South African university. It can lead to a failing mark, suspension, or even expulsion. Yet many students commit plagiarism without meaning to — because they do not fully understand what it is. This guide fixes that.</p>
-    <p>We cover what plagiarism is, the different types, and practical steps you can take to avoid it in every assignment.</p>
-
-    <div class="ad-wrap">
-      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5326242742377705" data-ad-slot="4394796685" data-ad-format="auto" data-full-width-responsive="true"></ins>
-      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-    </div>
-
-    <h2>What plagiarism actually is</h2>
-    <p>Plagiarism is using someone else's words, ideas, or work as your own without proper acknowledgement. It does not matter whether you did it on purpose or by accident. It is still plagiarism.</p>
-
-    <h2>The main types</h2>
-    <ul>
-      <li><strong>Direct plagiarism.</strong> Copying a sentence or paragraph word-for-word without quotation marks or citation.</li>
-      <li><strong>Mosaic plagiarism.</strong> Mixing copied phrases with your own words without crediting the source.</li>
-      <li><strong>Self-plagiarism.</strong> Submitting your own earlier work for a new assignment without permission.</li>
-      <li><strong>Accidental plagiarism.</strong> Forgetting to cite, or paraphrasing too closely.</li>
-      <li><strong>Contract cheating.</strong> Submitting work written by someone else — a person or an AI — as your own.</li>
-    </ul>
-
-    <h2>Why universities take it so seriously</h2>
-    <p>Academic work is built on trust. When you submit an assignment, you are saying that the work and the thinking are yours. Plagiarism breaks that trust. It also steals from the original author, who gets no credit for their labour.</p>
-
-    <div class="ad-wrap">
-      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5326242742377705" data-ad-slot="4394796685" data-ad-format="auto" data-full-width-responsive="true"></ins>
-      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-    </div>
-
-    <h2>How to avoid it — practical rules</h2>
-    <p><strong>1. Cite everything that is not common knowledge.</strong> Facts, statistics, theories, and opinions all need citations. What counts as "common knowledge" depends on your field — if in doubt, cite it.</p>
-    <p><strong>2. Use quotation marks for direct quotes.</strong> If you use the exact words of a source, put them in quotation marks and add a citation with a page number where required.</p>
-    <p><strong>3. Paraphrase properly.</strong> Change the structure, not just the words. Then cite the source anyway.</p>
-    <p><strong>4. Keep good notes.</strong> As you read sources, note the full reference details immediately — author, year, title, publisher, page. Do not trust your memory.</p>
-    <p><strong>5. Do not recycle your own work.</strong> Unless your lecturer has given permission, do not submit the same essay twice.</p>
-    <p><strong>6. Do not use AI to write for you.</strong> Using AI to generate work you then submit as your own is contract cheating, and most South African universities now treat it that way. Use AI tools only as writing aids, and only where your institution allows it.</p>
-
-    <h2>What referencing style should you use?</h2>
-    <p>Check your module guide. Most South African universities use APA 7th edition, Harvard, or Chicago. The style matters less than consistency — pick one and use it everywhere.</p>
-
-    <h2>If you are unsure — ask</h2>
-    <p>If you are unsure whether something needs a citation, ask your lecturer or tutor. Most will appreciate that you took the time to check.</p>
-
-    <h2>Final thoughts</h2>
-    <p>Plagiarism is easy to avoid once you know the rules. Cite everything, paraphrase properly, and never submit work that is not your own. Your academic reputation is worth more than any single assignment.</p>
-
-    <p style="margin-top:24px;"><a href="#" onclick="showPage('blog');return false;">← Back to all guides</a></p>
-  </div>
-</div>
-
-
-<!-- ============ BLOG POST 4 ============ -->
-<div id="page-blog4" class="page">
-  <div class="page-content">
-    <h1>NSFAS Motivation Letter Tips That Actually Work</h1>
-    <p style="color:#64748b;font-size:13px;">Write a letter that shows real need and real drive.</p>
-
-    <p>The NSFAS motivation letter is one of the most important pieces of writing any South African student will do. It is your chance to explain, in your own words, why you deserve funding and what you plan to do with your education. This guide shows you how to write one that actually works.</p>
-    <p>NSFAS receives hundreds of thousands of applications. A well-written motivation letter does not guarantee funding, but a poorly written one can lose you a place. Take it seriously.</p>
-
-    <div class="ad-wrap">
-      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5326242742377705" data-ad-slot="4394796685" data-ad-format="auto" data-full-width-responsive="true"></ins>
-      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-    </div>
-
-    <h2>What NSFAS is actually looking for</h2>
-    <p>NSFAS wants to fund students who (1) genuinely cannot afford tertiary study, and (2) are likely to succeed and use their qualification to contribute to South Africa. Your letter should make both points clearly and honestly.</p>
-
-    <h2>Structure that works</h2>
-    <ul>
-      <li><strong>Opening.</strong> State who you are, what you are studying (or plan to study), and that you are applying for NSFAS funding.</li>
-      <li><strong>Financial situation.</strong> Explain your household's income honestly. Mention who supports you, how many dependants there are, and any specific hardship.</li>
-      <li><strong>Academic record.</strong> Show that you have worked hard and that funding will not be wasted on you.</li>
-      <li><strong>Future plans.</strong> Explain what you want to do after your qualification and how it will help your community or the country.</li>
-      <li><strong>Closing.</strong> Thank the reader and confirm that all information is true.</li>
-    </ul>
-
-    <h2>Tip 1 — Be honest</h2>
-    <p>Do not exaggerate your hardship. NSFAS verifies information, and false statements can disqualify you permanently. Say what is true, in plain language.</p>
-
-    <h2>Tip 2 — Be specific</h2>
-    <p>"I am poor" is weak. "My mother is the only breadwinner, earning R3,200 a month, supporting four children" is strong. Numbers and details matter.</p>
-
-    <div class="ad-wrap">
-      <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5326242742377705" data-ad-slot="4394796685" data-ad-format="auto" data-full-width-responsive="true"></ins>
-      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-    </div>
-
-    <h2>Tip 3 — Keep it short</h2>
-    <p>One page is enough. NSFAS reviewers read thousands of letters. A clear, well-organised one-page letter beats a rambling two-page letter every time.</p>
-
-    <h2>Tip 4 — Use plain English</h2>
-    <p>You do not need big words. Write the way you speak — clear, simple, direct. If a sentence feels difficult to read, rewrite it shorter.</p>
-
-    <h2>Tip 5 — Show drive, not just need</h2>
-    <p>Many applicants are poor. Fewer are poor <em>and</em> have a clear plan. Talk about what you will do with the qualification. Do you want to be a teacher in your home village? A nurse in a rural clinic? A civil engineer who builds roads in the Eastern Cape? Make it concrete.</p>
-
-    <h2>Tip 6 — Proofread properly</h2>
-    <p>Read your letter out loud. Fix typos. Ask a teacher, parent, or friend to read it. A letter with errors suggests carelessness, which is the opposite of what you want.</p>
-
-    <h2>Tip 7 — Use StudyPad AI as a writing aid</h2>
-    <p>You can paste your draft into StudyPad AI to check readability and improve the tone. Do not let the tool write the letter for you — the voice must be yours. Use it only to make your own writing clearer.</p>
-
-    <h2>Final thoughts</h2>
-    <p>A NSFAS motivation letter is a chance to tell your story. Be honest, be specific, be brief, and be clear. If you do those four things, you have given yourself the best possible chance.</p>
-
-    <p style="margin-top:24px;"><a href="#" onclick="showPage('blog');return false;">← Back to all guides</a></p>
-  </div>
-</div>
-
-
-<!-- ============ PRIVACY PAGE ============ -->
-<div id="page-privacy" class="page">
-  <div class="page-content">
-    <h1>Privacy Policy</h1>
-    <p><em>Last updated: 2026</em></p>
-
-    <h2>1. Overview</h2>
-    <p>StudyPad AI is a free writing aid for students. This policy explains what data we collect, how we use it, and your rights. We aim to collect as little as possible.</p>
-
-    <h2>2. Data we do NOT collect</h2>
-    <ul>
-      <li>We do <strong>not</strong> store the text you paste into the tool.</li>
-      <li>We do <strong>not</strong> collect personal data unless you email us directly.</li>
-      <li>We do <strong>not</strong> sell or rent your data to anyone.</li>
-      <li>We do <strong>not</strong> create user accounts or require login.</li>
-    </ul>
-
-    <h2>3. Google AdSense and cookies</h2>
-    <p>We use Google AdSense to serve advertisements. Google and its partners may use cookies and web beacons to serve ads based on your prior visits to this and other websites. You can opt out of personalised advertising by visiting Google Ads Settings. Third-party vendors and networks may also use cookies — see Google's policy for details.</p>
-
-    <h2>4. Groq API</h2>
-    <p>Text you paste is sent to the Groq API for processing and is not stored by us. Groq's own privacy terms apply to the request. We do not log request content on our servers.</p>
-
-    <h2>5. Your rights (GDPR & POPIA)</h2>
-    <p>If you are in the EU/UK (GDPR) or South Africa (POPIA), you have the right to access, correct, or delete personal data we hold about you. Since we do not store personal data by default, this usually only applies to emails you send us. Contact <a href="mailto:helpstudypad@gmail.com">helpstudypad@gmail.com</a> for any request.</p>
-
-    <h2>6. Children</h2>
-    <p>StudyPad AI is intended for users aged 13 and above.</p>
-
-    <h2>7. Changes</h2>
-    <p>We may update this policy. Changes will appear on this page.</p>
-
-    <h2>8. Contact</h2>
-    <p>Email: <a href="mailto:helpstudypad@gmail.com">helpstudypad@gmail.com</a></p>
-  </div>
-</div>
-
-
-<!-- ============ TERMS PAGE ============ -->
-<div id="page-terms" class="page">
-  <div class="page-content">
-    <h1>Terms of Use</h1>
-    <p><em>Last updated: 2026</em></p>
-
-    <h2>1. Acceptance</h2>
-    <p>By using StudyPad AI you agree to these terms. If you do not agree, please do not use the service.</p>
-
-    <h2>2. Educational purpose only</h2>
-    <p>StudyPad AI is a learning aid. It is designed to help students improve readability, tone, and clarity in their writing. It is <strong>not</strong> intended to be used for academic dishonesty, contract cheating, or to misrepresent someone else's work as your own.</p>
-
-    <h2>3. User responsibility</h2>
-    <ul>
-      <li>You are responsible for the final content you submit.</li>
-      <li>You must cite all sources used in your work.</li>
-      <li>You must follow your university or school's rules on AI-assisted writing.</li>
-      <li>You must not use the tool to break any law or regulation.</li>
-    </ul>
-
-    <h2>4. Availability</h2>
-    <p>We aim to keep StudyPad AI online but we do not guarantee uninterrupted service. The tool relies on third-party APIs which may be unavailable from time to time.</p>
-
-    <h2>5. Limitation of liability</h2>
-    <p>StudyPad AI is provided "as is" without warranties of any kind. We are not liable for any loss, damage, or academic consequence arising from the use of the tool.</p>
-
-    <h2>6. Changes</h2>
-    <p>We may update these terms. Continued use means you accept the new terms.</p>
-
-    <h2>7. Contact</h2>
-    <p>Email: <a href="mailto:helpstudypad@gmail.com">helpstudypad@gmail.com</a></p>
-  </div>
-</div>
-
-
-<!-- ============ DISCLAIMER PAGE ============ -->
-<div id="page-disclaimer" class="page">
-  <div class="page-content">
-    <h1>Disclaimer</h1>
-
-    <h2>Academic integrity</h2>
-    <p>StudyPad AI is an educational writing aid. It exists to help students improve readability, tone, and clarity. It is <strong>not</strong> a tool for academic dishonesty.</p>
-
-    <h2>Always follow your university rules</h2>
-    <p>Different universities in South Africa have different policies on AI-assisted writing. Always check your institution's rules before using any AI tool. If your policy forbids AI assistance, do not use StudyPad AI for that assignment.</p>
-
-    <h2>Always cite sources</h2>
-    <p>Whether you paraphrase or not, you must cite the sources you use. Uncited use of another author's ideas is plagiarism, and StudyPad AI cannot protect you from that.</p>
-
-    <h2>No guarantee of outcomes</h2>
-    <p>We do not guarantee any specific grade, mark, or result. You are fully responsible for your submission.</p>
-
-    <h2>Questions</h2>
-    <p>Contact <a href="mailto:helpstudypad@gmail.com">helpstudypad@gmail.com</a>.</p>
-  </div>
-</div>
-
-
-<!-- ============ FOOTER ============ -->
-<footer class="site-footer">
-  <div class="container">
-    <div class="footer-grid">
-      <div>
-        <div class="footer-brand">📚 StudyPad <span>AI</span></div>
-        <p>AI-powered writing aid for South African students. For educational purposes only.</p>
-      </div>
-      <div>
-        <h4>Product</h4>
-        <ul>
-          <li><a href="#" onclick="showPage('home');return false;">Home</a></li>
-          <li><a href="#" onclick="showPage('how');return false;">How it Works</a></li>
-          <li><a href="#" onclick="showPage('blog');return false;">Blog</a></li>
-          <li><a href="#" onclick="showPage('contact');return false;">Contact</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Legal</h4>
-        <ul>
-          <li><a href="#" onclick="showPage('about');return false;">About</a></li>
-          <li><a href="#" onclick="showPage('privacy');return false;">Privacy Policy</a></li>
-          <li><a href="#" onclick="showPage('terms');return false;">Terms of Use</a></li>
-          <li><a href="#" onclick="showPage('disclaimer');return false;">Disclaimer</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4>Contact</h4>
-        <ul>
-          <li>Email: <a href="mailto:helpstudypad@gmail.com">helpstudypad@gmail.com</a></li>
-          <li>WhatsApp: <a href="https://wa.me/27738592196">073 859 2196</a></li>
-          <li>South Africa</li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <p>© 2026 StudyPad AI. All rights reserved.</p>
-      <p>We use cookies and Google AdSense to serve ads.</p>
-    </div>
-  </div>
+<footer style="padding:20px; text-align:center; color:#888; font-size:13px; margin-top:50px; border-top:1px solid #222;">
+    <p>Trusted by students from UNISA, UJ, UCT, Wits, UP, TUT, CPUT, DUT, UFS, UKZN, NWU, UWC, UL, UFH, WSU.</p>
+    <p><a href="/about.html" style="color:#888">About</a> | <a href="/privacy.html" style="color:#888">Privacy</a> | <a href="/contact.html" style="color:#888">Contact</a></p>
+    <p>© 2026 StudyPd | Founded & Developed by Joheliv Labs, JDev App Craft Co- Free for SA Students</p>
 </footer>
 
+<script src="https://pl31289422.profitableratecpmnetwork.com/ef/10/2d/ef102d0e6dfb6ec1c26ef3e4445ccde6.js"></script>
 
-<!-- ============ JAVASCRIPT ============ -->
 <script>
 // ==================== WORKER ====================
 const WORKER_URL = "https://young-recipe-a9fastudypadsmart.jdevapphub.workers.dev";
 
-// Stronger prompt — forces a flowing paragraph, no bullets, no numbers, no markdown
-const SYSTEM_PROMPT = "You are a professional South African academic writer. Rewrite the user's text in basic South African English. Follow these rules exactly: (1) Output exactly 6 sentences. (2) Put each sentence on its own new line. (3) Number the sentences exactly like 1. 2. 3. 4. 5. 6. (4) Every sentence must end with a full stop. (5) Do NOT use commas anywhere. Use full stops to separate ideas instead. (6) Keep the original meaning exactly and do not remove important information. (7) Keep the writing focused on the original topic. (8) Make each sentence flow naturally while using varied sentence lengths and sentence openings. (9) Sentence 2 must have a different and fresh opening from sentence 1. (10) Use basic everyday South African English. (11) Avoid unnecessarily complicated vocabulary and avoid words such as furthermore, moreover, delve, pivotal, tapestry, testament, leverage, robust, seamless, utilise, comprehensive, and holistic. (12) Do NOT use markdown, asterisks, underscores, bullet points, or extra commentary. (13) Do not start with 'Here is', 'Sure', 'Certainly', or any other meta commentary. (14) The requested action is provided by the application and the requested tone is provided by the application. Follow both exactly. Return only the 6 numbered sentences.";
-// ==================== STATE ====================
-let mode = "humanize";
-let tone = "casual";
-
-const inputEl = document.getElementById('inputText');
-const outputBox = document.getElementById('outputBox');
-const actionBtn = document.getElementById('actionBtn');
-const copyBtn = document.getElementById('copyBtn');
-const statusBadge = document.getElementById('statusBadge');
-const wordCountEl = document.getElementById('wordCount');
-const errorMsg = document.getElementById('errorMsg');
-const progressFill = document.getElementById('progressFill');
-const humanPercent = document.getElementById('humanPercent');
-
-// ==================== PAGE ROUTER ====================
-function showPage(id) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  const el = document.getElementById('page-' + id);
-  if (el) el.classList.add('active');
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-  document.getElementById('mainNav').classList.remove('open');
-
-  setTimeout(() => {
-    document.querySelectorAll('.page.active .adsbygoogle').forEach(() => {
-      try { (adsbygoogle = window.adsbygoogle || []).push({}); } catch (e) {}
-    });
-  }, 100);
-}
-
-// ==================== MODE / TONE ====================
-function setMode(m, btn) {
-  mode = m;
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-  btn.classList.add('active');
-  updateBtnLabel();
-}
-
-function setTone(t, btn) {
-  tone = t;
-  document.querySelectorAll('.tone').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  updateBtnLabel();
-}
-
-function updateBtnLabel() {
-  const toneLabel = { balanced: 'Balanced', academic: 'Academic', casual: 'Casual', simple: 'Simple' }[tone];
-  if (mode === 'humanize') {
-    actionBtn.textContent = `✨ Humanize Text (${toneLabel})`;
-  } else {
-    actionBtn.textContent = `📝 Paraphrase Text (${toneLabel})`;
-  }
-}
-updateBtnLabel();
-
-// ==================== WORD COUNT ====================
-inputEl.addEventListener('input', () => {
-  const wc = inputEl.value.trim() ? inputEl.value.trim().split(/\s+/).length : 0;
-  wordCountEl.textContent = wc + ' words';
-});
-
-// ==================== CLEANUP — forces a single paragraph ====================
-function cleanParagraph(s) {
-  if (!s) return '';
-  let t = String(s);
-
-  // Strip markdown artifacts
-  t = t.replace(/__+/g, '');
-  t = t.replace(/\*\*+/g, '');
-  t = t.replace(/^#{1,6}\s*/gm, '');
-  t = t.replace(/^\s*[-*_]{3,}\s*$/gm, '');
-  t = t.replace(/`{1,3}/g, '');
-
-  // Remove leading list markers on every line  ("1. ", "- ", "* ", "• ")
-  t = t.replace(/^\s*(?:\d+[.)]|[-*•])\s+/gm, '');
-
-  // Remove "Here is..." / "Sure," meta intros
-  t = t.replace(/^\s*(?:sure[,!.]?\s*|certainly[,!.]?\s*|of course[,!.]?\s*|here(?:'s| is)[^.:]*[:.\-]\s*)/i, '');
-
-  // Collapse ALL whitespace (including newlines) into single spaces → one paragraph
-  t = t.replace(/\s+/g, ' ').trim();
-
-  // Ensure it ends with a full stop
-  if (t && !/[.!?]$/.test(t)) t += '.';
-
-  return t;
-}
-
-// ==================== HUMAN SCORE ====================
-function computeHumanScore(text) {
-  const t = (text || '').trim();
-  if (!t) return 0;
-  const sentences = t.split(/(?<=[.!?])\s+/).filter(Boolean);
-  const words = t.split(/\s+/).filter(Boolean);
-  const wc = words.length || 1;
-  const sc = sentences.length || 1;
-  const lens = sentences.map(s => s.split(/\s+/).filter(Boolean).length);
-  const mean = lens.reduce((a,b)=>a+b,0) / (lens.length || 1);
-  const variance = lens.reduce((a,b)=>a+(b-mean)**2,0) / (lens.length || 1);
-  const sd = Math.sqrt(variance);
-  const variety = Math.min(100, Math.round((sd / 10) * 100));
-  const contractions = (t.match(/\b\w+'(t|s|re|ve|ll|d|m)\b/gi) || []).length;
-  const contScore = Math.min(100, Math.round((contractions / sc) * 200));
-  const cliches = ['delve','tapestry','leverage','robust','realm','foster','myriad','furthermore','moreover','in conclusion'];
-  let hits = 0;
-  const lower = t.toLowerCase();
-  cliches.forEach(c => { hits += (lower.match(new RegExp('\\b'+c+'\\b','g')) || []).length; });
-  const clicheScore = Math.max(0, Math.min(100, Math.round(100 - ((hits/wc)*100/3)*100)));
-  const total = Math.round(variety*0.35 + contScore*0.2 + clicheScore*0.3 + 75*0.15);
-  return Math.max(0, Math.min(100, total));
-}
-
-function updateScoreUI(text) {
-  const score = computeHumanScore(text);
-  progressFill.style.width = score + '%';
-  humanPercent.textContent = score + '%';
-  if (score >= 75) {
-    progressFill.style.background = 'linear-gradient(90deg,#4ade80,#3b82f6)';
-  } else if (score >= 50) {
-    progressFill.style.background = 'linear-gradient(90deg,#facc15,#3b82f6)';
-  } else {
-    progressFill.style.background = 'linear-gradient(90deg,#f87171,#3b82f6)';
-  }
-}
-
-// ==================== MAIN ACTION ====================
-async function runTool() {
-  errorMsg.style.display = 'none';
-  const text = inputEl.value.trim();
-  if (!text) {
-    errorMsg.textContent = 'Please paste your text first.';
-    errorMsg.style.display = 'block';
-    return;
-  }
-
-  actionBtn.disabled = true;
-  actionBtn.textContent = '⏳ Processing…';
-  statusBadge.textContent = 'Processing…';
-  statusBadge.className = 'badge';
-  outputBox.innerHTML = '<p class="output-empty">Thinking…</p>';
-  progressFill.style.width = '0%';
-  humanPercent.textContent = '0%';
-
-  try {
+// Sends {action, text, tone} — matches the Cloudflare Worker on the right.
+async function callWorker(action, text, tone) {
     const res = await fetch(WORKER_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        action: mode,
-        tone: tone,
-        text: text,
-        system: SYSTEM_PROMPT
-      })
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action, text, tone })
     });
     if (!res.ok) throw new Error('Worker error ' + res.status);
     const data = await res.json();
     if (data.error) throw new Error(data.error);
-
-    const raw = data.result || data.answer || '';
-    if (!raw) throw new Error('Empty AI response');
-
-    // Force single-paragraph output
-    const paragraph = cleanParagraph(raw);
-    outputBox.textContent = paragraph;
-
-    statusBadge.textContent = 'Done ✓';
-    statusBadge.className = 'badge success';
-    updateScoreUI(paragraph);
-
-  } catch (e) {
-    errorMsg.textContent = 'Error: ' + (e.message || 'Something went wrong.');
-    errorMsg.style.display = 'block';
-    statusBadge.textContent = 'Error';
-    statusBadge.className = 'badge';
-    outputBox.innerHTML = '<p class="output-empty">Something went wrong. Please try again.</p>';
-  } finally {
-    actionBtn.disabled = false;
-    updateBtnLabel();
-  }
+    let result = data.result || data.answer || '';
+    if (!result) throw new Error('Empty AI response');
+    return cleanAIText(result);
 }
 
-// ==================== COPY (right-side button) ====================
+// ==================== STATE ====================
+let mode = "humanize";
+let tone = "balanced";
+const input = document.getElementById('inputText');
+const output = document.getElementById('outputText');
+const btn = document.getElementById('actionBtn');
+const modeTabs = document.querySelectorAll('.tabs .tab[data-mode]');
+const toneBtns = document.querySelectorAll('.tone');
+const progressFill = document.getElementById('progressFill');
+const humanPercent = document.getElementById('humanPercent');
+const scoreBreakdown = document.getElementById('scoreBreakdown');
+
+// ==================== TAB / TONE SWITCHING ====================
+modeTabs.forEach(t => {
+    t.addEventListener('click', () => {
+        modeTabs.forEach(x => x.classList.remove('active'));
+        t.classList.add('active');
+        mode = t.dataset.mode;
+        updateBtnLabel();
+    });
+});
+
+toneBtns.forEach(t => {
+    t.addEventListener('click', () => {
+        toneBtns.forEach(x => x.classList.remove('active'));
+        t.classList.add('active');
+        tone = t.dataset.tone;
+        updateBtnLabel();
+    });
+});
+
+function updateBtnLabel() {
+  if (mode === 'humanize') {
+    const toneLabel = { balanced: 'Balanced', academic: 'Academic', casual: 'Casual', simple: 'Simple' }[tone];
+    btn.textContent = `✨ Humanize Text (${toneLabel}) - 100% Human`;
+  } else if (mode === 'summarize') {
+    const toneLabel = { balanced: 'Balanced', academic: 'Academic', casual: 'Casual', simple: 'Simple' }[tone];
+    btn.textContent = `📝 Summarize to ${toneLabel} (100% Human)`;
+  } else {
+    btn.textContent = '🚀 Paraphrase Now';
+  }
+}
+updateBtnLabel();
+
+// ================= LEVELS FOR SUMMARIZE =================
+function summarizeWithLevel(text, level) {
+  if (!text) return '';
+  let sentences = text.split(/(?<=[.!?])\s+/).filter(s => s.trim().length > 10);
+  if (sentences.length > 4) sentences = sentences.slice(0, 4);
+  let summary = sentences.join(' ');
+
+  // CLEAN - no __ ## **
+  summary = summary.replace(/__+/g, '').replace(/\*\*+/g, '').replace(/^#{1,6}\s*/gm, '');
+
+  // LEVEL 1: CASUAL = 100% casual, friendly, contractions
+  if (level === 'casual') {
+    summary = summary.replace(/\bIt is\b/g, "It's").replace(/\bI am\b/g, "I'm").replace(/\bdo not\b/g, "don't").replace(/\bcannot\b/g, "can't");
+    if (!summary.startsWith('So')) summary = "So basically, " + summary.charAt(0).toLowerCase() + summary.slice(1);
+    summary = summary + " You get what I mean?";
+  }
+  // LEVEL 2: ACADEMIC = formal, citations, complex
+  else if (level === 'academic') {
+    summary = summary.replace(/\bdon't\b/g, "do not").replace(/\bcan't\b/g, "cannot").replace(/\bIt's\b/g, "It is");
+    summary = summary.replace(/So basically,/g, "");
+    summary = "In summary, " + summary.trim();
+    if (!summary.endsWith('.')) summary += '.';
+    summary += " This analysis demonstrates the core findings with academic rigor.";
+  }
+  // LEVEL 3: SIMPLE = short words, easy, 5th grade
+  else if (level === 'simple') {
+    summary = summary.replace(/\butilize\b/gi, "use").replace(/\bhowever\b/gi, "but").replace(/\btherefore\b/gi, "so").replace(/\bsubsequently\b/gi, "then");
+    // Make sentences very short
+    let short = summary.split('. ').map(s => s.split(' ').slice(0,12).join(' ')).join('. ');
+    summary = short;
+    summary = "In simple words, " + summary.charAt(0).toLowerCase() + summary.slice(1);
+  }
+  // LEVEL 4: BALANCED = normal human
+  else {
+    summary = summary.replace(/\bIt is\b/g, "It's");
+    summary = summary + " That's the main point.";
+  }
+
+  return summary.trim();
+}
+
+// ==================== CLEANUP ====================
+function cleanAIText(text) {
+  if (!text) return '';
+  let cleaned = text;
+
+  // Remove ALL markdown that causes __ ## ** *
+  cleaned = cleaned.replace(/__+/g, '');           // __
+  cleaned = cleaned.replace(/\*\*+/g, '');         // ** or ***
+  cleaned = cleaned.replace(/^\s*#{1,6}\s*/gm, ''); // ## ### at start of line
+  cleaned = cleaned.replace(/^\s*[-*_]{3,}\s*$/gm, ''); // --- ___ ***
+  cleaned = cleaned.replace(/`{1,3}/g, '');         // ` code
+  cleaned = cleaned.replace(/^\s*>\s?/gm, '');      // > quote
+  cleaned = cleaned.replace(/^\s*[-+*]\s+/gm, '');  // - bullet
+  
+  // Clean leftover single * and _ that are not part of words
+  cleaned = cleaned.replace(/(^|\s)[*_](\s|$)/g, '$1$2');
+  cleaned = cleaned.replace(/\s{2,}/g, ' ');
+  cleaned = cleaned.replace(/\n{3,}/g, '\n\n');
+  
+  return cleaned.trim();
+}
+
+// ==================== HUMAN-SCORE ANALYSIS ====================
+function analyzeHumanScore(text) {
+    const raw = (text || '').trim();
+    if (!raw) return { total: 0, parts: {} };
+
+    const sentences = raw.split(/(?<=[.!?])\s+/).filter(s => s.trim().length > 0);
+    const words = raw.split(/\s+/).filter(Boolean);
+    const wordCount = words.length || 1;
+    const sentenceCount = sentences.length || 1;
+
+    const lengths = sentences.map(s => s.split(/\s+/).filter(Boolean).length);
+    const mean = lengths.reduce((a, b) => a + b, 0) / (lengths.length || 1);
+    const variance = lengths.reduce((a, b) => a + (b - mean) ** 2, 0) / (lengths.length || 1);
+    const stdDev = Math.sqrt(variance);
+    const sentVariety = Math.min(100, Math.round((stdDev / 10) * 100));
+
+    const contractions = (raw.match(/\b\w+'(t|s|re|ve|ll|d|m)\b/gi) || []).length;
+    const contractionRatio = contractions / sentenceCount;
+    const contScore = Math.min(100, Math.round(contractionRatio * 200));
+
+    const cliches = [
+        'delve', 'tapestry', 'leverage', 'robust', 'navigate', 'realm',
+        'foster', 'myriad', 'furthermore', 'moreover', 'in conclusion',
+        'it is important to note', 'paradigm', 'holistic', 'underscore',
+        'pivotal', 'crucial', 'multifaceted', 'in today\'s world',
+        'in the realm of', 'a testament to', 'when it comes to'
+    ];
+    let clicheHits = 0;
+    const lower = raw.toLowerCase();
+    cliches.forEach(c => {
+        const re = new RegExp('\\b' + c.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\b', 'gi');
+        clicheHits += (lower.match(re) || []).length;
+    });
+    const clichePer100 = (clicheHits / wordCount) * 100;
+    const clicheScore = Math.max(0, Math.min(100, Math.round(100 - (clichePer100 / 3) * 100)));
+
+    const firstWords = sentences.map(s => s.trim().split(/\s+/)[0].toLowerCase());
+    const uniqueOpeners = new Set(firstWords).size;
+    const openerVariety = uniqueOpeners / (sentences.length || 1);
+    const shortSentences = lengths.filter(l => l <= 8).length;
+    const shortRatio = shortSentences / sentenceCount;
+    const burstScore = Math.min(100, Math.round((openerVariety * 60) + (shortRatio * 100 * 0.4)));
+
+    const personalMarkers = (raw.match(/\b(i|we|you|my|our|your|us|me)\b/gi) || []).length;
+    const conversational = (raw.match(/\b(so|but|and yet|actually|really|pretty|quite|just|kind of|sort of|honestly|look|see)\b/gi) || []).length;
+    const voiceRatio = ((personalMarkers + conversational) / wordCount) * 100;
+    const voiceScore = Math.min(100, Math.round((voiceRatio / 4) * 100));
+
+    const total = Math.round(
+        sentVariety * 0.25 +
+        contScore * 0.20 +
+        clicheScore * 0.25 +
+        burstScore * 0.15 +
+        voiceScore * 0.15
+    );
+
+    return {
+        total: Math.max(0, Math.min(100, total)),
+        parts: { sentVariety, contScore, clicheScore, burstScore, voiceScore }
+    };
+}
+
+function colorClass(score) {
+    if (score >= 75) return 'good';
+    if (score >= 50) return 'ok';
+    return 'bad';
+}
+
+function updateScoreUI(text) {
+    const { total, parts } = analyzeHumanScore(text);
+
+    progressFill.style.width = total + '%';
+    humanPercent.textContent = total + '%';
+
+    if (total >= 75) {
+        progressFill.style.background = 'linear-gradient(90deg,#4ade80,#7c5cfc)';
+    } else if (total >= 50) {
+        progressFill.style.background = 'linear-gradient(90deg,#facc15,#7c5cfc)';
+    } else {
+        progressFill.style.background = 'linear-gradient(90deg,#f87171,#7c5cfc)';
+    }
+
+    if (!parts.sentVariety && parts.sentVariety !== 0) {
+        scoreBreakdown.style.display = 'none';
+        return;
+    }
+    scoreBreakdown.style.display = 'grid';
+
+    const setChip = (id, val) => {
+        const el = document.getElementById(id);
+        el.textContent = val + '%';
+        el.className = 'val ' + colorClass(val);
+    };
+    setChip('sc-sent', parts.sentVariety);
+    setChip('sc-cont', parts.contScore);
+    setChip('sc-clich', parts.clicheScore);
+    setChip('sc-burst', parts.burstScore);
+    setChip('sc-voice', parts.voiceScore);
+}
+
+// ==================== MAIN ACTION ====================
+async function doAction() {
+    if (mode === 'humanize' && tone === 'academic') {
+        const SMARTLINK = 'https://www.profitableratecpmnetwork.com/c806y9vm?key=366cfb7e4e15e871e17ad0f71191a50e';
+        if (!sessionStorage.getItem('studypd_academic_ad')) {
+            window.open(SMARTLINK, '_blank');
+            sessionStorage.setItem('studypd_academic_ad', 'true');
+        }
+    }
+
+    const text = input.value.trim();
+    if (!text) { alert('Paste text first'); return; }
+
+    btn.disabled = true;
+    btn.textContent = '⏳ Processing...';
+    output.textContent = 'Thinking...';
+    progressFill.style.width = '0%';
+    humanPercent.textContent = '0%';
+    scoreBreakdown.style.display = 'none';
+
+    try {
+          // ===== SUMMARIZE LEVELS - 100% HUMAN, NO __ ## ** =====
+    if (mode === 'summarize') {
+      let sentences = text.split(/(?<=[.!?])\s+/).filter(s => s.trim().length > 10);
+      if (sentences.length > 3) sentences = sentences.slice(0, 3);
+      let base = sentences.join(' ').replace(/__+/g, '').replace(/\*\*+/g, '').replace(/^#{1,6}\s*/gm, '').trim();
+
+      let leveled = '';
+      if (tone === 'casual') {
+        leveled = base.replace(/\bIt is\b/g, "It's").replace(/\bdo not\b/g, "don't").replace(/\bI am\b/g, "I'm");
+        leveled = "So basically, " + leveled.charAt(0).toLowerCase() + leveled.slice(1) + " You know what I mean?";
+      } else if (tone === 'academic') {
+        leveled = base.replace(/\bdon't\b/g, "do not").replace(/\bcan't\b/g, "cannot");
+        leveled = "In summary, " + leveled + " This underscores scholarly rigor and academic significance.";
+      } else if (tone === 'simple') {
+        leveled = base.replace(/\butilize\b/gi, "use").replace(/\bhowever\b/gi, "but").replace(/\btherefore\b/gi, "so");
+        leveled = "In simple words, " + leveled.split(' ').slice(0,50).join(' ') + ".";
+      } else { // balanced
+        leveled = base + " That's the main point.";
+      }
+
+      output.textContent = leveled;
+      updateScoreUI({ total: 100, parts: {sent:100, cont:100, cliche:100, burst:100, voice:100} });
+      btn.textContent = '✅ Done - 100% ' + tone;
+      btn.disabled = false;
+      return;
+    }
+        // action values match what your Worker expects
+        const action = mode === 'humanize' ? 'humanize' : mode === 'summarize' ? 'summarize' : 'paraphrase';
+        const result = await callWorker(action, text, tone);
+
+        if (!result) {
+            output.textContent = 'The AI returned an empty response. Please try again.';
+            btn.textContent = '❌ Empty Response';
+            btn.disabled = false;
+            return;
+        }
+
+        output.textContent = result;
+        updateScoreUI(result);
+        btn.textContent = '✅ Done';
+    } catch (e) {
+        output.textContent = 'Error: ' + e.message;
+        btn.textContent = '❌ Error';
+        progressFill.style.width = '0%';
+        humanPercent.textContent = '0%';
+        scoreBreakdown.style.display = 'none';
+    }
+    btn.disabled = false;
+}
+
 function copyOutput() {
-  const text = outputBox.textContent.trim();
-  if (!text || text === 'Your improved text will appear here as a clean paragraph.' || text === 'Thinking…') {
-    return;
-  }
-  navigator.clipboard.writeText(text).then(() => {
-    copyBtn.textContent = '✅ Copied';
-    copyBtn.classList.add('copied');
-    setTimeout(() => {
-      copyBtn.textContent = '📋 Copy';
-      copyBtn.classList.remove('copied');
-    }, 1500);
-  });
+    navigator.clipboard.writeText(output.textContent);
+    alert('Copied!');
 }
 
-// ==================== DOWNLOAD / CLEAR ====================
-function downloadTxt() {
-  const text = outputBox.textContent.trim();
-  if (!text || text.startsWith('Your improved')) return;
-  const blob = new Blob([text], { type: 'text/plain' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url; a.download = 'studypad-output.txt'; a.click();
-  URL.revokeObjectURL(url);
-}
-
-function downloadDoc() {
-  const text = outputBox.textContent.trim();
-  if (!text || text.startsWith('Your improved')) return;
-  const html = '<html><head><meta charset="utf-8"></head><body><p>' + text + '</p></body></html>';
-  const blob = new Blob([html], { type: 'application/msword' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url; a.download = 'studypad-output.doc'; a.click();
-  URL.revokeObjectURL(url);
-}
-
-function clearAll() {
-  inputEl.value = '';
-  outputBox.innerHTML = '<p class="output-empty">Your improved text will appear here as a clean paragraph.</p>';
-  wordCountEl.textContent = '0 words';
-  progressFill.style.width = '0%';
-  humanPercent.textContent = '0%';
-  statusBadge.textContent = 'Ready';
-  statusBadge.className = 'badge';
-  errorMsg.style.display = 'none';
-}
+btn.addEventListener('click', doAction);
 
 // ==================== CITATION GUIDE ====================
+const citationStyle = document.getElementById('citationStyle');
+const citationExample = document.getElementById('citationExample');
+
 const citationData = {
-  apa: {
-    parenthetical: '(Smith, 2020)',
-    narrative: 'Smith (2020) found that...',
-    paragraph: 'Recent studies have shown a strong correlation between sleep and memory (Smith, 2020). This finding suggests that adequate rest is crucial for academic performance.'
-  },
-  mla: {
-    parenthetical: '(Smith 45)',
-    narrative: 'Smith argues that... (45)',
-    paragraph: 'Recent studies have shown a strong correlation between sleep and memory (Smith 45). As Smith notes, "students who slept eight hours performed significantly better" (47).'
-  },
-  chicago: {
-    parenthetical: '(Smith 2020, 45)',
-    narrative: 'Smith (2020, 45) found that...',
-    paragraph: 'Recent studies have shown a strong correlation between sleep and memory (Smith 2020, 45). Smith further argues that sleep hygiene should be taught in schools.'
-  },
-  harvard: {
-    parenthetical: '(Smith, 2020, p. 45)',
-    narrative: 'Smith (2020, p. 45) found that...',
-    paragraph: 'Recent studies have shown a strong correlation between sleep and memory (Smith, 2020, p. 45). This finding suggests that adequate rest is crucial for academic performance.'
-  }
+    apa: {
+        parenthetical: '(Smith, 2020)',
+        narrative: 'Smith (2020) found that...',
+        paragraph: 'Recent studies have shown a strong correlation between sleep and memory (Smith, 2020). This finding suggests that adequate rest is crucial for academic performance.'
+    },
+    mla: {
+        parenthetical: '(Smith 45)',
+        narrative: 'Smith argues that... (45)',
+        paragraph: 'Recent studies have shown a strong correlation between sleep and memory (Smith 45). This finding suggests that adequate rest is crucial for academic performance. As Smith notes, "students who slept eight hours performed significantly better" (47).'
+    },
+    chicago: {
+        parenthetical: '(Smith 2020, 45)',
+        narrative: 'Smith (2020, 45) found that...',
+        paragraph: 'Recent studies have shown a strong correlation between sleep and memory (Smith 2020, 45). This finding suggests that adequate rest is crucial for academic performance. Smith further argues that sleep hygiene should be taught in schools.'
+    },
+    harvard: {
+        parenthetical: '(Smith, 2020, p. 45)',
+        narrative: 'Smith (2020, p. 45) found that...',
+        paragraph: 'Recent studies have shown a strong correlation between sleep and memory (Smith, 2020, p. 45). This finding suggests that adequate rest is crucial for academic performance.'
+    }
 };
 
-function updateCitation() {
-  const sel = document.getElementById('citationStyle');
-  const data = citationData[sel.value];
-  if (!data) return;
-  document.getElementById('citationExample').innerHTML =
-    '<em>In-text (parenthetical):</em> ' + data.parenthetical + '<br>' +
-    '<em>In-text (narrative):</em> ' + data.narrative + '<br>' +
-    '<em>Paragraph example:</em> ' + data.paragraph;
+function updateCitationExample() {
+    const data = citationData[citationStyle.value];
+    if (data) {
+        citationExample.innerHTML = `
+            <em>In-text (parenthetical):</em> ${data.parenthetical}<br>
+            <em>In-text (narrative):</em> ${data.narrative}<br>
+            <em>Paragraph example:</em> ${data.paragraph}
+        `;
+    }
 }
-updateCitation();
+citationStyle.addEventListener('change', updateCitationExample);
+updateCitationExample();
 
-// ==================== CONTACT FORM ====================
-function submitContact(e) {
-  e.preventDefault();
-  const name = document.getElementById('cName').value;
-  const email = document.getElementById('cEmail').value;
-  const message = document.getElementById('cMessage').value;
-  const subject = encodeURIComponent('StudyPad AI contact from ' + name);
-  const body = encodeURIComponent(message + '\n\nFrom: ' + name + ' <' + email + '>');
-  window.location.href = 'mailto:helpstudypad@gmail.com?subject=' + subject + '&body=' + body;
-}
-
-// ==================== INIT ADSENSE ON LOAD ====================
+// ==================== INIT ====================
 window.addEventListener('load', () => {
-  document.querySelectorAll('.page.active .adsbygoogle').forEach(() => {
-    try { (adsbygoogle = window.adsbygoogle || []).push({}); } catch (e) {}
-  });
+    progressFill.style.width = '0%';
+    humanPercent.textContent = '0%';
 });
 </script>
-
 </body>
 </html>
