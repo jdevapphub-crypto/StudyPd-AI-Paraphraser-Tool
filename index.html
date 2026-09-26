@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<!-- ============ ADSENSE HEAD SCRIPT ============ -->
+<!-- ============ ADSENSE HEAD SCRIPT (loaded once) ============ -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5326242742377705"
      crossorigin="anonymous"></script>
 
@@ -76,8 +76,8 @@
   .hero h1 span{color:#3b82f6}
   .hero p{color:#94a3b8;margin-top:8px;font-size:14px}
 
-  /* AD WRAPPER */
-  .ad-wrap{margin:32px 0;display:flex;justify-content:center;min-height:120px;background:#f1f5f9;border-radius:16px;padding:10px;width:100%;overflow:hidden}
+  /* AD WRAPPER — transparent, no grey box */
+  .ad-wrap{margin:32px 0;display:flex;justify-content:center;min-height:90px;width:100%;overflow:hidden}
   .ad-wrap ins{display:block;width:100%}
 
   /* TABS + TONES */
@@ -123,7 +123,7 @@
 
   .error-msg{color:#f87171;font-size:14px;margin-top:12px}
 
-  /* HUMAN SCORE BAR */
+  /* READABILITY SCORE BAR */
   .human-bar{display:flex;align-items:center;gap:12px;background:#121729;border:1px solid #232a44;border-radius:16px;padding:12px 16px;margin-top:20px}
   .human-bar .label{font-size:12px;color:#94a3b8;font-weight:600;white-space:nowrap}
   .progress-bg{flex:1;height:12px;background:#0a0e1a;border-radius:8px;overflow:hidden;border:1px solid #232a44}
@@ -239,16 +239,13 @@
 
   <!-- AD UNIT #1 -->
   <div class="container">
-    <div class="ad-wrap">
+    <div class="ad-wrap" data-ad-page="home">
       <ins class="adsbygoogle"
            style="display:block"
            data-ad-client="ca-pub-5326242742377705"
            data-ad-slot="4394796685"
            data-ad-format="auto"
            data-full-width-responsive="true"></ins>
-      <script>
-           (adsbygoogle = window.adsbygoogle || []).push({});
-      </script>
     </div>
   </div>
 
@@ -304,27 +301,24 @@
 
     <p class="error-msg" id="errorMsg" style="display:none;"></p>
 
-    <!-- Human score -->
+    <!-- Readability score -->
     <div class="human-bar">
-      <span class="label">🧑 Human Score</span>
+      <span class="label">📊 Readability Score</span>
       <div class="progress-bg"><div class="progress-fill" id="progressFill"></div></div>
       <span class="human-percent" id="humanPercent">0%</span>
     </div>
-    <p class="score-note">Score reflects sentence variety, natural contractions, and reduced AI-style clichés. 80%+ reads as genuinely human-like.</p>
+    <p class="score-note">Score reflects sentence variety, natural phrasing, and absence of AI-style clichés. Use it as a rough guide only.</p>
   </div>
 
   <!-- AD UNIT #2 -->
   <div class="container">
-    <div class="ad-wrap">
+    <div class="ad-wrap" data-ad-page="home">
       <ins class="adsbygoogle"
            style="display:block"
            data-ad-client="ca-pub-5326242742377705"
            data-ad-slot="4394796685"
            data-ad-format="auto"
            data-full-width-responsive="true"></ins>
-      <script>
-           (adsbygoogle = window.adsbygoogle || []).push({});
-      </script>
     </div>
   </div>
 
@@ -374,16 +368,13 @@
 
   <!-- AD UNIT #3 -->
   <div class="container">
-    <div class="ad-wrap">
+    <div class="ad-wrap" data-ad-page="home">
       <ins class="adsbygoogle"
            style="display:block"
            data-ad-client="ca-pub-5326242742377705"
            data-ad-slot="4394796685"
            data-ad-format="auto"
            data-full-width-responsive="true"></ins>
-      <script>
-           (adsbygoogle = window.adsbygoogle || []).push({});
-      </script>
     </div>
   </div>
 
@@ -474,8 +465,8 @@
     <h2>Step 4 — You get a clean paragraph</h2>
     <p>The output appears as one clean, well-written paragraph — never as a bullet list or numbered points. Use the Copy button on the right to grab it instantly.</p>
 
-    <h2>Step 5 — Human Score</h2>
-    <p>StudyPad AI analyses your result for sentence variety, natural contractions, and absence of AI-style clichés. The score bar shows how human-like the result reads. 80%+ means the text reads naturally.</p>
+    <h2>Step 5 — Readability Score</h2>
+    <p>StudyPad AI analyses your result for sentence variety, natural phrasing, and absence of AI-style clichés. The score bar shows how readable the result is. Use it as a rough guide only.</p>
 
     <h2>Step 6 — Use it as a study aid</h2>
     <p>Use the output as a reference. Rewrite in your own words, cite your sources, and follow your university's rules on AI assistance.</p>
@@ -532,9 +523,8 @@
     <p>Paraphrasing is one of the most important skills you will learn at university. It is also one of the most commonly misunderstood. Many students think paraphrasing just means "changing a few words", but real paraphrasing is about expressing the same idea in a completely new way while still giving credit to the original author.</p>
     <p>This guide walks you through paraphrasing step by step, with examples that work for assignments at UNISA, UJ, TUT, UCT, Wits, and every other South African university.</p>
 
-    <div class="ad-wrap">
+    <div class="ad-wrap" data-ad-page="blog1">
       <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5326242742377705" data-ad-slot="4394796685" data-ad-format="auto" data-full-width-responsive="true"></ins>
-      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
 
     <h2>What paraphrasing actually means</h2>
@@ -555,9 +545,8 @@
     <h2>Step 4 — Cite the source</h2>
     <p>Every paraphrase must be cited. In APA style, add (Author, Year) at the end of the sentence. In Harvard style, add (Author, Year, p. X). This is how you give credit while still using your own words.</p>
 
-    <div class="ad-wrap">
+    <div class="ad-wrap" data-ad-page="blog1">
       <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5326242742377705" data-ad-slot="4394796685" data-ad-format="auto" data-full-width-responsive="true"></ins>
-      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
 
     <h2>Step 5 — Compare with the original</h2>
@@ -597,9 +586,8 @@
     <p>Academic writing is a skill, not a talent. Every student can improve with deliberate practice. This guide gives you practical, no-nonsense techniques that work for South African students writing in English as a first or second language.</p>
     <p>Whether you are writing a UNISA portfolio, a UJ tutorial, a Wits research paper, or a TUT practical report, these principles apply.</p>
 
-    <div class="ad-wrap">
+    <div class="ad-wrap" data-ad-page="blog2">
       <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5326242742377705" data-ad-slot="4394796685" data-ad-format="auto" data-full-width-responsive="true"></ins>
-      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
 
     <h2>1. Know your reader</h2>
@@ -617,9 +605,8 @@
     <h2>5. Use active voice</h2>
     <p>Passive voice hides who did what. Active voice is clearer and more direct. Compare: "The study was conducted by the researchers" (passive) with "The researchers conducted the study" (active). Prefer active unless the passive is genuinely better.</p>
 
-    <div class="ad-wrap">
+    <div class="ad-wrap" data-ad-page="blog2">
       <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5326242742377705" data-ad-slot="4394796685" data-ad-format="auto" data-full-width-responsive="true"></ins>
-      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
 
     <h2>6. Vary your sentence length</h2>
@@ -654,9 +641,8 @@
     <p>Plagiarism is one of the most serious academic offences at any South African university. It can lead to a failing mark, suspension, or even expulsion. Yet many students commit plagiarism without meaning to — because they do not fully understand what it is. This guide fixes that.</p>
     <p>We cover what plagiarism is, the different types, and practical steps you can take to avoid it in every assignment.</p>
 
-    <div class="ad-wrap">
+    <div class="ad-wrap" data-ad-page="blog3">
       <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5326242742377705" data-ad-slot="4394796685" data-ad-format="auto" data-full-width-responsive="true"></ins>
-      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
 
     <h2>What plagiarism actually is</h2>
@@ -674,9 +660,8 @@
     <h2>Why universities take it so seriously</h2>
     <p>Academic work is built on trust. When you submit an assignment, you are saying that the work and the thinking are yours. Plagiarism breaks that trust. It also steals from the original author, who gets no credit for their labour.</p>
 
-    <div class="ad-wrap">
+    <div class="ad-wrap" data-ad-page="blog3">
       <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5326242742377705" data-ad-slot="4394796685" data-ad-format="auto" data-full-width-responsive="true"></ins>
-      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
 
     <h2>How to avoid it — practical rules</h2>
@@ -710,9 +695,8 @@
     <p>The NSFAS motivation letter is one of the most important pieces of writing any South African student will do. It is your chance to explain, in your own words, why you deserve funding and what you plan to do with your education. This guide shows you how to write one that actually works.</p>
     <p>NSFAS receives hundreds of thousands of applications. A well-written motivation letter does not guarantee funding, but a poorly written one can lose you a place. Take it seriously.</p>
 
-    <div class="ad-wrap">
+    <div class="ad-wrap" data-ad-page="blog4">
       <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5326242742377705" data-ad-slot="4394796685" data-ad-format="auto" data-full-width-responsive="true"></ins>
-      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
 
     <h2>What NSFAS is actually looking for</h2>
@@ -733,9 +717,8 @@
     <h2>Tip 2 — Be specific</h2>
     <p>"I am poor" is weak. "My mother is the only breadwinner, earning R3,200 a month, supporting four children" is strong. Numbers and details matter.</p>
 
-    <div class="ad-wrap">
+    <div class="ad-wrap" data-ad-page="blog4">
       <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5326242742377705" data-ad-slot="4394796685" data-ad-format="auto" data-full-width-responsive="true"></ins>
-      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
 
     <h2>Tip 3 — Keep it short</h2>
@@ -781,8 +764,8 @@
     <h2>3. Google AdSense and cookies</h2>
     <p>We use Google AdSense to serve advertisements. Google and its partners may use cookies and web beacons to serve ads based on your prior visits to this and other websites. You can opt out of personalised advertising by visiting Google Ads Settings. Third-party vendors and networks may also use cookies — see Google's policy for details.</p>
 
-    <h2>4. Groq API</h2>
-    <p>Text you paste is sent to the Groq API for processing and is not stored by us. Groq's own privacy terms apply to the request. We do not log request content on our servers.</p>
+    <h2>4. Third-party API processing</h2>
+    <p>Text you paste is sent to a third-party API for processing and is not stored by us. The API provider's own privacy terms apply to the request. We do not log request content on our servers.</p>
 
     <h2>5. Your rights (GDPR & POPIA)</h2>
     <p>If you are in the EU/UK (GDPR) or South Africa (POPIA), you have the right to access, correct, or delete personal data we hold about you. Since we do not store personal data by default, this usually only applies to emails you send us. Contact <a href="mailto:helpstudypad@gmail.com">helpstudypad@gmail.com</a> for any request.</p>
@@ -907,6 +890,7 @@ const WORKER_URL = "https://young-recipe-a9fastudypadsmart.jdevapphub.workers.de
 
 // Stronger prompt — forces a flowing paragraph, no bullets, no numbers, no markdown
 const SYSTEM_PROMPT = "You are a professional South African academic writer. Rewrite the user's text in basic South African English. Follow these rules exactly: (1) Output exactly 6 sentences. (2) Put each sentence on its own new line. (3) Number the sentences exactly like 1. 2. 3. 4. 5. 6. (4) Every sentence must end with a full stop. (5) Do NOT use commas anywhere. Use full stops to separate ideas instead. (6) Keep the original meaning exactly and do not remove important information. (7) Keep the writing focused on the original topic. (8) Make each sentence flow naturally while using varied sentence lengths and sentence openings. (9) Sentence 2 must have a different and fresh opening from sentence 1. (10) Use basic everyday South African English. (11) Avoid unnecessarily complicated vocabulary and avoid words such as furthermore, moreover, delve, pivotal, tapestry, testament, leverage, robust, seamless, utilise, comprehensive, and holistic. (12) Do NOT use markdown, asterisks, underscores, bullet points, or extra commentary. (13) Do not start with 'Here is', 'Sure', 'Certainly', or any other meta commentary. (14) The requested action is provided by the application and the requested tone is provided by the application. Follow both exactly. Return only the 6 numbered sentences.";
+
 // ==================== STATE ====================
 let mode = "humanize";
 let tone = "casual";
@@ -921,19 +905,30 @@ const errorMsg = document.getElementById('errorMsg');
 const progressFill = document.getElementById('progressFill');
 const humanPercent = document.getElementById('humanPercent');
 
+// ==================== ADSENSE — SAFE PER-PAGE FILLING ====================
+function fillAdsForPage(pageId) {
+  const wrappers = document.querySelectorAll('.ad-wrap[data-ad-page="' + pageId + '"]');
+  wrappers.forEach(wrapper => {
+    const ins = wrapper.querySelector('ins.adsbygoogle');
+    if (!ins || ins.dataset.adFilled === "true") return;
+    try {
+      (window.adsbygoogle = window.adsbygoogle || []).push({});
+      ins.dataset.adFilled = "true";
+    } catch (e) { /* ignore push errors silently */ }
+  });
+}
+
 // ==================== PAGE ROUTER ====================
 function showPage(id) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   const el = document.getElementById('page-' + id);
   if (el) el.classList.add('active');
   window.scrollTo({ top: 0, behavior: 'smooth' });
-  document.getElementById('mainNav').classList.remove('open');
+  const nav = document.getElementById('mainNav');
+  if (nav) nav.classList.remove('open');
 
-  setTimeout(() => {
-    document.querySelectorAll('.page.active .adsbygoogle').forEach(() => {
-      try { (adsbygoogle = window.adsbygoogle || []).push({}); } catch (e) {}
-    });
-  }, 100);
+  // Fill only the ads that belong to the newly visible page
+  setTimeout(() => fillAdsForPage(id), 100);
 }
 
 // ==================== MODE / TONE ====================
@@ -979,13 +974,13 @@ function cleanParagraph(s) {
   t = t.replace(/^\s*[-*_]{3,}\s*$/gm, '');
   t = t.replace(/`{1,3}/g, '');
 
-  // Remove leading list markers on every line  ("1. ", "- ", "* ", "• ")
+  // Remove leading list markers on every line
   t = t.replace(/^\s*(?:\d+[.)]|[-*•])\s+/gm, '');
 
   // Remove "Here is..." / "Sure," meta intros
   t = t.replace(/^\s*(?:sure[,!.]?\s*|certainly[,!.]?\s*|of course[,!.]?\s*|here(?:'s| is)[^.:]*[:.\-]\s*)/i, '');
 
-  // Collapse ALL whitespace (including newlines) into single spaces → one paragraph
+  // Collapse ALL whitespace into single spaces → one paragraph
   t = t.replace(/\s+/g, ' ').trim();
 
   // Ensure it ends with a full stop
@@ -994,8 +989,8 @@ function cleanParagraph(s) {
   return t;
 }
 
-// ==================== HUMAN SCORE ====================
-function computeHumanScore(text) {
+// ==================== READABILITY SCORE ====================
+function computeReadabilityScore(text) {
   const t = (text || '').trim();
   if (!t) return 0;
   const sentences = t.split(/(?<=[.!?])\s+/).filter(Boolean);
@@ -1019,7 +1014,7 @@ function computeHumanScore(text) {
 }
 
 function updateScoreUI(text) {
-  const score = computeHumanScore(text);
+  const score = computeReadabilityScore(text);
   progressFill.style.width = score + '%';
   humanPercent.textContent = score + '%';
   if (score >= 75) {
@@ -1067,7 +1062,6 @@ async function runTool() {
     const raw = data.result || data.answer || '';
     if (!raw) throw new Error('Empty AI response');
 
-    // Force single-paragraph output
     const paragraph = cleanParagraph(raw);
     outputBox.textContent = paragraph;
 
@@ -1087,12 +1081,14 @@ async function runTool() {
   }
 }
 
-// ==================== COPY (right-side button) ====================
+// ==================== COPY ====================
 function copyOutput() {
   const text = outputBox.textContent.trim();
-  if (!text || text === 'Your improved text will appear here as a clean paragraph.' || text === 'Thinking…') {
-    return;
-  }
+  if (!text) return;
+  if (text === 'Your improved text will appear here as a clean paragraph.') return;
+  if (text === 'Thinking…') return;
+  if (text === 'Something went wrong. Please try again.') return;
+
   navigator.clipboard.writeText(text).then(() => {
     copyBtn.textContent = '✅ Copied';
     copyBtn.classList.add('copied');
@@ -1106,7 +1102,7 @@ function copyOutput() {
 // ==================== DOWNLOAD / CLEAR ====================
 function downloadTxt() {
   const text = outputBox.textContent.trim();
-  if (!text || text.startsWith('Your improved')) return;
+  if (!text || text.startsWith('Your improved') || text === 'Thinking…') return;
   const blob = new Blob([text], { type: 'text/plain' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
@@ -1114,10 +1110,20 @@ function downloadTxt() {
   URL.revokeObjectURL(url);
 }
 
+function escapeHtml(s) {
+  return String(s)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 function downloadDoc() {
   const text = outputBox.textContent.trim();
-  if (!text || text.startsWith('Your improved')) return;
-  const html = '<html><head><meta charset="utf-8"></head><body><p>' + text + '</p></body></html>';
+  if (!text || text.startsWith('Your improved') || text === 'Thinking…') return;
+  const safe = escapeHtml(text);
+  const html = '<html><head><meta charset="utf-8"></head><body><p>' + safe + '</p></body></html>';
   const blob = new Blob([html], { type: 'application/msword' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
@@ -1182,11 +1188,10 @@ function submitContact(e) {
   window.location.href = 'mailto:helpstudypad@gmail.com?subject=' + subject + '&body=' + body;
 }
 
-// ==================== INIT ADSENSE ON LOAD ====================
-window.addEventListener('load', () => {
-  document.querySelectorAll('.page.active .adsbygoogle').forEach(() => {
-    try { (adsbygoogle = window.adsbygoogle || []).push({}); } catch (e) {}
-  });
+// ==================== INIT ADSENSE (home page only) ====================
+document.addEventListener('DOMContentLoaded', () => {
+  // Wait a tick for the adsbygoogle script to be ready
+  setTimeout(() => fillAdsForPage('home'), 200);
 });
 </script>
 
