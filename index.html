@@ -227,6 +227,33 @@
     .action-bar{flex-direction:column}
     .btn-copy{min-width:auto;width:100%}
   }
+
+  /* AI DETECTOR */
+  .dt-top{display:flex;gap:24px;align-items:center;flex-wrap:wrap}
+  .dt-ring{width:130px;height:130px;border-radius:50%;display:grid;place-items:center;position:relative;flex:none;background:#232a44}
+  .dt-ring::before{content:'';position:absolute;inset:11px;background:#151a2d;border-radius:50%}
+  .dt-ring div{position:relative;text-align:center}
+  .dt-ring b{display:block;font-size:30px;color:#fff;line-height:1}
+  .dt-ring span{font-size:11px;color:#94a3b8}
+  .dt-info{flex:1;min-width:220px}
+  .dt-verdict{display:inline-block;padding:6px 16px;border-radius:999px;font-weight:800;font-size:15px;margin-bottom:12px}
+  .dt-verdict.ai{background:rgba(239,68,68,.18);color:#f87171}
+  .dt-verdict.mixed{background:rgba(250,204,21,.18);color:#facc15}
+  .dt-verdict.human{background:rgba(34,197,94,.18);color:#4ade80}
+  .dt-verdict.likely{background:rgba(134,239,172,.15);color:#86efac}
+  .dt-split{display:flex;height:12px;border-radius:8px;overflow:hidden;background:#0a0e1a;border:1px solid #232a44}
+  .dt-split i{display:block;height:100%;transition:width .6s ease}
+  .dt-split i.a{background:#ef4444}.dt-split i.h{background:#22c55e}
+  .dt-splittxt{font-size:13px;color:#94a3b8;margin-top:8px}
+  .dt-text{height:auto;min-height:140px;max-height:420px}
+  .dt-text mark{background:rgba(239,68,68,.22);color:#fecaca;border-bottom:2px solid #ef4444;border-radius:3px;padding:1px 2px}
+  .dt-legend{font-size:12px;color:#94a3b8}
+  .dt-legend mark{background:rgba(239,68,68,.22);color:#fecaca;border-bottom:2px solid #ef4444;padding:0 6px;border-radius:3px}
+  .dt-box{margin-top:20px;border-radius:16px;padding:18px;border:1px solid #232a44;background:#151a2d}
+  .dt-box h3{font-size:16px;color:#fff;margin-bottom:10px}
+  .dt-box ul,.dt-box ol{padding-left:20px;color:#cbd5e1;font-size:14px;line-height:1.8}
+  .dt-box.tips{border-color:rgba(239,68,68,.45)}
+  .dt-box.ok{border-color:rgba(34,197,94,.5);background:rgba(34,197,94,.07)}
 </style>
 </head>
 <body>
@@ -1035,9 +1062,8 @@ async function runTool() {
         system: SYSTEM_PROMPT
       })
     });
-    if (!res.ok) throw new Error('Worker error ' + res.status);
-    const data = await res.json();
-    if (data.error) throw new Error(data.error);
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok || data.error) throw new Error(data.error || ('Worker error ' + res.status));
 
     const raw = data.result || data.answer || '';
     if (!raw) throw new Error('Empty AI response');
@@ -1170,11 +1196,13 @@ async function callWorker(action, text, system) {
   const res = await fetch(WORKER_URL, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ action: action, tone: 'balanced', text: text, system: system })
+    body: JSON.stringify({
+      action: action, tone: 'balanced', text: text,
+      length: action === 'summarizer' ? (document.getElementById('sumLen') || {}).value : undefined
+    })
   });
-  if (!res.ok) throw new Error('Worker error ' + res.status);
-  const d = await res.json();
-  if (d.error) throw new Error(d.error);
+  const d = await res.json().catch(() => ({}));
+  if (!res.ok || d.error) throw new Error(d.error || ('Worker error ' + res.status));
   const r = d.result || d.answer || '';
   if (!r) throw new Error('Empty AI response');
   return String(r).replace(/\*\*+/g, '').replace(/^#{1,6}\s*/gm, '').trim();
@@ -1243,11 +1271,105 @@ textTool('grammar', '✅ Grammar Check',
   'Check Grammar',
   'You are a careful proofreader. First output the full corrected text. Then on a new line write "CHANGES:" followed by a short numbered list of the main corrections and why. Do not change the meaning or the writer\'s voice.');
 
-// ---- AI Detector ----
-textTool('detector', '🕵️ AI Detector',
-  'Estimates how AI-written your text sounds. No detector is 100% accurate, so use it as a guide only.',
-  'Detect AI',
-  'You are an AI-writing analyst. Start with the line "AI likelihood: NN%" (a number from 0 to 100). Then give "Verdict:" in one line. Then give 3 to 5 numbered reasons based on sentence variety, repetition, cliches and tone. Then give 3 short tips to make the writing sound more like the student. Remind the user that detectors can be wrong.');
+// ---- AI Detector (pro) ----
+mkPage('detector', BACK + '<h1 style="color:#fff;font-size:26px">🕵️ AI Detector</h1>' +
+  '<p style="color:#94a3b8;margin:8px 0 18px;font-size:14px">Paste your text to see how much of it reads as AI-written. AI-like sentences are highlighted in red. No AI detector is 100% accurate, so use this as a guide only.</p>' +
+  '<div class="card"><div class="card-header"><span>Input Text</span><span class="badge" id="dtWc">0 words</span></div>' +
+  '<textarea id="dtIn" placeholder="Paste at least a few sentences for a reliable result…"></textarea>' +
+  '<div class="tool-actions"><button class="btn-primary" id="dtBtn">🕵️ Detect AI</button><button class="btn-copy" id="dtClr">Clear</button></div>' +
+  '<p class="error-msg" id="dtErr" style="display:none"></p></div>' +
+  '<div id="dtRes" style="display:none;margin-top:20px">' +
+  '<div class="card"><div class="dt-top"><div class="dt-ring" id="dtRing"><div><b id="dtPct">0%</b><span>AI score</span></div></div>' +
+  '<div class="dt-info"><div class="dt-verdict" id="dtVerdict"></div><div class="dt-split"><i class="a" id="dtA"></i><i class="h" id="dtH"></i></div><p class="dt-splittxt" id="dtSplit"></p></div></div></div>' +
+  '<div class="card" style="margin-top:20px"><div class="card-header"><span>Analysed text</span><span class="dt-legend"><mark>Red</mark> = likely AI-written</span></div><div class="output-box dt-text" id="dtText"></div></div>' +
+  '<div id="dtExtra"></div></div>');
+
+const DT_CLICHES = ['furthermore','moreover','delve','tapestry','leverage','robust','realm','foster','myriad','pivotal','testament','seamless','utilise','utilize','comprehensive','holistic','in conclusion','it is important to note','plays a crucial role','in today','landscape','underscores','crucial','navigate','multifaceted','ever-evolving'];
+function dtSplit(t) {
+  return (t.replace(/\s+/g, ' ').match(/[^.!?]+[.!?]+["')\]]*|[^.!?]+$/g) || []).map(s => s.trim()).filter(s => s.length > 1);
+}
+function dtHeur(s, avg) {
+  const w = s.split(/\s+/).length, l = s.toLowerCase();
+  let sc = 30;
+  DT_CLICHES.forEach(c => { if (l.includes(c)) sc += 18; });
+  if (/\b\w+'(t|s|re|ve|ll|d|m)\b/i.test(s)) sc -= 12;
+  if (w >= 18 && w <= 32 && Math.abs(w - avg) < 4) sc += 8;
+  if (/[!?]/.test(s)) sc -= 8;
+  return Math.max(0, Math.min(100, sc));
+}
+document.getElementById('dtIn').addEventListener('input', () => {
+  const t = document.getElementById('dtIn').value.trim();
+  document.getElementById('dtWc').textContent = (t ? t.split(/\s+/).length : 0) + ' words';
+});
+document.getElementById('dtClr').onclick = () => {
+  document.getElementById('dtIn').value = '';
+  document.getElementById('dtWc').textContent = '0 words';
+  document.getElementById('dtRes').style.display = 'none';
+  document.getElementById('dtErr').style.display = 'none';
+};
+document.getElementById('dtBtn').onclick = async () => {
+  const err = document.getElementById('dtErr'), btn = document.getElementById('dtBtn');
+  const raw = document.getElementById('dtIn').value.trim();
+  err.style.display = 'none';
+  const sents = dtSplit(raw).slice(0, 120);
+  if (raw.split(/\s+/).length < 25 || sents.length < 2) {
+    err.textContent = 'Please paste at least 25 words (2 or more sentences) for a reliable result.';
+    err.style.display = 'block';
+    return;
+  }
+  btn.disabled = true;
+  btn.textContent = '⏳ Analysing…';
+  try {
+    const numbered = sents.map((s, i) => (i + 1) + '. ' + s).join('\n');
+    const res = await callWorker('detector', numbered, '');
+    let data;
+    try { data = JSON.parse(res); } catch (e) { throw new Error('Could not read the analysis. Please try again.'); }
+    const lens = sents.map(s => s.split(/\s+/).length);
+    const avg = lens.reduce((a, b) => a + b, 0) / lens.length;
+    const model = {};
+    (data.sentences || []).forEach(x => { model[x.i] = Math.max(0, Math.min(100, +x.ai || 0)); });
+    const scores = sents.map((s, i) => Math.round(0.75 * (model[i + 1] !== undefined ? model[i + 1] : +data.score || 0) + 0.25 * dtHeur(s, avg)));
+    const totalW = lens.reduce((a, b) => a + b, 0);
+    const weighted = scores.reduce((a, sc, i) => a + sc * lens[i], 0) / totalW;
+    let overall = Math.max(0, Math.min(100, Math.round(0.5 * weighted + 0.5 * (+data.score || weighted))));
+    if (overall <= 5) overall = 0; // near-zero scores count as fully human
+
+    const cls = overall >= 65 ? 'ai' : overall >= 35 ? 'mixed' : overall >= 1 ? 'likely' : 'human';
+    const label = { ai: '🤖 AI-written', mixed: '⚠️ Mixed / possibly AI-assisted', likely: '👍 Likely human-written', human: '✅ Human text' }[cls];
+    const color = { ai: '#ef4444', mixed: '#facc15', likely: '#86efac', human: '#22c55e' }[cls];
+    document.getElementById('dtPct').textContent = overall + '%';
+    document.getElementById('dtRing').style.background = 'conic-gradient(' + color + ' ' + overall + '%, #232a44 0)';
+    const v = document.getElementById('dtVerdict');
+    v.textContent = label; v.className = 'dt-verdict ' + cls;
+    document.getElementById('dtA').style.width = overall + '%';
+    document.getElementById('dtH').style.width = (100 - overall) + '%';
+    document.getElementById('dtSplit').textContent = overall + '% AI-like · ' + (100 - overall) + '% human-like';
+
+    document.getElementById('dtText').innerHTML = sents.map((s, i) =>
+      scores[i] >= 55 ? '<mark title="AI-like: ' + scores[i] + '%">' + escapeHtml(s) + '</mark>' : escapeHtml(s)).join(' ');
+
+    const list = a => '<ul>' + (a || []).slice(0, 5).map(x => '<li>' + escapeHtml(String(x)) + '</li>').join('') + '</ul>';
+    let extra = '';
+    if (cls === 'human' || cls === 'likely') {
+      extra = '<div class="dt-box ok"><h3>' + (cls === 'human' ? '✅ Human text' : '👍 Likely human-written') + '</h3><p style="color:#cbd5e1;font-size:14px;line-height:1.7">' +
+        (cls === 'human' ? 'This text reads like natural human writing. No changes are needed.' : 'This text most likely reads as human-written. A few small patterns look slightly AI-like, but no changes are needed.') + '</p>' +
+        ((data.reasons || []).length ? '<p style="color:#94a3b8;font-size:13px;margin:12px 0 4px">Why it looks human:</p>' + list(data.reasons) : '') + '</div>';
+    } else {
+      extra = '<div class="dt-box"><h3>🔍 Why it looks AI-written</h3>' + list(data.reasons) + '</div>' +
+        '<div class="dt-box tips"><h3>💡 Tips to make it sound more human</h3>' + list(data.tips) +
+        '<p class="score-note" style="margin-top:10px">Tip: run it through the Humanizer, then add your own examples and re-check here.</p></div>';
+    }
+    document.getElementById('dtExtra').innerHTML = extra;
+    document.getElementById('dtRes').style.display = 'block';
+    document.getElementById('dtRes').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  } catch (e) {
+    err.textContent = 'Error: ' + (e.message || 'Something went wrong.');
+    err.style.display = 'block';
+  } finally {
+    btn.disabled = false;
+    btn.textContent = '🕵️ Detect AI';
+  }
+};
 
 // ---- Summarizer ----
 textTool('summarizer', '📄 Summarizer',
