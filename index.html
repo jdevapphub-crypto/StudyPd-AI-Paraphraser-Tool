@@ -123,14 +123,33 @@
 
   .error-msg{color:#f87171;font-size:14px;margin-top:12px}
 
-  /* READABILITY SCORE BAR */
-  .human-bar{display:flex;align-items:center;gap:12px;background:#121729;border:1px solid #232a44;border-radius:16px;padding:12px 16px;margin-top:20px}
-  .human-bar .label{font-size:12px;color:#94a3b8;font-weight:600;white-space:nowrap}
+  /* PROGRESS BAR (used by GradePilot) */
   .progress-bg{flex:1;height:12px;background:#0a0e1a;border-radius:8px;overflow:hidden;border:1px solid #232a44}
   .progress-fill{height:100%;width:0%;background:linear-gradient(90deg,#facc15,#3b82f6);border-radius:8px;transition:width .5s ease}
-  .human-percent{font-weight:800;font-size:18px;color:#3b82f6;min-width:56px;text-align:right}
 
   .score-note{font-size:12px;color:#64748b;margin-top:8px}
+
+  /* TOOLS GRID (replaces readability score) */
+  .tools-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px}
+  .tools-grid button{padding:16px 10px;border-radius:14px;border:1px solid #232a44;background:#151a2d;color:#e5e7eb;font-weight:700;font-size:14px;cursor:pointer;transition:all .15s}
+  .tools-grid button:hover{border-color:#3b82f6;color:#fff}
+  @media(max-width:640px){.tools-grid{grid-template-columns:1fr 1fr}}
+  .tool-actions{display:flex;gap:10px;margin-top:16px}
+  .tool-actions .btn-primary{padding:14px;font-size:15px}
+  .back-link{display:inline-block;margin-bottom:14px;font-size:14px}
+  .stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
+  .stat{background:#0d1220;border:1px solid #232a44;border-radius:12px;padding:14px;text-align:center}
+  .stat b{display:block;font-size:22px;color:#3b82f6}
+  .stat span{font-size:12px;color:#94a3b8}
+  .file-box{background:#0d1220;border:1px dashed #3b82f6;border-radius:12px;padding:14px;margin-bottom:14px}
+  .file-box label{display:block;font-size:13px;color:#cbd5e1;margin-bottom:8px;font-weight:600}
+  .file-box input{color:#94a3b8;font-size:13px;width:100%}
+  .gp-score{font-size:42px;font-weight:800;color:#3b82f6;margin:10px 0}
+  .rg-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  @media(max-width:800px){.rg-grid{grid-template-columns:1fr}}
+  .rg-grid .card h3{font-size:15px;color:#fff;margin-bottom:8px}
+  .rg-grid .card li,.rg-grid .card p{font-size:13.5px;color:#cbd5e1;line-height:1.7}
+  .rg-grid .card ul{padding-left:18px}
 
   /* CONTENT SECTIONS */
   section.content{padding:40px 0}
@@ -301,13 +320,15 @@
 
     <p class="error-msg" id="errorMsg" style="display:none;"></p>
 
-    <!-- Readability score -->
-    <div class="human-bar">
-      <span class="label">📊 Readability Score</span>
-      <div class="progress-bg"><div class="progress-fill" id="progressFill"></div></div>
-      <span class="human-percent" id="humanPercent">0%</span>
+    <!-- TOOLS GRID -->
+    <div class="tools-grid">
+      <button onclick="showPage('grammar')">✅ Grammar Check</button>
+      <button onclick="showPage('detector')">🕵️ AI Detector</button>
+      <button onclick="showPage('summarizer')">📄 Summarizer</button>
+      <button onclick="showPage('counter')">🔢 Word Counter</button>
+      <button onclick="showPage('research')">🎓 Research Guide</button>
+      <button onclick="showPage('gradepilot')">🚀 GradePilot</button>
     </div>
-    <p class="score-note">Score reflects sentence variety, natural phrasing, and absence of AI-style clichés. Use it as a rough guide only.</p>
   </div>
 
   <!-- AD UNIT #2 -->
@@ -465,8 +486,8 @@
     <h2>Step 4 — You get a clean paragraph</h2>
     <p>The output appears as one clean, well-written paragraph — never as a bullet list or numbered points. Use the Copy button on the right to grab it instantly.</p>
 
-    <h2>Step 5 — Readability Score</h2>
-    <p>StudyPad AI analyses your result for sentence variety, natural phrasing, and absence of AI-style clichés. The score bar shows how readable the result is. Use it as a rough guide only.</p>
+    <h2>Step 5 — Use the extra tools</h2>
+    <p>Below the main button you will find Grammar Check, AI Detector, Summarizer, Word Counter, Research Guide, and GradePilot. Each one opens on its own screen.</p>
 
     <h2>Step 6 — Use it as a study aid</h2>
     <p>Use the output as a reference. Rewrite in your own words, cite your sources, and follow your university's rules on AI assistance.</p>
@@ -765,7 +786,7 @@
     <p>We use Google AdSense to serve advertisements. Google and its partners may use cookies and web beacons to serve ads based on your prior visits to this and other websites. You can opt out of personalised advertising by visiting Google Ads Settings. Third-party vendors and networks may also use cookies — see Google's policy for details.</p>
 
     <h2>4. Third-party API processing</h2>
-    <p>Text you paste is sent to a third-party API for processing and is not stored by us. The API provider's own privacy terms apply to the request. We do not log request content on our servers.</p>
+    <p>Text you paste or upload (including files you upload to GradePilot, which are read in your browser) is sent to a third-party API for processing and is not stored by us. The API provider's own privacy terms apply to the request. We do not log request content on our servers.</p>
 
     <h2>5. Your rights (GDPR & POPIA)</h2>
     <p>If you are in the EU/UK (GDPR) or South Africa (POPIA), you have the right to access, correct, or delete personal data we hold about you. Since we do not store personal data by default, this usually only applies to emails you send us. Contact <a href="mailto:helpstudypad@gmail.com">helpstudypad@gmail.com</a> for any request.</p>
@@ -832,7 +853,7 @@
     <p>Whether you paraphrase or not, you must cite the sources you use. Uncited use of another author's ideas is plagiarism, and StudyPad AI cannot protect you from that.</p>
 
     <h2>No guarantee of outcomes</h2>
-    <p>We do not guarantee any specific grade, mark, or result. You are fully responsible for your submission.</p>
+    <p>We do not guarantee any specific grade, mark, or result. Scores and AI-likelihood estimates given by the AI Detector and GradePilot are estimates only. You are fully responsible for your submission.</p>
 
     <h2>Questions</h2>
     <p>Contact <a href="mailto:helpstudypad@gmail.com">helpstudypad@gmail.com</a>.</p>
@@ -902,8 +923,6 @@ const copyBtn = document.getElementById('copyBtn');
 const statusBadge = document.getElementById('statusBadge');
 const wordCountEl = document.getElementById('wordCount');
 const errorMsg = document.getElementById('errorMsg');
-const progressFill = document.getElementById('progressFill');
-const humanPercent = document.getElementById('humanPercent');
 
 // ==================== ADSENSE — SAFE PER-PAGE FILLING ====================
 function fillAdsForPage(pageId) {
@@ -989,43 +1008,6 @@ function cleanParagraph(s) {
   return t;
 }
 
-// ==================== READABILITY SCORE ====================
-function computeReadabilityScore(text) {
-  const t = (text || '').trim();
-  if (!t) return 0;
-  const sentences = t.split(/(?<=[.!?])\s+/).filter(Boolean);
-  const words = t.split(/\s+/).filter(Boolean);
-  const wc = words.length || 1;
-  const sc = sentences.length || 1;
-  const lens = sentences.map(s => s.split(/\s+/).filter(Boolean).length);
-  const mean = lens.reduce((a,b)=>a+b,0) / (lens.length || 1);
-  const variance = lens.reduce((a,b)=>a+(b-mean)**2,0) / (lens.length || 1);
-  const sd = Math.sqrt(variance);
-  const variety = Math.min(100, Math.round((sd / 10) * 100));
-  const contractions = (t.match(/\b\w+'(t|s|re|ve|ll|d|m)\b/gi) || []).length;
-  const contScore = Math.min(100, Math.round((contractions / sc) * 200));
-  const cliches = ['delve','tapestry','leverage','robust','realm','foster','myriad','furthermore','moreover','in conclusion'];
-  let hits = 0;
-  const lower = t.toLowerCase();
-  cliches.forEach(c => { hits += (lower.match(new RegExp('\\b'+c+'\\b','g')) || []).length; });
-  const clicheScore = Math.max(0, Math.min(100, Math.round(100 - ((hits/wc)*100/3)*100)));
-  const total = Math.round(variety*0.35 + contScore*0.2 + clicheScore*0.3 + 75*0.15);
-  return Math.max(0, Math.min(100, total));
-}
-
-function updateScoreUI(text) {
-  const score = computeReadabilityScore(text);
-  progressFill.style.width = score + '%';
-  humanPercent.textContent = score + '%';
-  if (score >= 75) {
-    progressFill.style.background = 'linear-gradient(90deg,#4ade80,#3b82f6)';
-  } else if (score >= 50) {
-    progressFill.style.background = 'linear-gradient(90deg,#facc15,#3b82f6)';
-  } else {
-    progressFill.style.background = 'linear-gradient(90deg,#f87171,#3b82f6)';
-  }
-}
-
 // ==================== MAIN ACTION ====================
 async function runTool() {
   errorMsg.style.display = 'none';
@@ -1041,8 +1023,6 @@ async function runTool() {
   statusBadge.textContent = 'Processing…';
   statusBadge.className = 'badge';
   outputBox.innerHTML = '<p class="output-empty">Thinking…</p>';
-  progressFill.style.width = '0%';
-  humanPercent.textContent = '0%';
 
   try {
     const res = await fetch(WORKER_URL, {
@@ -1067,7 +1047,6 @@ async function runTool() {
 
     statusBadge.textContent = 'Done ✓';
     statusBadge.className = 'badge success';
-    updateScoreUI(paragraph);
 
   } catch (e) {
     errorMsg.textContent = 'Error: ' + (e.message || 'Something went wrong.');
@@ -1135,8 +1114,6 @@ function clearAll() {
   inputEl.value = '';
   outputBox.innerHTML = '<p class="output-empty">Your improved text will appear here as a clean paragraph.</p>';
   wordCountEl.textContent = '0 words';
-  progressFill.style.width = '0%';
-  humanPercent.textContent = '0%';
   statusBadge.textContent = 'Ready';
   statusBadge.className = 'badge';
   errorMsg.style.display = 'none';
@@ -1187,6 +1164,248 @@ function submitContact(e) {
   const body = encodeURIComponent(message + '\n\nFrom: ' + name + ' <' + email + '>');
   window.location.href = 'mailto:helpstudypad@gmail.com?subject=' + subject + '&body=' + body;
 }
+
+// ==================== NEW TOOLS (same WORKER_URL) ====================
+async function callWorker(action, text, system) {
+  const res = await fetch(WORKER_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ action: action, tone: 'balanced', text: text, system: system })
+  });
+  if (!res.ok) throw new Error('Worker error ' + res.status);
+  const d = await res.json();
+  if (d.error) throw new Error(d.error);
+  const r = d.result || d.answer || '';
+  if (!r) throw new Error('Empty AI response');
+  return String(r).replace(/\*\*+/g, '').replace(/^#{1,6}\s*/gm, '').trim();
+}
+
+function mkPage(id, html) {
+  const d = document.createElement('div');
+  d.id = 'page-' + id;
+  d.className = 'page';
+  d.innerHTML = '<div class="container" style="padding-top:32px">' + html + '</div>';
+  document.querySelector('footer.site-footer').before(d);
+}
+
+const BACK = '<a class="back-link" href="#" onclick="showPage(\'home\');return false;">← Back to Humanizer</a>';
+const PLAIN = ' Use basic South African English. Do not use markdown, asterisks or hashes. Use plain text only.';
+
+function textTool(id, title, desc, btn, system, extra) {
+  mkPage(id, BACK + '<h1 style="color:#fff;font-size:26px">' + title + '</h1><p style="color:#94a3b8;margin:8px 0 18px;font-size:14px">' + desc + '</p>' +
+    (extra || '') +
+    '<div class="grid"><div class="card"><div class="card-header"><span>Input Text</span><span class="badge" id="' + id + 'Wc">0 words</span></div>' +
+    '<textarea id="' + id + 'In" placeholder="Paste your text here…"></textarea></div>' +
+    '<div class="card"><div class="card-header"><span>Result</span><span class="badge" id="' + id + 'St">Ready</span></div>' +
+    '<div class="output-box" id="' + id + 'Out"><p class="output-empty">Your result will appear here.</p></div></div></div>' +
+    '<div class="tool-actions"><button class="btn-primary" id="' + id + 'Btn">' + btn + '</button><button class="btn-copy" id="' + id + 'Cp">📋 Copy</button></div>' +
+    '<p class="error-msg" id="' + id + 'Err" style="display:none"></p>');
+  const $ = s => document.getElementById(id + s);
+  $('In').addEventListener('input', () => {
+    const t = $('In').value.trim();
+    $('Wc').textContent = (t ? t.split(/\s+/).length : 0) + ' words';
+  });
+  $('Cp').onclick = () => {
+    const t = $('Out').textContent.trim();
+    if (!t || t.startsWith('Your result') || t === 'Thinking…') return;
+    navigator.clipboard.writeText(t);
+    $('Cp').textContent = '✅ Copied';
+    setTimeout(() => $('Cp').textContent = '📋 Copy', 1500);
+  };
+  $('Btn').onclick = async () => {
+    const t = $('In').value.trim();
+    $('Err').style.display = 'none';
+    if (!t) { $('Err').textContent = 'Please paste your text first.'; $('Err').style.display = 'block'; return; }
+    $('Btn').disabled = true;
+    $('St').textContent = 'Processing…';
+    $('St').className = 'badge';
+    $('Out').innerHTML = '<p class="output-empty">Thinking…</p>';
+    try {
+      const sys = typeof system === 'function' ? system() : system;
+      $('Out').textContent = await callWorker(id, t, sys + PLAIN);
+      $('St').textContent = 'Done ✓';
+      $('St').className = 'badge success';
+    } catch (e) {
+      $('Err').textContent = 'Error: ' + (e.message || 'Something went wrong.');
+      $('Err').style.display = 'block';
+      $('Out').innerHTML = '<p class="output-empty">Something went wrong. Please try again.</p>';
+      $('St').textContent = 'Error';
+      $('St').className = 'badge';
+    } finally {
+      $('Btn').disabled = false;
+    }
+  };
+}
+
+// ---- Grammar Check ----
+textTool('grammar', '✅ Grammar Check',
+  'Fix spelling, grammar and punctuation without changing your meaning.',
+  'Check Grammar',
+  'You are a careful proofreader. First output the full corrected text. Then on a new line write "CHANGES:" followed by a short numbered list of the main corrections and why. Do not change the meaning or the writer\'s voice.');
+
+// ---- AI Detector ----
+textTool('detector', '🕵️ AI Detector',
+  'Estimates how AI-written your text sounds. No detector is 100% accurate, so use it as a guide only.',
+  'Detect AI',
+  'You are an AI-writing analyst. Start with the line "AI likelihood: NN%" (a number from 0 to 100). Then give "Verdict:" in one line. Then give 3 to 5 numbered reasons based on sentence variety, repetition, cliches and tone. Then give 3 short tips to make the writing sound more like the student. Remind the user that detectors can be wrong.');
+
+// ---- Summarizer ----
+textTool('summarizer', '📄 Summarizer',
+  'Turn long text into a short summary.',
+  'Summarize',
+  () => {
+    const l = document.getElementById('sumLen').value;
+    return 'You are a study assistant. Summarize the text in ' + l + '. Keep the key points and names. Do not add new information.';
+  },
+  '<select id="sumLen" style="width:100%;padding:12px;margin-bottom:16px;background:#0d1220;border:1px solid #232a44;border-radius:10px;color:#fff"><option value="3 short sentences">Short (3 sentences)</option><option value="one paragraph of about 6 sentences" selected>Medium (1 paragraph)</option><option value="5 to 8 numbered key points">Key points</option></select>');
+
+// ---- Word Counter (no API) ----
+mkPage('counter', BACK + '<h1 style="color:#fff;font-size:26px">🔢 Word Counter</h1><p style="color:#94a3b8;margin:8px 0 18px;font-size:14px">Live count. Nothing is sent anywhere.</p>' +
+  '<div class="card"><textarea id="wcIn" placeholder="Type or paste your text…"></textarea></div>' +
+  '<div class="stat-grid">' +
+  '<div class="stat"><b id="wcW">0</b><span>Words</span></div>' +
+  '<div class="stat"><b id="wcC">0</b><span>Characters</span></div>' +
+  '<div class="stat"><b id="wcCN">0</b><span>No spaces</span></div>' +
+  '<div class="stat"><b id="wcS">0</b><span>Sentences</span></div>' +
+  '<div class="stat"><b id="wcP">0</b><span>Paragraphs</span></div>' +
+  '<div class="stat"><b id="wcR">0 min</b><span>Reading time</span></div></div>' +
+  '<p id="wcK" style="color:#94a3b8;font-size:13px;margin-top:14px"></p>');
+document.getElementById('wcIn').addEventListener('input', () => {
+  const t = document.getElementById('wcIn').value;
+  const w = t.trim() ? t.trim().split(/\s+/) : [];
+  const set = (i, v) => document.getElementById(i).textContent = v;
+  set('wcW', w.length);
+  set('wcC', t.length);
+  set('wcCN', t.replace(/\s/g, '').length);
+  set('wcS', (t.match(/[^.!?]+[.!?]+/g) || []).length);
+  set('wcP', t.split(/\n+/).filter(x => x.trim()).length);
+  set('wcR', Math.max(w.length ? 1 : 0, Math.round(w.length / 200)) + ' min');
+  const f = {};
+  w.map(x => x.toLowerCase().replace(/[^a-z']/g, '')).filter(x => x.length > 4).forEach(x => f[x] = (f[x] || 0) + 1);
+  const top = Object.entries(f).sort((a, b) => b[1] - a[1]).slice(0, 5).map(e => e[0] + ' (' + e[1] + ')').join(', ');
+  document.getElementById('wcK').textContent = top ? 'Top words: ' + top : '';
+});
+
+// ---- Research Guide ----
+mkPage('research', BACK + '<h1 style="color:#fff;font-size:26px">🎓 Research Guide for South African Students</h1>' +
+  '<p style="color:#94a3b8;margin:8px 0 18px;font-size:14px">Everything you need to do research properly at a South African university.</p>' +
+  '<div class="rg-grid">' +
+  '<div class="card"><h3>1. Choose and narrow your topic</h3><ul><li>Pick a topic you can finish in your time and budget.</li><li>Turn it into one clear research question.</li><li>Write 2 to 3 objectives that start with verbs like "explore", "assess", "determine".</li><li>Agree the topic with your supervisor early.</li></ul></div>' +
+  '<div class="card"><h3>2. Research proposal checklist</h3><ul><li>Title, background and problem statement</li><li>Research question, aim and objectives</li><li>Literature review outline</li><li>Methodology: design, sample, tools, data analysis</li><li>Ethical considerations</li><li>Timeline and budget</li><li>Reference list</li></ul></div>' +
+  '<div class="card"><h3>3. Ethics clearance (compulsory)</h3><ul><li>Apply to your faculty or university Research Ethics Committee (REC) BEFORE collecting any data.</li><li>You need informed consent forms, an information sheet and your data collection tools.</li><li>Participants must be told it is voluntary, confidential and they can withdraw.</li><li>Follow POPIA when handling personal information.</li><li>Get gatekeeper permission (school, clinic, company, municipality) in writing.</li></ul></div>' +
+  '<div class="card"><h3>4. Where to find sources</h3><ul><li>Your university library databases (EBSCOhost, ProQuest, JSTOR, Sabinet)</li><li>Google Scholar and SciELO South Africa</li><li>SAePublications and the DHET accredited journal list</li><li>NEXUS and NDLTD for SA theses and dissertations</li><li>Stats SA, HSRC, CSIR, DBE and DHET reports for local data</li><li>Use journals from the last 5 to 10 years where possible.</li></ul></div>' +
+  '<div class="card"><h3>5. Choosing a methodology</h3><ul><li><b>Qualitative:</b> interviews, focus groups, observation</li><li><b>Quantitative:</b> surveys, experiments, statistics</li><li><b>Mixed methods:</b> both</li><li>Match your method to your research question, not the other way round.</li><li>Explain your sampling (purposive, random, snowball) and sample size.</li><li>Explain validity, reliability or trustworthiness.</li></ul></div>' +
+  '<div class="card"><h3>6. Literature review tips</h3><ul><li>Group sources by theme, not by author.</li><li>Compare and critique, do not just list.</li><li>Show the gap your study fills.</li><li>Keep your reference details from day one (Zotero or Mendeley are free).</li></ul></div>' +
+  '<div class="card"><h3>7. Referencing and plagiarism</h3><ul><li>Use the style in your module guide (Harvard, APA 7, Chicago, MLA).</li><li>Every in-text citation must appear in the reference list and the other way round.</li><li>Check your work on Turnitin through your university where available.</li><li>Paraphrase properly and cite every idea that is not yours.</li></ul></div>' +
+  '<div class="card"><h3>8. Funding and publishing</h3><ul><li>NRF bursaries and grants (honours, masters, doctoral)</li><li>University postgraduate funding offices</li><li>Get an ORCID iD for free</li><li>Publish in DHET accredited journals; avoid predatory journals</li></ul></div>' +
+  '<div class="card"><h3>9. Managing your time</h3><ul><li>Break the project into monthly milestones.</li><li>Book regular meetings with your supervisor and send drafts early.</li><li>Back up your files in two places.</li><li>Keep a research diary of decisions and changes.</li></ul></div>' +
+  '<div class="card"><h3>10. Before you submit</h3><ul><li>Check the faculty template, word limit and formatting</li><li>Proofread the whole document aloud</li><li>Check that every table, figure and citation is numbered and referenced</li><li>Add a declaration of originality and ethics clearance number</li></ul></div>' +
+  '</div>' +
+  '<h2 class="section-title">🤖 Ask the Research Assistant</h2>' +
+  '<div class="card"><textarea id="rgIn" style="height:120px" placeholder="Describe your topic, field and level (e.g. Honours in Education, effects of load shedding on Grade 12 learners)…"></textarea>' +
+  '<div class="tool-actions"><button class="btn-primary" id="rgBtn">Generate research plan</button></div>' +
+  '<div class="output-box" id="rgOut" style="margin-top:14px;height:auto;min-height:100px"><p class="output-empty">Your research plan will appear here.</p></div></div>' +
+  '<p class="score-note" style="margin-top:12px">Always follow your own university\'s rules and your supervisor\'s guidance.</p>');
+document.getElementById('rgBtn').onclick = async () => {
+  const t = document.getElementById('rgIn').value.trim();
+  const o = document.getElementById('rgOut');
+  const b = document.getElementById('rgBtn');
+  if (!t) return;
+  b.disabled = true;
+  o.innerHTML = '<p class="output-empty">Thinking…</p>';
+  try {
+    o.textContent = await callWorker('research', t,
+      'You are a research supervisor at a South African university. From the topic given, produce: a refined research question, 3 objectives, suggested methodology, sampling approach, ethical considerations for South Africa (REC, POPIA, consent), 5 search keywords, and a simple 6-month timeline. Use short plain-text sections.' + PLAIN);
+  } catch (e) {
+    o.innerHTML = '<p class="output-empty">Error: ' + (e.message || 'try again') + '</p>';
+  } finally {
+    b.disabled = false;
+  }
+};
+
+// ---- GradePilot ----
+function loadScript(src) {
+  return new Promise((ok, no) => {
+    if (document.querySelector('script[src="' + src + '"]')) return ok();
+    const s = document.createElement('script');
+    s.src = src;
+    s.onload = ok;
+    s.onerror = () => no(new Error('Could not load the file reader. Check your connection.'));
+    document.head.appendChild(s);
+  });
+}
+
+async function readDoc(file) {
+  const name = file.name.toLowerCase();
+  if (name.endsWith('.docx')) {
+    await loadScript('https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js');
+    return (await mammoth.extractRawText({ arrayBuffer: await file.arrayBuffer() })).value;
+  }
+  if (name.endsWith('.pdf')) {
+    await loadScript('https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js');
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+    const pdf = await pdfjsLib.getDocument({ data: await file.arrayBuffer() }).promise;
+    let out = '';
+    for (let i = 1; i <= pdf.numPages; i++) {
+      const c = await (await pdf.getPage(i)).getTextContent();
+      out += c.items.map(x => x.str).join(' ') + '\n';
+    }
+    return out;
+  }
+  throw new Error('Unsupported file. Please upload a PDF or Word (.docx). Save old .doc files as .docx first.');
+}
+
+mkPage('gradepilot', BACK + '<h1 style="color:#fff;font-size:26px">🚀 GradePilot</h1>' +
+  '<p style="color:#94a3b8;margin:8px 0 18px;font-size:14px">Upload your assignment guide and your assignment (PDF or Word). GradePilot estimates your score and shows where to improve, including in-text citation checks.</p>' +
+  '<div class="card"><div class="file-box"><label>1. Assignment guide / rubric (PDF or .docx)</label><input type="file" id="gpGuide" accept=".pdf,.docx"></div>' +
+  '<div class="file-box"><label>2. Your assignment (PDF or .docx)</label><input type="file" id="gpWork" accept=".pdf,.docx"></div>' +
+  '<div class="tool-actions"><button class="btn-primary" id="gpBtn">🚀 Scan &amp; Estimate Score</button></div>' +
+  '<p class="error-msg" id="gpErr" style="display:none"></p></div>' +
+  '<div class="card" style="margin-top:20px"><div class="card-header"><span>Result</span><span class="badge" id="gpSt">Ready</span></div>' +
+  '<div class="gp-score" id="gpScore">–</div><div class="progress-bg"><div class="progress-fill" id="gpBar"></div></div>' +
+  '<div class="output-box" id="gpOut" style="margin-top:14px;height:auto;min-height:120px"><p class="output-empty">Your feedback will appear here.</p></div></div>' +
+  '<p class="score-note">The score is an estimate only. Your lecturer\'s marking is final. Text is read in your browser and sent to the AI for scoring, and is not stored.</p>');
+
+document.getElementById('gpBtn').onclick = async () => {
+  const g = document.getElementById('gpGuide').files[0];
+  const w = document.getElementById('gpWork').files[0];
+  const err = document.getElementById('gpErr');
+  const out = document.getElementById('gpOut');
+  const btn = document.getElementById('gpBtn');
+  const st = document.getElementById('gpSt');
+  err.style.display = 'none';
+  if (!g || !w) { err.textContent = 'Please upload both the guide and your assignment.'; err.style.display = 'block'; return; }
+  btn.disabled = true;
+  st.textContent = 'Reading files…';
+  st.className = 'badge';
+  out.innerHTML = '<p class="output-empty">Reading your files…</p>';
+  try {
+    let gt = (await readDoc(g)).trim();
+    let wt = (await readDoc(w)).trim();
+    if (gt.length < 50 || wt.length < 50) throw new Error('Could not read text. Scanned PDFs (images) are not supported. Use a text PDF or .docx.');
+    gt = gt.slice(0, 8000);
+    wt = wt.slice(0, 16000);
+    st.textContent = 'Scanning…';
+    out.innerHTML = '<p class="output-empty">Marking against the guide…</p>';
+    const sys = 'You are a strict but fair South African university marker. You receive an ASSIGNMENT GUIDE and a STUDENT ASSIGNMENT. Start with exactly one line: "SCORE: NN" (estimated percentage 0 to 100). Then give these plain-text sections: "MATCH TO GUIDE" (which requirements are met or missing), "STRENGTHS", "WHERE TO IMPROVE" (specific, numbered), "CITATION CHECK" (check that in-text citations are accurate and consistent with the reference list: missing citations, citations without reference entries, reference entries never cited, wrong format for the style asked in the guide), "LANGUAGE AND STRUCTURE", and "NEXT STEPS" (3 actions). Be honest and specific.' + PLAIN;
+    const res = await callWorker('gradepilot', 'ASSIGNMENT GUIDE:\n' + gt + '\n\nSTUDENT ASSIGNMENT:\n' + wt, sys);
+    const m = res.match(/SCORE:\s*(\d{1,3})/i);
+    const sc = m ? Math.min(100, +m[1]) : null;
+    document.getElementById('gpScore').textContent = sc !== null ? sc + '%' : '–';
+    document.getElementById('gpBar').style.width = (sc || 0) + '%';
+    out.textContent = res.replace(/^\s*SCORE:\s*\d{1,3}%?\s*/i, '');
+    st.textContent = 'Done ✓';
+    st.className = 'badge success';
+  } catch (e) {
+    err.textContent = 'Error: ' + (e.message || 'Something went wrong.');
+    err.style.display = 'block';
+    out.innerHTML = '<p class="output-empty">Something went wrong. Please try again.</p>';
+    st.textContent = 'Error';
+    st.className = 'badge';
+  } finally {
+    btn.disabled = false;
+  }
+};
 
 // ==================== INIT ADSENSE (home page only) ====================
 document.addEventListener('DOMContentLoaded', () => {
